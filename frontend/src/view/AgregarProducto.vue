@@ -41,25 +41,62 @@ export default {
     };
   },
   methods: {
+    cargarLoader(){
+      const cargando = {
+        isCargando: !this.$store.state.loader.cargando,
+        texto: this.$store.state.loader.textoCargando == '' ? 'Agregando sala...' : ''
+      };
+      this.$store.dispatch('setCargando', cargando)
+    },
+    cargarPopUp(texto, titulo){
+      const cargando = {
+        isCargando: !this.$store.state.popup.cargando,
+        texto: this.$store.state.popup.textoPopup == '' ? texto : '',
+        titulo: this.$store.state.popup.tituloPopup == '' ? titulo : ''
+      };
+      this.$store.dispatch('setPopup', cargando)
+    },
     handleImageChange(event) {
       const selectedFiles = Array.from(event.target.files).slice(0, 5);
       this.imageFiles = selectedFiles;
     },
     submitForm() {
+      if (this.imageFiles.length < 1) {
+        this.cargarPopUp("Seleccione al menos 1 imagen", "Faltan datos..")
+        return
+      }
       this.imageFiles.forEach(img=>{
         const {name} = img
         const urlBase = `https://github.com/VICT0R89/ProyectoImgs/blob/main/${this.$refs.tipo.value}/${name}?raw=true`
         this.urls.push(urlBase)
       })
       const newData = {
-        id: this.$store.state.data.length+1,
+        id: this.$store.state.data.length+4,
         name: this.$refs.nombre.value,
         description: this.$refs.tipo.value,
         url: this.urls
       }
+      if (newData.name.length < 1) {
+        this.cargarPopUp("Ingrese el nombre", "Faltan datos..")
+        return
+      }
+      if (newData.description.length < 1) {
+        this.cargarPopUp("Ingrese el tipo de sala", "Faltan datos..")
+        return
+      }
+      if (this.$refs.description.value.length < 1) {
+        this.cargarPopUp("Ingrese la descripción", "Faltan datos..")
+        return
+      }
       const data = this.$store.state.data
       data.push(newData)
       this.$store.dispatch('setData', data)
+      this.$refs.loginForm.reset()
+      this.cargarLoader()
+      setTimeout(() => {
+        this.cargarLoader()
+        this.cargarPopUp("Sala agregada con éxito", "Gracias!")
+      }, 1000);
     },
   }
 }

@@ -30,7 +30,9 @@ export default {
   methods: {
     loadCard() {
       this.card = data.filter(item => item.id == this.$route.params.id)
+      console.log(this.card);
       this.card = this.card[0]
+      console.log(this.card);
       this.url = this.card.url[0]
     },
   },
