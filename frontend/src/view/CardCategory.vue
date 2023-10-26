@@ -1,12 +1,14 @@
 <template>
-	<div v-for=" card in cards" :key="card.id" :class="[theme, 'card']" >
-		<img :src="card.url[0]" :alt="card.name">
-		<div :class="[theme, 'info']">
-			<h2> {{ card.name }} </h2>
-			<p> {{ card.description }} </p>
-			<router-link :to="{ name: 'card-detail', params: { id: card.id } }">
-				<p>Detalle</p>
-			</router-link>
+	<div class="container">
+		<div v-for="card in cards" :key="card.id" :class="[theme, 'card']" >
+			<img :src="card.url[0]" :alt="card.name">
+			<div :class="[theme, 'info']">
+				<h2> {{ card.name }} </h2>
+				<p> {{ card.description }} </p>
+				<router-link :to="{ name: 'card-detail', params: { id: card.id } }">
+					<p>Detalle</p>
+				</router-link>
+			</div>
 		</div>
 	</div>
 </template>
@@ -44,6 +46,13 @@
 </script>
     
 <style scoped>
+	.container{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		flex-wrap: wrap;
+	}
 	.card {
     border: 1px solid #ccc;
     border-radius: 8px;

@@ -1,4 +1,4 @@
-package com.medibook.controller;
+/*package com.medibook.controller;
 
 import com.medibook.entities.TypeRoom;
 import com.medibook.exceptions.ResourceNotFoundException;
@@ -15,7 +15,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/typerooms")
 public class TypeRoomController {
-    @Autowired
     private TypeRoomService typeRoomService;
 
     @Autowired
@@ -75,3 +74,4 @@ public class TypeRoomController {
         }
     }
 }
+ */

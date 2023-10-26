@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="footer-content">
 
-      <div class="footer-infompresa">
+      <div class="footerInfompresa">
         <div class="isologotipo">
           <img src="../assets/logoBlanco.png" alt="Logo empresa">
         </div>
@@ -12,7 +12,7 @@
         </div>
       </div>
     
-      <div class="redes-sociales">
+      <div class="redesSociales">
         <img src="../assets/facebook.png" alt="Logo de Facebook">
         <img src="../assets/whatsapp.png" alt="Logo de Whatsapp">
         <img src="../assets/instagram.png" alt="Logo de Instagram">
@@ -46,7 +46,7 @@ export default {
   align-items: center;
 }
 
-.footer-infompresa{
+.footerInfompresa{
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -61,7 +61,7 @@ export default {
   margin: 0;
 }
 
-.redes-sociales img {
+.redesSociales img {
   max-width: 30px;
   margin-right: 10px;
 }
@@ -72,7 +72,7 @@ export default {
     align-items: center;
   }
 
-  .footer-infompresa, .redes-sociales {
+  .footerInfompresa, .redesSociales {
     margin-bottom: 20px;
   }
 }

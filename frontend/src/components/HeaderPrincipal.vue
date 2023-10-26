@@ -44,6 +44,7 @@ export default {
 
 <style scoped>
 header{
+  z-index: 999;
   display: flex;
   position: sticky;
   top: 0;

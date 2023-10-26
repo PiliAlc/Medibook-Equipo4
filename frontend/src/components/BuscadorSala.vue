@@ -48,13 +48,14 @@ export default {
       this.cargarLoader()
       setTimeout(() => {
         const busqueda = this.$refs.search.value.trim().toLowerCase();
-        this.resultados = data.filter((sala) => {
-          let {name, description, url} = sala
-          return name.trim().toLowerCase().includes(busqueda) ||
-          description.trim().toLowerCase().includes(busqueda) ||
-          url[0].trim().toLowerCase().includes(busqueda)
-        });
-        this.cargarLoader()
+        busqueda.length == 0 ? this.cargarLoader() :
+          (this.resultados = data.filter((sala) => {
+            let {name, description, url} = sala
+            return name.trim().toLowerCase().includes(busqueda) ||
+            description.trim().toLowerCase().includes(busqueda) ||
+            url[0].trim().toLowerCase().includes(busqueda)
+          }),
+        this.cargarLoader())
       }, 1000);
     }
   },

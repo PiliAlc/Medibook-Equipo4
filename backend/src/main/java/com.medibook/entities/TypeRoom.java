@@ -1,4 +1,4 @@
-package com.medibook.entities;
+/*package com.medibook.entities;
 
 
 import jakarta.persistence.*;
@@ -56,6 +56,8 @@ public class TypeRoom {
         this.room = room;
     }
 }
+
+ */
 
 
 

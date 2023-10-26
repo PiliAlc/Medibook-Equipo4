@@ -2,7 +2,6 @@ package com.medibook.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import com.medibook.entities.TypeRoom;
 
 import java.util.Set;
 
@@ -12,30 +11,28 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rooms_id;
-
     private String name;
     private String description;
     private Boolean favourite;
-
     private String url1;
     private String url2;
     private String url3;
     private String url4;
     private String url5;
+    private String type;
 
     @OneToMany(mappedBy = "room")
     @JsonIgnore
     private Set<Booking> bookings;
 
-
-    @OneToMany(mappedBy = "room")
+    /*@OneToMany(mappedBy = "room")
     @JsonIgnore
-    private Set<TypeRoom> typeRooms;
+    private Set<TypeRoom> typeRooms;*/
 
     public Room() {
     }
 
-    public Room(String name, String description, Boolean favourite, String url1, String url2, String url3, String url4, String url5, Set<Booking> bookings, Set<TypeRoom> typeRooms) {
+    public Room(String name, String description, Boolean favourite, String url1, String url2, String url3, String url4, String url5, String type, Set<Booking> bookings) {
         this.name = name;
         this.description = description;
         this.favourite = favourite;
@@ -44,11 +41,11 @@ public class Room {
         this.url3 = url3;
         this.url4 = url4;
         this.url5 = url5;
+        this.type = type;
         this.bookings = bookings;
-        this.typeRooms = typeRooms;
     }
 
-    public Room(Long rooms_id, String name, String description, Boolean favourite, String url1, String url2, String url3, String url4, String url5, Set<Booking> bookings, Set<TypeRoom> typeRooms) {
+    public Room(Long rooms_id, String name, String description, Boolean favourite, String url1, String url2, String url3, String url4, String url5, String type, Set<Booking> bookings) {
         this.rooms_id = rooms_id;
         this.name = name;
         this.description = description;
@@ -58,8 +55,8 @@ public class Room {
         this.url3 = url3;
         this.url4 = url4;
         this.url5 = url5;
+        this.type = type;
         this.bookings = bookings;
-        this.typeRooms = typeRooms;
     }
 
     public Long getRooms_id() {
@@ -78,20 +75,20 @@ public class Room {
         this.name = name;
     }
 
-    public Set<TypeRoom> getTypeRooms() {
-        return typeRooms;
-    }
-
-    public void setTypeRooms(Set<TypeRoom> typeRooms) {
-        this.typeRooms = typeRooms;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Boolean getFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(Boolean favourite) {
+        this.favourite = favourite;
     }
 
     public String getUrl1() {
@@ -134,18 +131,19 @@ public class Room {
         this.url5 = url5;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public Set<Booking> getBookings() {
         return bookings;
     }
 
     public void setBookings(Set<Booking> bookings) {
         this.bookings = bookings;
-    }
-    public Boolean getFavourite() {
-        return favourite;
-    }
-
-    public void setFavourite(Boolean favourite) {
-        this.favourite = favourite;
     }
 }

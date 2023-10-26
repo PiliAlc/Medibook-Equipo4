@@ -33,7 +33,6 @@
   <style scoped>
   
   .card {
-
     margin: 1%;
     overflow: hidden;
     width: 390px;

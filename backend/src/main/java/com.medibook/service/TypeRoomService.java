@@ -1,4 +1,4 @@
-package com.medibook.service;
+/*package com.medibook.service;
 
 
 import com.medibook.entities.TypeRoom;
@@ -95,5 +95,7 @@ public class TypeRoomService {
 
 
 }
+
+ */
 
 

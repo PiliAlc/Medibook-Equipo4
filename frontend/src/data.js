@@ -1,7 +1,7 @@
 const data = [
-  {id:1, name:"pasillo", description:"pasillo de la clinica",url:["https://github.com/VICT0R89/ProyectoImgs/blob/main/clinica/pasillo.jpg?raw=true"]},
+/*   {id:1, name:"pasillo", description:"pasillo de la clinica",url:["https://github.com/VICT0R89/ProyectoImgs/blob/main/clinica/pasillo.jpg?raw=true"]},
   {id:2, name:"reception", description:"recepcion de la clinica",url:["https://github.com/VICT0R89/ProyectoImgs/blob/main/clinica/reception.jpg?raw=true"]},
-  {id:3, name:"reception-2", description:"recepcion de la clinica",url:["https://github.com/VICT0R89/ProyectoImgs/blob/main/clinica/reception-2.jpg?raw=true"]},
+  {id:3, name:"reception-2", description:"recepcion de la clinica",url:["https://github.com/VICT0R89/ProyectoImgs/blob/main/clinica/reception-2.jpg?raw=true"]}, */
   {id:4, name:"Sala 1", description:"general",url:["https://github.com/VICT0R89/ProyectoImgs/blob/main/general/img-1.jpg?raw=true"]},
   {id:5, name:"Sala 2", description:"general",url:["https://github.com/VICT0R89/ProyectoImgs/blob/main/general/img-2.jpg?raw=true"]},
   {id:6, name:"Sala 3", description:"general",url:["https://github.com/VICT0R89/ProyectoImgs/blob/main/general/img-3.jpg?raw=true"]},

@@ -5,7 +5,7 @@
       <h2>{{ sala.name }}</h2>
       <p class="infoDesc">{{ sala.description }}</p>
       <router-link :to="{ name: 'card-detail', params: { id: sala.id } }">
-        <p class="infoDet">Detalles</p>
+      <p class="infoDet">Detalles</p>
       </router-link>
       </div>
     </div>
