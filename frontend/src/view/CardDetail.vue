@@ -1,9 +1,11 @@
 <template>
   <div :class="[theme, 'card']">
-    <img :src=url :alt="card.name" >
-    <div :class="[theme, 'info']">
-      <h2>{{ card.name }}</h2>
-      <p>{{ card.description }}</p>
+    <div class="card-container">
+      <img :src=url :alt="card.name" >
+      <div :class="[theme, 'info']">
+        <h2>{{ card.name }}</h2>
+        <p>{{ card.description }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -30,9 +32,7 @@ export default {
   methods: {
     loadCard() {
       this.card = data.filter(item => item.id == this.$route.params.id)
-      console.log(this.card);
       this.card = this.card[0]
-      console.log(this.card);
       this.url = this.card.url[0]
     },
   },
@@ -58,6 +58,16 @@ export default {
   }
   
   .info {
+    position: relative;
     padding: 10px;
+    background-color: var(--background);
+    border-radius: 8px;
+    margin-top: -20px;
+    z-index: 2;
   }
+  .card-container{
+    background-color: white;
+    height: 70vh;
+  }
+
 </style>

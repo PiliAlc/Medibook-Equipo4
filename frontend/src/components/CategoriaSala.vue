@@ -83,4 +83,12 @@ h3{
   font-size: 2vw;
   color: var(--text2);
 }
+
+@media only screen and (max-width:480px ){
+  h3{
+  font-size: 4.5vw;
+  margin-left:-70% ;
+}
+
+}
 </style>

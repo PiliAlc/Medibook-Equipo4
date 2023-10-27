@@ -134,7 +134,16 @@ label, input {
 }
 .btnContainer{
   margin-top: -8vw;
-  width: 10vw;
+  margin-left: -3vw;
+  width: 15vw;
+}
+.btnBusc{
+  width: 100px;
+  height: 4vw;
+  font-size: 2vw;
+}
+nav {
+  height: 14vw;
 }
 }
 </style>

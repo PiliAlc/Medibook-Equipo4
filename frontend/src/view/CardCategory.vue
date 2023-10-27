@@ -67,7 +67,6 @@
     object-fit: cover;
     border-radius: 8px 8px 0 0;
   }
-  
   .info {
     padding: 10px;
   }

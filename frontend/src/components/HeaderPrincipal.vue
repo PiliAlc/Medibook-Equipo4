@@ -76,7 +76,6 @@ header{
   height: 3vw;
   font-size: 1vw;
   width: 12vw !important;
-
 }
 
 @media only screen and (max-width:480px ){
@@ -85,12 +84,9 @@ header{
   }
   .btnInicio, .btnTheme, .btnAgrSala, .btnCrearCuenta{
     height: 5vw;
-  font-size: 1.5vw;
-  width: 14vw !important;
-
-}
-.btnAgrSala{
-  display: none;
-}
+    font-size: 1.5vw;
+    width: 14vw !important;
+  }
+  
 }
 </style>

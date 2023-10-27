@@ -8,15 +8,14 @@
 </template>
 
 <script>
-import CardSala from './CardSala.vue';
-import data from '@/data';
+import CardSala from "./CardSala.vue";
+import data from "@/data";
 
 export default {
-  name: 'RecomendacionSala',
-  props:{
-  },
-  components:{
-    CardSala
+  name: "RecomendacionSala",
+  props: {},
+  components: {
+    CardSala,
   },
   data() {
     return {
@@ -26,7 +25,7 @@ export default {
   computed: {
     theme() {
       return this.$store.getters.getTheme;
-    }
+    },
   },
   mounted() {
     this.generarResultados();
@@ -35,24 +34,32 @@ export default {
     generarResultados() {
       // esta dataFiltrada es únicamente porque las 3 primeras imágenes del data.js no son de salas
       const dataFiltrada = data.slice(3);
-      const indicesAleatorios = this.obtenerIndicesAleatorios(dataFiltrada.length, 5);
-      this.resultados = indicesAleatorios.map(index => dataFiltrada[index]);
+      const indicesAleatorios = this.obtenerIndicesAleatorios(
+        dataFiltrada.length,
+        5
+      );
+      this.resultados = indicesAleatorios.map((index) => dataFiltrada[index]);
     },
     obtenerIndicesAleatorios(max, cantidad) {
       const indices = [];
+
       while (indices.length < cantidad) {
         const indice = Math.floor(Math.random() * max);
-        indices.push(indice);
+
+        // Verificar si el índice ya está presente en el array
+        if (!indices.includes(indice)) {
+          indices.push(indice);
+        }
       }
+
       return indices;
     },
   },
-
-}
+};
 </script>
 
 <style scoped>
-section{
+section {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -60,17 +67,23 @@ section{
   border: 4px solid var(--border);
   padding: 10px;
   background-color: white;
-  width:100%;
+  width: 100%;
 }
-.contenedor{
+.contenedor {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
 }
-h3{
-  margin-left:-73% ;
+h3 {
+  margin-left: -73%;
   font-size: 2vw;
   color: var(--text2);
+}
+@media only screen and (max-width: 480px) {
+  h3 {
+    font-size: 4.5vw;
+    margin-left: -52%;
+  }
 }
 </style>

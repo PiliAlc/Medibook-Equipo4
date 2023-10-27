@@ -10,7 +10,7 @@
         <select ref="tipo" id="tipo" :value="selectedTipo">
           <option value="general">General</option>
           <option value="odontologia">Odontologia</option>
-          <option value="oftalmologia">Oftalmologia</option>
+          <option value="oftalmologo">Oftalmologia</option>
           <option value="quirofano">Quirofano</option>
         </select>
 
@@ -71,7 +71,7 @@ export default {
         this.urls.push(urlBase)
       })
       const newData = {
-        id: this.$store.state.data.length+4,
+        id: this.$store.state.data.length+5,
         name: this.$refs.nombre.value,
         description: this.$refs.tipo.value,
         url: this.urls
@@ -109,6 +109,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100vh;
 }
 .contenedor:hover{
   background-color: #15b4bc;

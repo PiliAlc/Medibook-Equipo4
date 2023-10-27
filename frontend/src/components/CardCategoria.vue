@@ -5,7 +5,7 @@
     </router-link>
       <div :class="[theme, 'info']">
         <h2>{{ sala.description }}</h2>
-        <p>{{ sala.description }}</p>
+        <!-- <p>{{ sala.description }}</p> -->
         <p class="infoDet">Detalles</p>
       </div>
   </div>
@@ -66,7 +66,45 @@
   .info p {
     color: var(--text2);
     margin-top: 6px;
+    margin-right: 50px;
     text-decoration: underline;
+  }
+  @media only screen and (max-width:480px ){ 
+    .card {
+margin: 1%;
+overflow: hidden;
+width: 46%;
+height: 200px;
+}
+
+.card img {
+width: 100%;
+height: 150px;
+
+}
+.info {
+  width: 100%;
+    padding: 5px;
+    margin-top: -18px;
+    margin-left: 0px;
+    height: 55px;
+
+}
+.info p {
+  font-size: 12px;
+  margin-top: 10px;
+  margin-right: 0px;
+  
+}
+div.info > p:first-of-type{
+  margin-left: -120px;
+  margin-top: 19px;
+  
+}
+.info h2{
+  font-size: 15px;
+  margin-left: 5px;
+}
   }
   </style>
   

@@ -61,6 +61,7 @@ background-color: rgba(0, 0, 0, 0.5);
   width: 25%;
   height: 50%;
   border: 1px solid aqua;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 h2, p{
   padding: 10px;

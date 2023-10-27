@@ -57,11 +57,10 @@
     justify-content: space-between;
     padding: 10px;
     background-color: var(--background2);
-    border: solid  var(--text2);
+    border: solid var(--text2);
     margin-top: -25px;
     border-radius: 15px 15px 25px 25px;
     z-index: 2;
-    height: 4vw;
   }
   .info h2{
     margin-left: 35px;
@@ -78,6 +77,44 @@
     margin-top: 13px;
     margin-right: 50px;
     text-decoration: underline;
+  }
+  @media only screen and (max-width:480px ){ 
+    .card {
+margin: 1%;
+overflow: hidden;
+width: 46%;
+height: 200px;
+}
+
+.card img {
+width: 100%;
+height: 150px;
+
+}
+.info {
+  width: 100%;
+    padding: 5px;
+    margin-top: -18px;
+    margin-left: 0px;
+    height: 55px;
+
+}
+.info p {
+  font-size: 12px;
+  margin-top: 10px;
+  margin-right: 0px;
+  
+}
+div.info > p:first-of-type{
+  margin-left: -120px;
+  margin-top: 19px;
+  
+}
+.info h2{
+  font-size: 15px;
+  margin-left: 5px;
+}
+
   }
   </style>
   

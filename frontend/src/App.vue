@@ -15,7 +15,7 @@
 import HeaderPrincipal from './components/HeaderPrincipal.vue';
 import LoaderMain from './components/LoaderMain.vue';
 import FooterComponent from './components/FooterComponent.vue';
-import PopUp from './components/PopUp.vue'
+import PopUp from './components/PopUp.vue';
 
 export default {
   name: 'App',
@@ -90,5 +90,7 @@ a{
   text-decoration: none;
   color: var(--text);
 }
-
+LoaderMain{
+  height: 100%;
+}
 </style>
