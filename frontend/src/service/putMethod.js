@@ -6,18 +6,18 @@ const updateUser = async data => {
 	const { id, nombre, apellido, email, password } = data
 	const url = URL_BASE+"/users/"+id
 	const datos = {
-			name: nombre,
-			lastName: apellido,
-			email: email,
-			password: password
+		name: nombre,
+		lastName: apellido,
+		email: email,
+		password: password
 	}
 	const config = {
-			method : "PUT",
-			body : JSON.stringify(datos),
-			headers : {
-				// authorization : jwt,
-				'Content-Type': 'application/json'
-			}
+		method : "PUT",
+		body : JSON.stringify(datos),
+		headers : {
+			// authorization : jwt,
+			'Content-Type': 'application/json'
+		}
 	}
 	const response = await fetch(url, config)
 	const json = await response.json()
@@ -34,14 +34,14 @@ const updateDoctor = async data =>{
 		tuition: tuition,
 		bookings: bookings,
 		specialties: specialties
-}
+	}
 	const config = {
-			method : "PUT",
-			body : JSON.stringify(datos),
-			headers : {
-				// authorization : jwt,
-				'Content-Type': 'application/json'
-			}
+		method : "PUT",
+		body : JSON.stringify(datos),
+		headers : {
+			// authorization : jwt,
+			'Content-Type': 'application/json'
+		}
 	}
 	const response = await fetch(url, config)
 	const json = await response.json()
