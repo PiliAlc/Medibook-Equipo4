@@ -31,9 +31,11 @@ export default {
     };
   },
   methods: {
-    submitForm() {
+    async submitForm() {
       // this.$refs.loginForm.preverntDefault()
-      getMethod.getDoctors()
+      const {getDoctors} = getMethod
+      const json = await getDoctors()
+      console.log(json);
       /* this.username = this.$refs.username.value
       this.password = this.$refs.password.value
       console.log('Usuario:', this.username);

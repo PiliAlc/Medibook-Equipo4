@@ -59,9 +59,8 @@ const getDoctors = async () =>{
 		}
 	}
 	const response = await fetch(url, settings)
-	console.log(response);
 	const json = await response.json()
-	console.log(json);
+	return json
 }
 
 // ROOMS -----------------------------------
