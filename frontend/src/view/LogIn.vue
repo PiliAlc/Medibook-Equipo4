@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import getMethod from '../service/getMethod'
 export default {
   name: 'LogIn',
   computed: {
@@ -31,10 +32,12 @@ export default {
   },
   methods: {
     submitForm() {
-      this.username = this.$refs.username.value
+      // this.$refs.loginForm.preverntDefault()
+      getMethod.getDoctors()
+      /* this.username = this.$refs.username.value
       this.password = this.$refs.password.value
       console.log('Usuario:', this.username);
-      console.log('Contraseña:', this.password);
+      console.log('Contraseña:', this.password); */
       this.resetForm()
     },
     resetForm(){

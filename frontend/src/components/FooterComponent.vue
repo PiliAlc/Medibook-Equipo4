@@ -12,15 +12,15 @@
       </div>
 
       <div class="redesSociales">
-        <a href="https://www.instagram.com">
+        <a href="https://www.instagram.com" target="_blank">
           <img src="../assets/instagram.png" alt="Logo de Instagram" />
         </a>
 
-        <a href="https://www.facebook.com">
+        <a href="https://www.facebook.com" target="_blank">
           <img src="../assets/facebook.png" alt="Logo de Facebook" />
         </a>
 
-        <a href="https://api.whatsapp.com/send?phone=+5491111111111">
+        <a href="https://api.whatsapp.com/send?phone=+5491111111111" target="_blank">
           <img src="../assets/whatsapp.png" alt="Logo de Whatsapp" />
         </a>
 
