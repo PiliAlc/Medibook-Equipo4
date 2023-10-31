@@ -1,4 +1,4 @@
-const URL_BASE = ""
+const URL_BASE = "http://localhost:3306"
 
 // METDODOS - USER -
 
@@ -15,7 +15,6 @@ const updateUser = async data => {
 		method : "PUT",
 		body : JSON.stringify(datos),
 		headers : {
-			// authorization : jwt,
 			'Content-Type': 'application/json'
 		}
 	}

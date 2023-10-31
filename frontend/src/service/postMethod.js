@@ -1,4 +1,4 @@
-const URL_BASE = ""
+const URL_BASE = "http://localhost:3306"
 
 // METODOS - USUARIO -
 

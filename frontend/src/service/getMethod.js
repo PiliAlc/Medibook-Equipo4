@@ -1,4 +1,4 @@
-const URL_BASE = ""
+const URL_BASE = "http://localhost:3306"
 
 // USER --------------
 const getUsers = async () =>{
@@ -55,7 +55,6 @@ const getDoctors = async () =>{
 	const settings = {
 		method: 'GET',
 		headers: {
-		//   authorization : jwt,
 			'Content-Type': 'application/json'
 		}
 	}
