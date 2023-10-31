@@ -51,7 +51,7 @@ const getDoctor = async data =>{
 	return json
 }
 const getDoctors = async () =>{
-	const url = URL_BASE+"/doctors"
+	const url = "http://localhost:3306/doctors"
 	const settings = {
 		method: 'GET',
 		headers: {
@@ -59,8 +59,9 @@ const getDoctors = async () =>{
 		}
 	}
 	const response = await fetch(url, settings)
+	console.log(response);
 	const json = await response.json()
-	return json
+	console.log(json);
 }
 
 // ROOMS -----------------------------------
