@@ -3,6 +3,7 @@
     <div class="login-container">
       <h2>AGREGAR SALA</h2>
       <form ref="loginForm" @submit.prevent="submitForm">
+        
         <label for="nombre">NOMBRE*</label>
         <input ref="nombre" type="text" id="nombre" :value="nombre" />
 
@@ -10,7 +11,7 @@
         <select ref="tipo" id="tipo" :value="selectedTipo">
           <option value="general">General</option>
           <option value="odontologia">Odontologia</option>
-          <option value="oftalmologo">Oftalmologia</option>
+          <option value="oftalmologia">Oftalmologia</option>
           <option value="quirofano">Quirofano</option>
         </select>
 
@@ -27,6 +28,7 @@
 </template>
 
 <script>
+import postMethods from '@/service/postMethod';
 export default {
   name: 'AgregarProducto',
   computed: {
@@ -60,42 +62,49 @@ export default {
       const selectedFiles = Array.from(event.target.files).slice(0, 5);
       this.imageFiles = selectedFiles;
     },
-    submitForm() {
-      if (this.imageFiles.length < 1) {
-        this.cargarPopUp("Seleccione al menos 1 imagen", "Faltan datos..")
+    async submitForm() {
+
+      if (this.imageFiles.length != 5) {
+        this.cargarPopUp("Seleccione 5 imagenes", "Faltan datos..")
         return
       }
+      if (this.$refs.nombre.length < 1) {
+        this.cargarPopUp("Ingrese el nombre", "Faltan datos..")
+        return
+      }
+      if (this.$refs.description.length < 1) {
+        this.cargarPopUp("Ingrese el descripción de la sala", "Faltan datos..")
+        return
+      }
+      if (this.$refs.tipo.value.length < 1) {
+        this.cargarPopUp("Ingrese el tipo de sala", "Faltan datos..")
+        return
+      }
+
       this.imageFiles.forEach(img=>{
         const {name} = img
         const urlBase = `https://github.com/VICT0R89/ProyectoImgs/blob/main/${this.$refs.tipo.value}/${name}?raw=true`
         this.urls.push(urlBase)
       })
-      const newData = {
-        id: this.$store.state.data.length+5,
+
+      const datos = {
         name: this.$refs.nombre.value,
-        description: this.$refs.tipo.value,
-        url: this.urls
+        description: this.$refs.description.value,
+        favourite: false,
+        url1: this.urls[0],
+        url2: this.urls[1],
+        url3: this.urls[2],
+        url4: this.urls[3],
+        url5: this.urls[4],
+        type: this.$refs.tipo.value
       }
-      if (newData.name.length < 1) {
-        this.cargarPopUp("Ingrese el nombre", "Faltan datos..")
-        return
-      }
-      if (newData.description.length < 1) {
-        this.cargarPopUp("Ingrese el tipo de sala", "Faltan datos..")
-        return
-      }
-      if (this.$refs.description.value.length < 1) {
-        this.cargarPopUp("Ingrese la descripción", "Faltan datos..")
-        return
-      }
-      const data = this.$store.state.data
-      data.push(newData)
-      this.$store.dispatch('setData', data)
-      this.$refs.loginForm.reset()
+
       this.cargarLoader()
+      await postMethods.addRoom(datos)
+      this.cargarLoader()
+      this.$refs.loginForm.reset()
+      this.cargarPopUp("Sala agregada con éxito", "Gracias!")
       setTimeout(() => {
-        this.cargarLoader()
-        this.cargarPopUp("Sala agregada con éxito", "Gracias!")
       }, 1000);
     },
   }

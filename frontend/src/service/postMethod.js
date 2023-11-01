@@ -107,29 +107,17 @@ const addDoctor = async data =>{
 */
 // Devuelve la respuesta de la API
 const addRoom = async data => {
-	const { name, description, favourite, url1, url2, url3, url4, url5, type, bookings } = data
 	const url = URL_BASE+"/rooms"
 
-	const datos = {
-		name: name,
-		description: description,
-		favourite: favourite,
-		url1: url1,
-		url2: url2,
-		url3: url3,
-		url4: url4,
-		url5: url5,
-		type: type,
-		bookings: bookings
-	}
 	const settings = {
 		method: "POST",
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(datos)
+		body: JSON.stringify(data)
 	}
 	const response = await fetch(url, settings)
+	console.log(response);
 	const json = await response.json()
 	return json
 }

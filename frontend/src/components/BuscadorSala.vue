@@ -17,8 +17,9 @@
 
 <script>
 import BotonPrincipal from './BotonPrincipal.vue';
-import data from '@/data';
+// import data from '@/data';
 import CardSala from './CardSala.vue';
+import getMethod from '@/service/getMethod';
 
 export default {
   name: 'BuscadorSala',
@@ -44,19 +45,20 @@ export default {
       };
       this.$store.dispatch('setCargando', cargando)
     },
-    buscar(){
+    async buscar(){
       this.cargarLoader()
-      setTimeout(() => {
-        const busqueda = this.$refs.search.value.trim().toLowerCase();
-        busqueda.length == 0 ? this.cargarLoader() :
-          (this.resultados = data.filter((sala) => {
-            let {name, description, url} = sala
-            return name.trim().toLowerCase().includes(busqueda) ||
-            description.trim().toLowerCase().includes(busqueda) ||
-            url[0].trim().toLowerCase().includes(busqueda)
-          }),
-        this.cargarLoader())
-      }, 1000);
+      const datos = await getMethod.getRooms()
+      console.log(datos);
+
+      /* const busqueda = this.$refs.search.value.trim().toLowerCase();
+      busqueda.length == 0 ? this.cargarLoader() :
+        (this.resultados = data.filter((sala) => {
+          let {name, description, url} = sala
+          return name.trim().toLowerCase().includes(busqueda) ||
+          description.trim().toLowerCase().includes(busqueda) ||
+          url[0].trim().toLowerCase().includes(busqueda)
+        }), */
+      this.cargarLoader()
     }
   },
 }
