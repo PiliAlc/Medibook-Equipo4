@@ -1,11 +1,11 @@
 <template>
   <div v-for="sala in resultados" :key="sala.id" :class="[theme, 'card']">
-    <img :src="sala.url[0]" :alt="sala.name">
+    <img v-for="image in sala.image" :key="image.id" :src="image.path" :alt="image.name">
     <div :class="[theme, 'info']">
       <h2>{{ sala.name }}</h2>
       <p class="infoDesc">{{ sala.description }}</p>
       <router-link :to="{ name: 'card-detail', params: { id: sala.id } }">
-      <p class="infoDet">Detalles</p>
+        <p class="infoDet">Detalles</p>
       </router-link>
       </div>
     </div>
@@ -21,15 +21,9 @@
       resultados:[]
     },
     computed: {
-    theme() {
-      return this.$store.getters.getTheme;
-    },
-  },
-    mounted(){
-      this.resultados.forEach(element => {
-        console.log(element.utr[0])
-      });
-      console.log(this.resultados);
+      theme() {
+        return this.$store.getters.getTheme;
+      },
     }
   }
   </script>

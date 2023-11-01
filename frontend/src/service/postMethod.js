@@ -12,19 +12,12 @@ const URL_BASE = "http://localhost:3306"
 // Devuelve la respuesta de la API
 const addUser = async data =>{
 	const url = URL_BASE+"/users"
-	const { nombre, apellido, email, password } = data
-	const datos = {
-		name: nombre,
-		lastName: apellido,
-		email: email,
-		password: password
-	}
 	const settings = {
 		method: "POST",
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(datos),
+		body: JSON.stringify(data),
 	}
 	const response = await fetch(url, settings)
 	const json = await response.json()
@@ -39,17 +32,12 @@ const addUser = async data =>{
 // Devuelve la respuesta de la API
 const logIn = async data =>{
 	const url = URL_BASE+"/users"
-	const { email, password } = data
-	const datos = {
-		email: email,
-		password: password
-	}
 	const settings = {
 		method: "POST",
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(datos),
+		body: JSON.stringify(data),
 	}
 	const response = await fetch(url, settings)
 	const json = await response.json()
@@ -68,22 +56,13 @@ const logIn = async data =>{
 */
 // Devuelve la respuesta de la API
 const addDoctor = async data =>{
-	const { name, lastname, tuition, bookings, specialties } = data
 	const url = URL_BASE+"/doctors"
-
-	const datos = {
-		name: name,
-		lastname: lastname,
-		tuition: tuition,
-		bookings: bookings,
-		specialties: specialties
-	}
 	const settings = {
 		method: "POST",
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(datos)
+		body: JSON.stringify(data)
 	}
 	const response = await fetch(url, settings)
 	const json = await response.json()
@@ -117,7 +96,6 @@ const addRoom = async data => {
 		body: JSON.stringify(data)
 	}
 	const response = await fetch(url, settings)
-	console.log(response);
 	const json = await response.json()
 	return json
 }

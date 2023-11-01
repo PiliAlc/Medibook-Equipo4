@@ -5,7 +5,6 @@
     </router-link>
       <div :class="[theme, 'info']">
         <h2>{{ sala.description }}</h2>
-        <!-- <p>{{ sala.description }}</p> -->
         <p class="infoDet">Detalles</p>
       </div>
   </div>

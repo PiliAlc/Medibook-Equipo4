@@ -9,7 +9,7 @@
 
 <script>
 import CardCategoria from './CardCategoria.vue';
-import data from '@/data';
+import getMethod from '@/service/getMethod';
 
 export default {
   name: 'CategoriaSala',
@@ -32,25 +32,25 @@ export default {
     this.generarCategorias();
   },
   methods: {
-    generarCategorias() {
+    async generarCategorias() {
+
+      const data = await getMethod.getRooms()
+
       const categorias = {};
 
-      data.forEach(sala => {
-        if (sala.description != "pasillo de la clinica" && sala.description != "recepcion de la clinica") {
-          const categoria = sala.description;
-          if (!categorias[categoria]) {
-            categorias[categoria] = [];
-          }
-          categorias[categoria].push(sala);
+      data.forEach(room => {
+        const {name} = room.category
+        if (!categorias[name]) {
+          categorias[name] = []
         }
-      });
+        categorias[name].push(room)
+      })
 
       const arrayPorCategoria = Object.keys(categorias).map(categoria => ({
         id: categoria,
         salas: categorias[categoria]
-      }));
+      }))
 
-      // reformular este resultado
       this.resultados = arrayPorCategoria.map(item=> item.salas[0])
       
     },

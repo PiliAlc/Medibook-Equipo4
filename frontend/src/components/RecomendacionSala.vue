@@ -9,7 +9,8 @@
 
 <script>
 import CardSala from "./CardSala.vue";
-import data from "@/data";
+import util from "@/utils/utils";
+import getMethod from "@/service/getMethod";
 
 export default {
   name: "RecomendacionSala",
@@ -24,35 +25,29 @@ export default {
   },
   computed: {
     theme() {
-      return this.$store.getters.getTheme;
+      return this.$store.getters.getTheme
     },
   },
   mounted() {
-    this.generarResultados();
+    this.generarResultados()
   },
   methods: {
-    generarResultados() {
-      // esta dataFiltrada es únicamente porque las 3 primeras imágenes del data.js no son de salas
-      const dataFiltrada = data.slice(3);
-      const indicesAleatorios = this.obtenerIndicesAleatorios(
-        dataFiltrada.length,
-        5
-      );
-      this.resultados = indicesAleatorios.map((index) => dataFiltrada[index]);
+    async generarResultados() {
+      util.cargarLoader("cargando")
+      const data = await getMethod.getRooms()
+      util.cargarLoader("")
+      const indicesAleatorios = this.obtenerIndicesAleatorios(data.length,5)
+      this.resultados = indicesAleatorios.map((index) => data[index])
     },
     obtenerIndicesAleatorios(max, cantidad) {
-      const indices = [];
-
+      const indices = []
       while (indices.length < cantidad) {
-        const indice = Math.floor(Math.random() * max);
-
-        // Verificar si el índice ya está presente en el array
+        const indice = Math.floor(Math.random() * max)
         if (!indices.includes(indice)) {
           indices.push(indice);
         }
       }
-
-      return indices;
+      return indices
     },
   },
 };

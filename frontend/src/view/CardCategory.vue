@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<div v-for="card in cards" :key="card.id" :class="[theme, 'card']" >
-			<img :src="card.url[0]" :alt="card.name">
+			<img v-for="url in card.images" :key="url.id" :src="url.path" :alt="url.name">
 			<div :class="[theme, 'info']">
 				<h2> {{ card.name }} </h2>
 				<p> {{ card.description }} </p>
@@ -14,7 +14,8 @@
 </template>
     
 <script>
-	import data from '@/data';
+	import getMethod from '@/service/getMethod';
+	import util from '@/utils/utils';
 
 	export default {
 		name:'CardCategory',
@@ -36,10 +37,12 @@
 			this.generarCards();
 		},
 		methods:{
-			generarCards(){
+			async generarCards(){
 				const categoryLength = this.$router.currentRoute.value.path.length
 				const category = this.$router.currentRoute.value.path.slice(6,categoryLength)
-				this.cards = data.filter( item => item.description == category )
+				util.cargarLoader("Buscando salas...")
+				this.cards = await getMethod.getRooms().filter( item => item.category.name == category )
+				util.cargarLoader("")
 			}
 		}
 	}

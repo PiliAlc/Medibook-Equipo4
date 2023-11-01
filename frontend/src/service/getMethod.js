@@ -51,7 +51,7 @@ const getDoctor = async data =>{
 	return json
 }
 const getDoctors = async () =>{
-	const url = "http://localhost:3306/doctors"
+	const url = URL_BASE+"/doctors"
 	const settings = {
 		method: 'GET',
 		headers: {

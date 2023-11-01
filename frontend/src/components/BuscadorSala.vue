@@ -20,6 +20,7 @@ import BotonPrincipal from './BotonPrincipal.vue';
 // import data from '@/data';
 import CardSala from './CardSala.vue';
 import getMethod from '@/service/getMethod';
+import util from '../utils/utils'
 
 export default {
   name: 'BuscadorSala',
@@ -38,27 +39,23 @@ export default {
     };
   },
   methods: {
-    cargarLoader(){
-      const cargando = {
-        isCargando: !this.$store.state.loader.cargando,
-        texto: this.$store.state.loader.textoCargando == '' ? 'Buscando salas...' : ''
-      };
-      this.$store.dispatch('setCargando', cargando)
-    },
     async buscar(){
-      this.cargarLoader()
+      util.cargarLoader("Buscando salas...")
       const datos = await getMethod.getRooms()
       console.log(datos);
-
-      /* const busqueda = this.$refs.search.value.trim().toLowerCase();
-      busqueda.length == 0 ? this.cargarLoader() :
-        (this.resultados = data.filter((sala) => {
+      const busqueda = this.$refs.search.value.trim().toLowerCase();
+      busqueda.length == 0 ? (
+        util.cargarLoader(""),
+        util.cargarPopUp("no se encontran coincidencias", "RESULTADO")
+        ) :
+      (this.resultados = datos.filter((sala) => {  
           let {name, description, url} = sala
           return name.trim().toLowerCase().includes(busqueda) ||
           description.trim().toLowerCase().includes(busqueda) ||
           url[0].trim().toLowerCase().includes(busqueda)
-        }), */
-      this.cargarLoader()
+          }) 
+        )
+        util.cargarLoader("")
     }
   },
 }
