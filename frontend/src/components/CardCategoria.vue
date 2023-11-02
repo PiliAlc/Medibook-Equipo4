@@ -1,10 +1,11 @@
 <template>
   <div v-for="sala in resultados" :key="sala.id" :class="[theme, 'card']">
-    <router-link :to="{ name: 'card-category', params: { id: sala.description } }">
+    <!-- <router-link :to="{ name: 'card-category', params: { id: sala.description } }">
       <img :src="sala.url[0]" :alt="sala.name">
-    </router-link>
+    </router-link> -->
+    <div class="imgSimulation"></div>
       <div :class="[theme, 'info']">
-        <h2>{{ sala.description }}</h2>
+        <h2>{{ sala.name }}</h2>
         <p class="infoDet">Detalles</p>
       </div>
   </div>
@@ -44,6 +45,13 @@
     border-radius: 25px 25px 0 0;
     border: solid #605B5B;
   }
+  .imgSimulation{
+    width: 100%;
+    height: 300px;
+    background-color: #605B5B;
+    border-radius: 25px 25px 0 0;
+    border: solid #605B5B;
+  }
   
   .info {
     position: relative;
@@ -69,41 +77,41 @@
     text-decoration: underline;
   }
   @media only screen and (max-width:480px ){ 
-    .card {
-margin: 1%;
-overflow: hidden;
-width: 46%;
-height: 200px;
-}
+  .card {
+    margin: 1%;
+    overflow: hidden;
+    width: 46%;
+    height: 200px;
+  }
 
-.card img {
-width: 100%;
-height: 150px;
-
-}
-.info {
-  width: 100%;
+  .card img {
+    height: 150px;
+  }
+  .imgSimulation{
+    height: 150px;
+  }
+  .info {
+   width: 100%;
     padding: 5px;
     margin-top: -18px;
     margin-left: 0px;
     height: 55px;
-
-}
-.info p {
-  font-size: 12px;
-  margin-top: 10px;
-  margin-right: 0px;
-  
-}
-div.info > p:first-of-type{
-  margin-left: -120px;
-  margin-top: 19px;
-  
-}
-.info h2{
-  font-size: 15px;
-  margin-left: 5px;
-}
   }
+  .info p {
+    font-size: 12px;
+    margin-top: 10px;
+    margin-right: 0px;
+    
+  }
+  div.info > p:first-of-type{
+    margin-left: -120px;
+    margin-top: 19px;
+    
+  }
+  .info h2{
+    font-size: 15px;
+    margin-left: 5px;
+  }
+}
   </style>
   

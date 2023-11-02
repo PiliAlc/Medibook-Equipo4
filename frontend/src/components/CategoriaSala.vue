@@ -35,11 +35,11 @@ export default {
     async generarCategorias() {
 
       const data = await getMethod.getRooms()
-
+      console.log(data);
       const categorias = {};
 
       data.forEach(room => {
-        const {name} = room.category
+        const {name} = room.typeroom
         if (!categorias[name]) {
           categorias[name] = []
         }

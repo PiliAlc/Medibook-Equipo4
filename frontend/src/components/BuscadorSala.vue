@@ -49,10 +49,9 @@ export default {
         util.cargarPopUp("no se encontran coincidencias", "RESULTADO")
         ) :
       (this.resultados = datos.filter((sala) => {  
-          let {name, description, url} = sala
+          let {name, description} = sala
           return name.trim().toLowerCase().includes(busqueda) ||
-          description.trim().toLowerCase().includes(busqueda) ||
-          url[0].trim().toLowerCase().includes(busqueda)
+          description.trim().toLowerCase().includes(busqueda) 
           }) 
         )
         util.cargarLoader("")

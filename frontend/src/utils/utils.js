@@ -1,4 +1,4 @@
-import { createStore } from '@/store'
+import createStore from '@/store'
 
 const cargarPopUp = (texto, titulo) =>{
     const cargando = {
@@ -11,6 +11,7 @@ const cargarPopUp = (texto, titulo) =>{
 
 
   const cargarLoader = texto =>{
+    console.log(createStore);
     const cargando = {
       isCargando: !createStore.state.loader.cargando,
       texto: createStore.state.loader.textoCargando == '' ? texto : ''

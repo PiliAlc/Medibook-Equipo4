@@ -1,8 +1,9 @@
 <template>
   <div v-for="sala in resultados" :key="sala.id" :class="[theme, 'card']">
-    <img v-for="image in sala.image" :key="image.id" :src="image.path" :alt="image.name">
+    <!-- <img v-for="image in sala.image" :key="image.id" :src="image.path" :alt="image.name"> -->
     <div :class="[theme, 'info']">
       <h2>{{ sala.name }}</h2>
+      <h2>{{ sala.typeroom.name }}</h2>
       <p class="infoDesc">{{ sala.description }}</p>
       <router-link :to="{ name: 'card-detail', params: { id: sala.id } }">
         <p class="infoDet">Detalles</p>
