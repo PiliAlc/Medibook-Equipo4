@@ -17,6 +17,7 @@
 
 <script>
 import getMethod from '../service/getMethod'
+import postMethods from '@/service/postMethod';
 export default {
   name: 'LogIn',
   computed: {
@@ -33,8 +34,16 @@ export default {
   methods: {
     async submitForm() {
       // this.$refs.loginForm.preverntDefault()
-      const {getDoctors} = getMethod
-      const json = await getDoctors()
+      const data= {
+        description: "aca estamos testeando el post",
+        favourite: false,
+        name:"sala post",
+        typeroom:{id:1}
+      }
+      const posteando = await postMethods.addRoom(data)
+      console.log(posteando);
+      const {getRooms} = getMethod
+      const json = await getRooms()
       console.log(json);
       /* this.username = this.$refs.username.value
       this.password = this.$refs.password.value

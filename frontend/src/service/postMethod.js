@@ -71,22 +71,24 @@ const addDoctor = async data =>{
 
 // METDODOS - ROOM -
 
-// Recibe un objeto data con los valores ingresado en el formulario de login,
-/* 
-	name: string,
-	description: string,
-	favourite: boolean,
-	url1: string,
-	url2: string,
-	url3: string,
-	url4: string,
-	url5: string,
-	type: string,
-	bookings: []
-*/
+// Recibe un objeto data con los valores ingresado en el formulario de agregar producto,
 // Devuelve la respuesta de la API
 const addRoom = async data => {
 	const url = URL_BASE+"/rooms"
+
+	const settings = {
+		method: "POST",
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(data)
+	}
+	const response = await fetch(url, settings)
+	const json = await response.json()
+	return json
+}
+const addTypeRoom = async data => {
+	const url = URL_BASE+"/typerooms"
 
 	const settings = {
 		method: "POST",
@@ -105,6 +107,7 @@ const postMethods = {
 	logIn: logIn,
 	addDoctor: addDoctor,
 	addRoom: addRoom,
+	addTypeRoom: addTypeRoom
 }
 
 export default postMethods

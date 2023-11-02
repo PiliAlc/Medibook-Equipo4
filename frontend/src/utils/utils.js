@@ -1,21 +1,21 @@
-
+import { createStore } from '@/store'
 
 const cargarPopUp = (texto, titulo) =>{
     const cargando = {
-      isCargando: !this.$store.state.popup.cargando,
-      texto: this.$store.state.popup.textoPopup == '' ? texto : '',
-      titulo: this.$store.state.popup.tituloPopup == '' ? titulo : ''
+      isCargando: !createStore.state.popup.cargando,
+      texto: createStore.state.popup.textoPopup == '' ? texto : '',
+      titulo: createStore.state.popup.tituloPopup == '' ? titulo : ''
     };
-    this.$store.dispatch('setPopup', cargando)
+    createStore.dispatch('setPopup', cargando)
   }
 
 
   const cargarLoader = texto =>{
     const cargando = {
-      isCargando: !this.$store.state.loader.cargando,
-      texto: this.$store.state.loader.textoCargando == '' ? texto : ''
+      isCargando: !createStore.state.loader.cargando,
+      texto: createStore.state.loader.textoCargando == '' ? texto : ''
     };
-    this.$store.dispatch('setCargando', cargando)
+    createStore.dispatch('setCargando', cargando)
   }
 
   const util = {

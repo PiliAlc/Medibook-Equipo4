@@ -80,10 +80,10 @@ const getRooms = async () =>{
 
 // get room id or name
 /* 
-	data = {
-		id: integer or string (name)
-		isId: boolean (true = id, false = name)
-	}
+data = {
+	id: integer or string (name)
+	isId: boolean (true = id, false = name)
+}
 */
 const getRoom = async data =>{
 	const {id, isId} = data
@@ -91,7 +91,32 @@ const getRoom = async data =>{
 	const settings = {
 		method: 'GET',
 		headers: {
-		//   authorization : jwt,
+			//   authorization : jwt,
+			'Content-Type': 'application/json'
+		}
+	}
+	const response = await fetch(url, settings)
+	const json = await response.json()
+	return json
+}
+
+const getTypeRooms = async () =>{
+	const url = URL_BASE+"/typeroom"
+	const settings = {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	}
+	const response = await fetch(url, settings)
+	const json = await response.json()
+	return json
+}
+const getTypeRoom = async id =>{
+	const url = URL_BASE+"/typeroom/"+id
+	const settings = {
+		method: 'GET',
+		headers: {
 			'Content-Type': 'application/json'
 		}
 	}
@@ -106,7 +131,9 @@ const getMethod = {
 	getDoctor: getDoctor,
 	getDoctors: getDoctors,
 	getRooms: getRooms,
-	getRoom: getRoom
+	getRoom: getRoom,
+	getTypeRooms: getTypeRooms,
+	getTypeRoom: getTypeRoom,
 }
 
 export default getMethod

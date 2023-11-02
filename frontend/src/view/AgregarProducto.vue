@@ -7,16 +7,14 @@
         <label for="nombre">NOMBRE*</label>
         <input ref="nombre" type="text" id="nombre" :value="nombre" />
 
-        <label for="tipo">TIPO DE SALA*</label>
-        <select ref="tipo" id="tipo" :value="selectedTipo">
-          <option value="general">General</option>
-          <option value="odontologia">Odontologia</option>
-          <option value="oftalmologia">Oftalmologia</option>
-          <option value="quirofano">Quirofano</option>
-        </select>
+        <label for="descriptionRoom">DESCRIPCIÓN SALA*</label>
+        <textarea ref="descriptionRoom" id="descriptionRoom" :value="descriptionRoom" maxlength="100" rows="4" cols="50"></textarea>
 
-        <label for="description">DESCRIPCIÓN*</label>
-        <textarea ref="description" id="description" :value="description" maxlength="100" rows="4" cols="50"></textarea>
+        <label for="category">CATEGORÍA*</label>
+        <input ref="category" type="text" id="category" :value="category" />
+
+        <label for="descriptionCategory">DESCRIPCIÓN CATEGORÍA*</label>
+        <textarea ref="descriptionCategory" id="descriptionCategory" :value="descriptionCategory" maxlength="100" rows="4" cols="50"></textarea>
 
         <label for="images">IMÁGENES*</label>
         <input ref="images" type="file" accept="image/png, image/jpeg" id="images" multiple @change="handleImageChange" />
@@ -29,6 +27,7 @@
 
 <script>
 import postMethods from '@/service/postMethod';
+import getMethod from '@/service/getMethod';
 export default {
   name: 'AgregarProducto',
   computed: {
@@ -80,32 +79,37 @@ export default {
         this.cargarPopUp("Ingrese el tipo de sala", "Faltan datos..")
         return
       }
-
       this.imageFiles.forEach(img=>{
         const {name} = img
         const urlBase = `https://github.com/VICT0R89/ProyectoImgs/blob/main/${this.$refs.tipo.value}/${name}?raw=true`
         this.urls.push(urlBase)
       })
 
-      const datos = {
-        name: this.$refs.nombre.value,
-        description: this.$refs.description.value,
-        favourite: false,
-        url1: this.urls[0],
-        url2: this.urls[1],
-        url3: this.urls[2],
-        url4: this.urls[3],
-        url5: this.urls[4],
-        type: this.$refs.tipo.value
-      }
+      // INICIO DE AGREGAR SALA -------------------------
 
       this.cargarLoader()
-      await postMethods.addRoom(datos)
+
+
+      const category = {
+        name: this.$refs.category.value,
+        description: this.$refs.descriptionCategory.value
+      }
+      await postMethods.addTypeRoom(category)      
+      const categoryResult = await getMethod.getTypeRooms()
+      console.log(categoryResult);
+      /* 
+      const datos= {
+        description: this.$refs.description.value,
+        favourite: false,
+        name:this.$refs.nombre.value,
+        typeroom:{
+          id: 1
+        }
+      }
+      await postMethods.addRoom(datos) */
       this.cargarLoader()
       this.$refs.loginForm.reset()
       this.cargarPopUp("Sala agregada con éxito", "Gracias!")
-      setTimeout(() => {
-      }, 1000);
     },
   }
 }
