@@ -1,6 +1,6 @@
-/*package com.medibook.controller;
+package com.medibook.controller;
 
-import com.medibook.entities.TypeRoom;
+import com.medibook.entities.Typeroom;
 import com.medibook.exceptions.ResourceNotFoundException;
 import com.medibook.service.TypeRoomService;
 import com.medibook.util.ValidatorClass;
@@ -23,7 +23,7 @@ public class TypeRoomController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> addType(@RequestBody TypeRoom typeRoom) {
+    public ResponseEntity<?> addType(@RequestBody Typeroom typeRoom) {
 
         typeRoomService.addType(typeRoom);
 
@@ -31,7 +31,7 @@ public class TypeRoomController {
     }
 
     @PutMapping()
-    public ResponseEntity<?> editTypeRoom(@RequestBody TypeRoom typeRoom) throws ResourceNotFoundException {
+    public ResponseEntity<?> editTypeRoom(@RequestBody Typeroom typeRoom) throws ResourceNotFoundException {
 
         typeRoomService.editTypeRoom(typeRoom);
 
@@ -39,16 +39,16 @@ public class TypeRoomController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TypeRoom>> listTypeRooms() throws ResourceNotFoundException {
+    public ResponseEntity<List<Typeroom>> listTypeRooms() throws ResourceNotFoundException {
 
-        List<TypeRoom> typeRooms = typeRoomService.listTypeRooms();
+        List<Typeroom> typeRooms = typeRoomService.listTypeRooms();
 
         return ResponseEntity.ok(typeRooms);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<TypeRoom>> searchByType_Id(@PathVariable String id) throws ResourceNotFoundException {
-        Optional<TypeRoom> typeRoom = typeRoomService.searchByType_Id(Long.parseLong(id));
+    public ResponseEntity<Optional<Typeroom>> searchByType_Id(@PathVariable String id) throws ResourceNotFoundException {
+        Optional<Typeroom> typeRoom = typeRoomService.searchByType_Id(Long.parseLong(id));
         if (ValidatorClass.isNumeric(id)) {
 
             return ResponseEntity.ok(typeRoom);
@@ -74,4 +74,4 @@ public class TypeRoomController {
         }
     }
 }
- */
+

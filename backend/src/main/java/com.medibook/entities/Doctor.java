@@ -7,11 +7,11 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="doctors")
+@Table(name="doctor")
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long doctors_id;
+    private Long id;
     private String name;
     private String lastname;
     private String tuition;
@@ -20,37 +20,19 @@ public class Doctor {
     @JsonIgnore
     private Set<Booking> bookings;
 
-    @OneToMany(mappedBy = "doctor")
-    @JsonIgnore
-    private Set<Specialty> specialties;
-
+    @ManyToOne
+    @JoinColumn(name = "specialty_id", nullable = false) // Con que columna en la bdd se va a relacionar.
+    private Specialty specialty;
 
     public Doctor() {
     }
 
-    public Doctor(String name, String lastname, String tuition, Set<Booking> bookings, Set<Specialty> specialties) {
-        this.name = name;
-        this.lastname = lastname;
-        this.tuition = tuition;
-        this.bookings = bookings;
-        this.specialties = specialties;
+    public Long getId() {
+        return id;
     }
 
-    public Doctor(Long doctors_id, String name, String lastname, String tuition, Set<Booking> bookings, Set<Specialty> specialties) {
-        this.doctors_id = doctors_id;
-        this.name = name;
-        this.lastname = lastname;
-        this.tuition = tuition;
-        this.bookings = bookings;
-        this.specialties = specialties;
-    }
-
-    public Long getDoctors_id() {
-        return doctors_id;
-    }
-
-    public void setDoctors_id(Long doctors_id) {
-        this.doctors_id = doctors_id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -77,7 +59,6 @@ public class Doctor {
         this.tuition = tuition;
     }
 
-
     public Set<Booking> getBookings() {
         return bookings;
     }
@@ -86,11 +67,28 @@ public class Doctor {
         this.bookings = bookings;
     }
 
-    public Set<Specialty> getSpecialties() {
-        return specialties;
+    public Specialty getSpecialty() {
+        return specialty;
     }
 
-    public void setSpecialties(Set<Specialty> specialties) {
-        this.specialties = specialties;
+    public void setSpecialty(Specialty specialty) {
+        this.specialty = specialty;
+    }
+
+    public Doctor(String name, String lastname, String tuition, Set<Booking> bookings, Specialty specialty) {
+        this.name = name;
+        this.lastname = lastname;
+        this.tuition = tuition;
+        this.bookings = bookings;
+        this.specialty = specialty;
+    }
+
+    public Doctor(Long id, String name, String lastname, String tuition, Set<Booking> bookings, Specialty specialty) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+        this.tuition = tuition;
+        this.bookings = bookings;
+        this.specialty = specialty;
     }
 }

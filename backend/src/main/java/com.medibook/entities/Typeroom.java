@@ -1,24 +1,33 @@
 package com.medibook.entities;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Set;
 
+
 @Entity
-@Table(name="specialty")
-public class Specialty {
+@Table(name="typeroom")
+public class Typeroom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "specialty") // Como se llama la propiedad en la clase con la que me estoy relacionando.
+    @OneToMany(mappedBy = "typeroom") // Como se llama la propiedad en la clase con la que me estoy relacionando.
     @JsonIgnore // Cuando alguien mapee con un dto, que no llame a la propiedad turnos, porque entra en loop infinito.
-    private Set<Doctor> doctors;
+    private Set<Room> rooms;
 
-    public Specialty() {
+    public Typeroom() {
+    }
+
+    public Typeroom(Long id, String name, String description, Set<Room> rooms) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.rooms = rooms;
     }
 
     public Long getId() {
@@ -45,24 +54,22 @@ public class Specialty {
         this.description = description;
     }
 
-    public Set<Doctor> getDoctors() {
-        return doctors;
+    public Set<Room> getRooms() {
+        return rooms;
     }
 
-    public void setDoctors(Set<Doctor> doctors) {
-        this.doctors = doctors;
+    public void setRooms(Set<Room> rooms) {
+        this.rooms = rooms;
     }
 
-    public Specialty(String name, String description, Set<Doctor> doctors) {
+    public Typeroom(String name, String description, Set<Room> rooms) {
         this.name = name;
         this.description = description;
-        this.doctors = doctors;
-    }
-
-    public Specialty(Long id, String name, String description, Set<Doctor> doctors) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.doctors = doctors;
+        this.rooms = rooms;
     }
 }
+
+
+
+
+

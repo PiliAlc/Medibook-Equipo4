@@ -6,23 +6,23 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="bookings")
+@Table(name="booking")
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bookings_id;
+    private Long id;
     private LocalDate date;
 
     @ManyToOne
-    @JoinColumn(name = "doctors_id",nullable = false)
+    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
     @ManyToOne
-    @JoinColumn(name = "rooms_id",nullable = false)
+    @JoinColumn(name = "rooom_id")
     private Room room;
 
     @ManyToOne
-    @JoinColumn(name = "shifts_id",nullable = false)
+    @JoinColumn(name = "shift_id")
     private Shift shift;
 
     public Booking() {
@@ -35,8 +35,8 @@ public class Booking {
         this.room = room;
     }
 
-    public Booking(Long bookings_id, LocalDate date, Doctor doctor, Room room, Shift shift) {
-        this.bookings_id = bookings_id;
+    public Booking(Long id, LocalDate date, Doctor doctor, Room room, Shift shift) {
+        this.id = id;
         this.date = date;
         this.doctor = doctor;
         this.room = room;
@@ -44,11 +44,11 @@ public class Booking {
     }
 
     public Long getId() {
-        return bookings_id;
+        return id;
     }
 
     public void setId(Long id) {
-        this.bookings_id = id;
+        this.id = id;
     }
 
     public LocalDate getDate() {

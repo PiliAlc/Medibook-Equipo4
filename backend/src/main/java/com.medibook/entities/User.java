@@ -3,11 +3,11 @@ package com.medibook.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="users")
+@Table(name="user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long users_id;
+    private Long id;
     private String name;
     private String lastname;
     private String username;
@@ -20,7 +20,7 @@ public class User {
     }
 
     public User(Long id, String name, String lastname, String username, String password) {
-        this.users_id = id;
+        this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.username = username;
@@ -28,11 +28,11 @@ public class User {
     }
 
     public Long getId() {
-        return users_id;
+        return id;
     }
 
     public void setId(Long id) {
-        this.users_id = id;
+        this.id = id;
     }
 
     public String getName() {

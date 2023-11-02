@@ -28,14 +28,14 @@ public class RoomService {
 
         Room room1 = registerRoom(room);
 
-        logger.info("Se ha agregado la sala con id: " + room1.getRooms_id());
+        logger.info("Se ha agregado la sala con id: " + room1.getId());
     }
 
     public void editRoom(Room room) throws ResourceNotFoundException {
 
         String msg = "";
 
-        Optional<Room> room1 = roomRepository.findById(room.getRooms_id());
+        Optional<Room> room1 = roomRepository.findById(room.getId());
 
         if (room1.isEmpty()) {
 
@@ -46,7 +46,7 @@ public class RoomService {
 
 
             registerRoom(room);
-            logger.info("Se modifica la sala con id: " + room1.get().getRooms_id());
+            logger.info("Se modifica la sala con id: " + room1.get().getId());
         }
     }
 
@@ -103,7 +103,7 @@ public class RoomService {
 
         if(room.isPresent()){
 
-            logger.info("Se consulta sala por Id: " + room.get().getRooms_id());}
+            logger.info("Se consulta sala por Id: " + room.get().getId());}
         else{
 
             throw  new ResourceNotFoundException("No existe la sala con ese id: " + id);

@@ -1,70 +1,35 @@
 package com.medibook.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.util.Set;
-
 @Entity
-@Table(name="rooms")
+@Table(name="room")
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rooms_id;
+    private Long id;
     private String name;
     private String description;
     private Boolean favourite;
-    private String url1;
-    private String url2;
-    private String url3;
-    private String url4;
-    private String url5;
-    private String type;
 
-    @OneToMany(mappedBy = "room")
+    /* @OneToMany(mappedBy = "room")
     @JsonIgnore
     private Set<Booking> bookings;
+    */
 
-    /*@OneToMany(mappedBy = "room")
-    @JsonIgnore
-    private Set<TypeRoom> typeRooms;*/
+    @ManyToOne
+    @JoinColumn(name = "typeroom_id",nullable = false)
+    private Typeroom typeroom;
 
     public Room() {
     }
 
-    public Room(String name, String description, Boolean favourite, String url1, String url2, String url3, String url4, String url5, String type, Set<Booking> bookings) {
-        this.name = name;
-        this.description = description;
-        this.favourite = favourite;
-        this.url1 = url1;
-        this.url2 = url2;
-        this.url3 = url3;
-        this.url4 = url4;
-        this.url5 = url5;
-        this.type = type;
-        this.bookings = bookings;
+    public Long getId() {
+        return id;
     }
 
-    public Room(Long rooms_id, String name, String description, Boolean favourite, String url1, String url2, String url3, String url4, String url5, String type, Set<Booking> bookings) {
-        this.rooms_id = rooms_id;
-        this.name = name;
-        this.description = description;
-        this.favourite = favourite;
-        this.url1 = url1;
-        this.url2 = url2;
-        this.url3 = url3;
-        this.url4 = url4;
-        this.url5 = url5;
-        this.type = type;
-        this.bookings = bookings;
-    }
-
-    public Long getRooms_id() {
-        return rooms_id;
-    }
-
-    public void setRooms_id(Long rooms_id) {
-        this.rooms_id = rooms_id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -91,59 +56,26 @@ public class Room {
         this.favourite = favourite;
     }
 
-    public String getUrl1() {
-        return url1;
+    public Typeroom getTyperoom() {
+        return typeroom;
     }
 
-    public void setUrl1(String url1) {
-        this.url1 = url1;
+    public void setTyperoom(Typeroom typeroom) {
+        this.typeroom = typeroom;
     }
 
-    public String getUrl2() {
-        return url2;
+    public Room(String name, String description, Boolean favourite, Typeroom typeroom) {
+        this.name = name;
+        this.description = description;
+        this.favourite = favourite;
+        this.typeroom = typeroom;
     }
 
-    public void setUrl2(String url2) {
-        this.url2 = url2;
-    }
-
-    public String getUrl3() {
-        return url3;
-    }
-
-    public void setUrl3(String url3) {
-        this.url3 = url3;
-    }
-
-    public String getUrl4() {
-        return url4;
-    }
-
-    public void setUrl4(String url4) {
-        this.url4 = url4;
-    }
-
-    public String getUrl5() {
-        return url5;
-    }
-
-    public void setUrl5(String url5) {
-        this.url5 = url5;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Set<Booking> getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(Set<Booking> bookings) {
-        this.bookings = bookings;
+    public Room(Long id, String name, String description, Boolean favourite, Typeroom typeroom) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.favourite = favourite;
+        this.typeroom = typeroom;
     }
 }

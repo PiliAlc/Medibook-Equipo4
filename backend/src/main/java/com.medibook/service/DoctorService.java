@@ -29,14 +29,14 @@ public class DoctorService {
 
         Doctor doctor1 = registerDoctor(doctor);
 
-        logger.info("Se ha agregado el médico con id: " + doctor1.getDoctors_id());
+        logger.info("Se ha agregado el médico con id: " + doctor1.getId());
     }
 
     public void editDoctor(Doctor doctor) throws ResourceNotFoundException {
 
         String msg = "";
 
-        Optional<Doctor> doctor1 = doctorRepository.findById(doctor.getDoctors_id());
+        Optional<Doctor> doctor1 = doctorRepository.findById(doctor.getId());
 
         if (doctor1.isEmpty()) {
 
@@ -47,7 +47,7 @@ public class DoctorService {
 
 
             registerDoctor(doctor);
-            logger.info("Se modifica el medico con id: " + doctor1.get().getDoctors_id());
+            logger.info("Se modifica el medico con id: " + doctor1.get().getId());
         }
     }
 
@@ -103,7 +103,7 @@ public class DoctorService {
 
         if(doctor.isPresent()){
 
-            logger.info("Se consulta medico por Id: " + doctor.get().getDoctors_id());}
+            logger.info("Se consulta medico por Id: " + doctor.get().getId());}
         else{
 
             throw  new ResourceNotFoundException("No existe el medico con ese id: " + id);

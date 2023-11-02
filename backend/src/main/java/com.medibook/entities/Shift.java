@@ -5,41 +5,39 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="shifts")
+@Table(name="shift")
 public class Shift {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long shifts_id;
+    private Long id;
     private String shift;
     private String shift_range;
 
-    @OneToMany(mappedBy = "shift")
+    /* @OneToMany(mappedBy = "shift")
     @JsonIgnore
     private Set<Booking> bookings;
-
+    */
 
     public Shift() {
     }
 
-    public Shift(String shift, String shift_range, Set<Booking> bookings) {
+    public Shift(String shift, String shift_range) {
         this.shift = shift;
         this.shift_range = shift_range;
-        this.bookings = bookings;
     }
 
-    public Shift(Long shifts_id, String shift, String shift_range, Set<Booking> bookings) {
-        this.shifts_id = shifts_id;
+    public Shift(Long id, String shift, String shift_range) {
+        this.id = id;
         this.shift = shift;
         this.shift_range = shift_range;
-        this.bookings = bookings;
     }
 
     public Long getShifts_id() {
-        return shifts_id;
+        return id;
     }
 
-    public void setShifts_id(Long shifts_id) {
-        this.shifts_id = shifts_id;
+    public void setShifts_id(Long id) {
+        this.id = id;
     }
 
     public String getShift() {
@@ -58,13 +56,6 @@ public class Shift {
         this.shift_range = shift_range;
     }
 
-    public Set<Booking> getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(Set<Booking> bookings) {
-        this.bookings = bookings;
-    }
 }
 
 
