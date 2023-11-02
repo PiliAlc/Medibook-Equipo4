@@ -20,14 +20,11 @@ public class Typeroom {
     @JsonIgnore // Cuando alguien mapee con un dto, que no llame a la propiedad turnos, porque entra en loop infinito.
     private Set<Room> rooms;
 
-    public Typeroom() {
-    }
+    @OneToMany(mappedBy = "typeroom") // Como se llama la propiedad en la clase con la que me estoy relacionando.
+    @JsonIgnore // Cuando alguien mapee con un dto, que no llame a la propiedad turnos, porque entra en loop infinito.
+    private Set<Image> images;
 
-    public Typeroom(Long id, String name, String description, Set<Room> rooms) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.rooms = rooms;
+    public Typeroom() {
     }
 
     public Long getId() {
@@ -62,10 +59,27 @@ public class Typeroom {
         this.rooms = rooms;
     }
 
-    public Typeroom(String name, String description, Set<Room> rooms) {
+    public Set<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<Image> images) {
+        this.images = images;
+    }
+
+    public Typeroom(String name, String description, Set<Room> rooms, Set<Image> images) {
         this.name = name;
         this.description = description;
         this.rooms = rooms;
+        this.images = images;
+    }
+
+    public Typeroom(Long id, String name, String description, Set<Room> rooms, Set<Image> images) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.rooms = rooms;
+        this.images = images;
     }
 }
 
