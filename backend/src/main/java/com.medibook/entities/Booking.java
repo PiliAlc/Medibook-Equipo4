@@ -1,6 +1,5 @@
 package com.medibook.entities;
 
-
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -18,7 +17,7 @@ public class Booking {
     private Doctor doctor;
 
     @ManyToOne
-    @JoinColumn(name = "rooom_id")
+    @JoinColumn(name = "room_id")
     private Room room;
 
     @ManyToOne
