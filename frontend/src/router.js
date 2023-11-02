@@ -6,12 +6,14 @@ import SignUp from './view/SignUp.vue';
 import CardDetail from './view/CardDetail'
 import CardCategory from './view/CardCategory'
 import AgregarProducto from './view/AgregarProducto'
+import AgregarCategoria from './view/AgregarCategoria'
 
 const routes = [
   { path: '/', component: BodyMain },
   { path: '/login', component: LogIn },
   { path: '/signup', component: SignUp },
   { path: '/admin', component: AgregarProducto },
+  { path: '/admin/category', component: AgregarCategoria },
   { path: '/card/:id', name: 'card-detail', component: CardDetail },
   { path: '/card/:id', name: 'card-category', component: CardCategory },
 ];

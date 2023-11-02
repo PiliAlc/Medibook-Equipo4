@@ -2,14 +2,17 @@
   <header :class="theme">
     <LogoSlogan />
     <div class="btnes">
-      <router-link to="/signup">
+      <router-link to="/signup" v-if="this.$router.currentRoute.value.path != '/admin'">
         <BotonPrincipal class="btnCrearCuenta" texto="CREAR CUENTA" size="19" />
       </router-link>
-      <router-link to="/login">
+      <router-link to="/login" v-if="this.$router.currentRoute.value.path != '/admin'">
         <BotonPrincipal class="btnInicio" texto="INICIAR SESIÓN" size="19"/>
       </router-link>  
       <router-link to="/admin">
         <BotonPrincipal class="btnAgrSala" texto="AGREGAR SALA" size="19"/>
+      </router-link>  
+      <router-link to="admin/category" v-if="this.$router.currentRoute.value.path == '/admin'">
+        <BotonPrincipal class="btnAgrSala" texto="+ CATEGORÍA" size="19"/>
       </router-link>  
       <!-- <BotonPrincipal class="btnTheme" texto="🌓" @click="toggleTheme" style="border-radius: 50%; padding: .8vw;" /> -->
     </div>
