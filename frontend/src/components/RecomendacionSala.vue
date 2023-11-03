@@ -35,9 +35,10 @@ export default {
     async generarResultados() {
       util.cargarLoader("cargando")
       const data = await getMethod.getRooms()
-      util.cargarLoader("")
-      const indicesAleatorios = this.obtenerIndicesAleatorios(data.length,5)
+      const cantidad = data.length < 5 ? data.length : 5
+      const indicesAleatorios = this.obtenerIndicesAleatorios(data.length,cantidad)
       this.resultados = indicesAleatorios.map((index) => data[index])
+      util.cargarLoader("")
     },
     obtenerIndicesAleatorios(max, cantidad) {
       const indices = []
@@ -63,12 +64,14 @@ section {
   padding: 10px;
   background-color: white;
   width: 100%;
+  height: auto;
 }
 .contenedor {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  width: 100%;
 }
 h3 {
   margin-left: -73%;

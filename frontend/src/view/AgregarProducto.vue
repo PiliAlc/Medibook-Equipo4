@@ -7,14 +7,13 @@
         <label for="nombre">NOMBRE*</label>
         <input ref="nombre" type="text" id="nombre" :value="nombre" />
 
-        <label for="descriptionRoom">DESCRIPCIÓN SALA*</label>
-        <textarea ref="descriptionRoom" id="descriptionRoom" :value="descriptionRoom" maxlength="100" rows="4" cols="50"></textarea>
-
         <label for="category">CATEGORÍA*</label>
-        <input ref="category" type="text" id="category" :value="category" />
+        <select ref="category" name="category" id="category">
+          <option v-for="category in options" :key="category.id" :value=category.name>{{category.name}}</option>
+        </select>
 
-        <label for="descriptionCategory">DESCRIPCIÓN CATEGORÍA*</label>
-        <textarea ref="descriptionCategory" id="descriptionCategory" :value="descriptionCategory" maxlength="100" rows="4" cols="50"></textarea>
+        <label for="description">DESCRIPCIÓN SALA*</label>
+        <textarea ref="description" id="description" :value="description" maxlength="100" rows="4" cols="50"></textarea>
 
         <label for="images">IMÁGENES*</label>
         <input ref="images" type="file" accept="image/png, image/jpeg" id="images" multiple @change="handleImageChange" />
@@ -28,6 +27,8 @@
 <script>
 import postMethods from '@/service/postMethod';
 import getMethod from '@/service/getMethod';
+import util from '@/utils/utils';
+
 export default {
   name: 'AgregarProducto',
   computed: {
@@ -38,25 +39,11 @@ export default {
   data() {
     return {
       imageFiles: [],
-      urls: []
+      urls: [],
+      options: []
     };
   },
   methods: {
-    cargarLoader(){
-      const cargando = {
-        isCargando: !this.$store.state.loader.cargando,
-        texto: this.$store.state.loader.textoCargando == '' ? 'Agregando sala...' : ''
-      };
-      this.$store.dispatch('setCargando', cargando)
-    },
-    cargarPopUp(texto, titulo){
-      const cargando = {
-        isCargando: !this.$store.state.popup.cargando,
-        texto: this.$store.state.popup.textoPopup == '' ? texto : '',
-        titulo: this.$store.state.popup.tituloPopup == '' ? titulo : ''
-      };
-      this.$store.dispatch('setPopup', cargando)
-    },
     handleImageChange(event) {
       const selectedFiles = Array.from(event.target.files).slice(0, 5);
       this.imageFiles = selectedFiles;
@@ -64,53 +51,64 @@ export default {
     async submitForm() {
 
       if (this.imageFiles.length != 5) {
-        this.cargarPopUp("Seleccione 5 imagenes", "Faltan datos..")
+        util.cargarPopUp("Seleccione 5 imagenes", "Faltan datos..")
         return
       }
       if (this.$refs.nombre.length < 1) {
-        this.cargarPopUp("Ingrese el nombre", "Faltan datos..")
+        util.cargarPopUp("Ingrese el nombre", "Faltan datos..")
         return
       }
       if (this.$refs.description.length < 1) {
-        this.cargarPopUp("Ingrese el descripción de la sala", "Faltan datos..")
+        util.cargarPopUp("Ingrese el descripción de la sala", "Faltan datos..")
         return
       }
-      if (this.$refs.tipo.value.length < 1) {
-        this.cargarPopUp("Ingrese el tipo de sala", "Faltan datos..")
+      if (!this.$refs.category.value) {
+        util.cargarPopUp("Ingrese la categoría de la sala", "Faltan datos..")
         return
       }
-      this.imageFiles.forEach(img=>{
+      /* this.imageFiles.forEach(img=>{
         const {name} = img
         const urlBase = `https://github.com/VICT0R89/ProyectoImgs/blob/main/${this.$refs.tipo.value}/${name}?raw=true`
         this.urls.push(urlBase)
-      })
+      }) */
 
       // INICIO DE AGREGAR SALA -------------------------
 
-      this.cargarLoader()
-
-
-      const category = {
-        name: this.$refs.category.value,
-        description: this.$refs.descriptionCategory.value
-      }
-      await postMethods.addTypeRoom(category)      
-      const categoryResult = await getMethod.getTypeRooms()
-      console.log(categoryResult);
-      /* 
+      util.cargarLoader("Agregando sala...")
+      
+      let id;
+      this.options.forEach(opt=>{
+        if(opt.name == this.$refs.category.value){
+          id = opt.id
+          return
+        }
+      })
       const datos= {
         description: this.$refs.description.value,
         favourite: false,
         name:this.$refs.nombre.value,
         typeroom:{
-          id: 1
+          id: id
         }
       }
-      await postMethods.addRoom(datos) */
-      this.cargarLoader()
-      this.$refs.loginForm.reset()
-      this.cargarPopUp("Sala agregada con éxito", "Gracias!")
+      if (id) {
+        await postMethods.addRoom(datos)
+        util.cargarLoader("")
+        this.$refs.loginForm.reset()
+        util.cargarPopUp("Sala agregada con éxito", "Gracias!")
+      } else {
+        util.cargarLoader("")
+        this.$refs.loginForm.reset()
+        util.cargarPopUp("Ha ocurrido un error en el servido", "Lo sentimos!")
+      }
+
     },
+    async init(){
+      this.options = await getMethod.getTypeRooms()
+    }
+  },
+  mounted(){
+    this.init()
   }
 }
 </script>

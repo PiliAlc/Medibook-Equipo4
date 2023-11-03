@@ -101,7 +101,7 @@ const getRoom = async data =>{
 }
 
 const getTypeRooms = async () =>{
-	const url = URL_BASE+"/typeroom"
+	const url = URL_BASE+"/typerooms"
 	const settings = {
 		method: 'GET',
 		headers: {
@@ -113,7 +113,7 @@ const getTypeRooms = async () =>{
 	return json
 }
 const getTypeRoom = async id =>{
-	const url = URL_BASE+"/typeroom/"+id
+	const url = URL_BASE+"/typerooms/"+id
 	const settings = {
 		method: 'GET',
 		headers: {

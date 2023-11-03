@@ -1,10 +1,11 @@
 <template>
   <div v-for="sala in resultados" :key="sala.id" :class="[theme, 'card']">
     <!-- <img v-for="image in sala.image" :key="image.id" :src="image.path" :alt="image.name"> -->
+    <div class="imgSimulation"></div>
     <div :class="[theme, 'info']">
       <h2>{{ sala.name }}</h2>
       <h2>{{ sala.typeroom.name }}</h2>
-      <p class="infoDesc">{{ sala.description }}</p>
+      <!-- <p class="infoDesc">{{ sala.description }}</p> -->
       <router-link :to="{ name: 'card-detail', params: { id: sala.id } }">
         <p class="infoDet">Detalles</p>
       </router-link>
@@ -32,9 +33,9 @@
   <style scoped>
   
   .card {
-    margin: 10px;
+    margin: 1%;
     overflow: hidden;
-    width: 330px;
+    width: 390px;
   }
   
   .card img {
@@ -43,6 +44,13 @@
     object-fit: cover;
     border-radius: 25px 25px 0 0;
     border: solid var(--text2);
+  }
+  .imgSimulation{
+    width: 100%;
+    height: 300px;
+    background-color: #605B5B;
+    border-radius: 25px 25px 0 0;
+    border: solid #605B5B;
   }
   
   .info {
@@ -75,40 +83,39 @@
   }
   @media only screen and (max-width:480px ){ 
     .card {
-margin: 1%;
-overflow: hidden;
-width: 46%;
-height: 200px;
-}
+      margin: 1%;
+      overflow: hidden;
+      width: 46%;
+      height: 200px;
+    }
 
-.card img {
-width: 100%;
-height: 150px;
-
-}
-.info {
-  width: 100%;
+    .card img {
+      width: 100%;
+      height: 150px;
+    }
+    .imgSimulation{
+      height: 150px;
+    }
+  .info {
+    width: 100%;
     padding: 5px;
     margin-top: -18px;
     margin-left: 0px;
     height: 55px;
-
-}
-.info p {
-  font-size: 12px;
-  margin-top: 10px;
-  margin-right: 0px;
-  
-}
-div.info > p:first-of-type{
-  margin-left: -120px;
-  margin-top: 19px;
-  
-}
-.info h2{
-  font-size: 15px;
-  margin-left: 5px;
-}
+  }
+  .info p {
+    font-size: 12px;
+    margin-top: 10px;
+    margin-right: 0px;
+  }
+  div.info > p:first-of-type{
+    margin-left: -120px;
+    margin-top: 19px;
+  }
+  .info h2{
+    font-size: 15px;
+    margin-left: 5px;
+  }
 
   }
   </style>

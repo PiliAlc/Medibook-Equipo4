@@ -5,8 +5,10 @@
     </router-link> -->
     <div class="imgSimulation"></div>
       <div :class="[theme, 'info']">
-        <h2>{{ sala.name }}</h2>
-        <p class="infoDet">Detalles</p>
+        <h2>{{ sala.typeroom.name }}</h2>
+        <router-link :to="{ name: 'card-category', params: { id: sala.typeroom.name } }">
+          <p class="infoDet">Detalles</p>
+        </router-link>
       </div>
   </div>
 </template>
@@ -91,7 +93,7 @@
     height: 150px;
   }
   .info {
-   width: 100%;
+    width: 100%;
     padding: 5px;
     margin-top: -18px;
     margin-left: 0px;

@@ -85,6 +85,7 @@ const addRoom = async data => {
 	}
 	const response = await fetch(url, settings)
 	const json = await response.json()
+	console.log(json);
 	return json
 }
 const addTypeRoom = async data => {

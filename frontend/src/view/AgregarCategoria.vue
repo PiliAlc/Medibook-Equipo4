@@ -35,25 +35,37 @@
     methods: {
       async submitForm() {
 
+        const categoryResult = await getMethod.getTypeRooms()
+        let aux = false
+        categoryResult.forEach(category => {
+          if (category.name == this.$refs.nombre.value) {
+            aux = true
+            return
+          }
+        });
+        if (aux) {
+          util.cargarPopUp("ya exite una categoría con ese nombre", "Faltan datos..")
+          aux=false
+          return
+        }
+
         if (this.$refs.nombre.length < 1) {
-            util.cargarPopUp("Ingrese el nombre", "Faltan datos..")
+          util.cargarPopUp("Ingrese el nombre", "Faltan datos..")
           return
         }
         if (this.$refs.description.length < 1) {
-            util.cargarPopUp("Ingrese el descripción de la sala", "Faltan datos..")
+          util.cargarPopUp("Ingrese el descripción de la sala", "Faltan datos..")
           return
         }
   
         util.cargarLoader("agregando sala...")
-  
-  
+
         const category = {
           name: this.$refs.nombre.value,
           description: this.$refs.description.value
         }
-        await postMethods.addTypeRoom(category)      
-        const categoryResult = await getMethod.getTypeRooms()
-        console.log(categoryResult)
+
+        await postMethods.addTypeRoom(category)
         
         util.cargarLoader()
         this.$refs.loginForm.reset()
@@ -110,6 +122,7 @@
     border-radius: 4px;
     cursor: pointer;
     transition: .5s ease-in-out;
+    margin-top: 15px;
   }
   button:hover{
     background-color: #0f8389;
