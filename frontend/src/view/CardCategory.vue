@@ -1,14 +1,14 @@
 <template>
 	<div class="container">
 		<div v-for="card in cards" :key="card.id" :class="[theme, 'card']" >
-			<img v-for="url in card.images" :key="url.id" :src="url.path" :alt="url.name">
-			<div :class="[theme, 'info']">
-				<h2> {{ card.name }} </h2>
-				<p> {{ card.description }} </p>
-				<router-link :to="{ name: 'card-detail', params: { id: card.id } }">
-					<p>Detalle</p>
-				</router-link>
-			</div>
+			<!-- <img v-for="url in card.images" :key="url.id" :src="url.path" :alt="url.name"> -->
+			<router-link :to="{ name: 'card-detail', params: { id: card.id } }">
+				<div class="imgSimulation"></div>
+				<div :class="[theme, 'info']">
+					<h2> {{ card.name }} </h2>
+					<p> {{ card.description }} </p>
+				</div>
+			</router-link>
 		</div>
 	</div>
 </template>
@@ -40,8 +40,10 @@
 			async generarCards(){
 				const categoryLength = this.$router.currentRoute.value.path.length
 				const category = this.$router.currentRoute.value.path.slice(6,categoryLength)
+				console.log(category);
 				util.cargarLoader("Buscando salas...")
-				this.cards = await getMethod.getRooms().filter( item => item.category.name == category )
+				const rooms = await getMethod.getRooms()
+				this.cards = rooms.filter( item => item.typeroom.name == category )
 				util.cargarLoader("")
 			}
 		}
@@ -57,21 +59,85 @@
 		flex-wrap: wrap;
 	}
 	.card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin: 10px;
+    margin: 1%;
     overflow: hidden;
-    width: 300px;
+    width: 390px;
+		height: auto;
   }
   
   .card img {
     width: 100%;
-    height: 200px;
+    height: 300px;
     object-fit: cover;
-    border-radius: 8px 8px 0 0;
+    border-radius: 25px 25px 0 0;
+    border: solid #605B5B;
+  }
+  .imgSimulation{
+    width: 100%;
+    height: 300px;
+    background-color: #605B5B;
+    border-radius: 25px 25px 0 0;
+    border: solid #605B5B;
+  }
+  
+  .info {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: var(--background2);
+    border: solid var(--text2);
+    margin-top: -25px;
+    border-radius: 15px 15px 25px 25px;
+    z-index: 2;
+  }
+  .info h2{
+    margin-left: 5px;
+    text-transform: capitalize;
+    color: var(--text2);
+  }
+  .info p {
+    color: var(--text2);
+    margin-top: 6px;
+    margin-right: 5px;
+    text-decoration: underline;
+  }
+	@media only screen and (max-width:480px ){ 
+  .card {
+    margin: 1%;
+    overflow: hidden;
+    width: 46%;
+    height: 200px;
+  }
+
+  .card img {
+    height: 150px;
+  }
+  .imgSimulation{
+    height: 150px;
   }
   .info {
-    padding: 10px;
+    width: 100%;
+    padding: 5px;
+    margin-top: -18px;
+    margin-left: 0px;
+    height: 55px;
+  }
+  .info p {
+    font-size: 12px;
+    margin-top: 10px;
+    margin-right: 0px;
+    
+  }
+  div.info > p:first-of-type{
+    margin-left: -120px;
+    margin-top: 19px;
+    
+  }
+  .info h2{
+    font-size: 15px;
+    margin-left: 5px;
+  }
   }
 </style>
     

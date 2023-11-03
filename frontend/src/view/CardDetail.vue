@@ -1,7 +1,8 @@
 <template>
   <div :class="[theme, 'card']">
     <div class="card-container">
-      <img v-for="url in card.url" :key="url" :src=url :alt="card.name" >
+      <!-- <img v-for="url in card.url" :key="url" :src=url :alt="card.name" > -->
+      <div class="imgSimulation"></div>
       <div :class="[theme, 'info']">
         <h2>{{ card.name }}</h2>
         <p>{{ card.description }}</p>
@@ -32,7 +33,11 @@ export default {
   methods: {
     async loadCard() {
       util.cargarLoader("Buscando sala...")
-      this.card = await getMethod.getRoom(this.$route.params.id)
+      const data= {
+        id:this.$route.params.id,
+        isId:true
+      }
+      this.card = await getMethod.getRoom(data)
       util.cargarLoader("")
     },
   },
@@ -55,6 +60,13 @@ export default {
     height: 200px;
     object-fit: cover;
     border-radius: 8px;
+  }
+  .imgSimulation{
+    width: 100%;
+    height: 300px;
+    background-color: #605B5B;
+    border-radius: 25px 25px 0 0;
+    border: solid #605B5B;
   }
   
   .info {

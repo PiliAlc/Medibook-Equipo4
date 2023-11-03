@@ -11,7 +11,6 @@ const cargarPopUp = (texto, titulo) =>{
 
 
   const cargarLoader = texto =>{
-    console.log("cargando");
     const cargando = {
       isCargando: !createStore.state.loader.cargando,
       texto: createStore.state.loader.textoCargando == '' ? texto : ''

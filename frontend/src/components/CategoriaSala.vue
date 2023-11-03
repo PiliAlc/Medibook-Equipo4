@@ -33,28 +33,7 @@ export default {
   },
   methods: {
     async generarCategorias() {
-
       this.resultados = await getMethod.getRooms()
-      /* console.log(data);
-      const categorias = {};
-
-      data.forEach(room => {
-        const {name} = room.typeroom
-        console.log(name);
-        if (!categorias[name]) {
-          categorias[name] = []
-        }
-        categorias[name].push(room)
-      })
-
-      const arrayPorCategoria = Object.keys(categorias).map(categoria => ({
-        id: categoria,
-        salas: categorias[categoria]
-      }))
-
-      this.resultados = arrayPorCategoria.map(item=> item.salas[0])
-      console.log(this.resultados); */
-      
     },
   },
 
