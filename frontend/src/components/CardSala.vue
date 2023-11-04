@@ -20,7 +20,10 @@
     components:{
     },
     props:{
-      resultados:[]
+      resultados:{
+        type:Array,
+        default:()=>[]
+      }
     },
     computed: {
       theme() {

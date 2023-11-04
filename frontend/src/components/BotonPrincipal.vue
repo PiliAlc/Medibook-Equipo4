@@ -9,8 +9,14 @@
 export default {
   name: 'BotonPrincipal',
   props: {
-    texto: String,
-    size: String,
+    texto: {
+      type:String,
+      default:()=>""
+    },
+    size: {
+      type:String,
+      default:()=>""
+    }
   },
   computed: {
     theme() {

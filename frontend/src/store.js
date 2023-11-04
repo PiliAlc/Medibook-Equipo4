@@ -1,5 +1,4 @@
 import { createStore } from "vuex";
-import data from "./data";
 
 export default createStore({
   state: {
@@ -13,7 +12,8 @@ export default createStore({
       textoPopup: "",
       tituloPopup: "",
     },
-    data: data,
+    rooms: [],
+    dialog:{},
   },
   mutations: {
     setTheme(state, theme) {
@@ -28,8 +28,11 @@ export default createStore({
       state.popup.textoPopup = texto;
       state.popup.tituloPopup = titulo;
     },
-    setData(state, data) {
-      state.data = data;
+    setRooms(state, room){
+      state.rooms = room
+    },
+    setDialog(state, dialog){
+      state.dialog = dialog
     },
   },
   actions: {
@@ -42,17 +45,21 @@ export default createStore({
     setPopup({ commit }, popup) {
       commit("setPopup", popup);
     },
-    setData({ commit }, data) {
-      commit("setData", data);
+    setRooms({ commit }, room) {
+      commit("setRooms", room);
+    },
+    setDialog({ commit }, dialog) {
+      commit("setDialog", dialog);
     },
   },
   getters: {
-    getTheme: (state) => state.theme,
-    getCargando: (state) => state.loader.cargando,
-    getTextoCargando: (state) => state.loader.textoCargando,
-    getTextoPopUp: (state) => state.popup.textoPopup,
-    getTituloPopUp: (state) => state.popup.tituloPopup,
-    getPopUp: (state) => state.popup.cargando,
-    getData: (state) => state.data,
+    getTheme: state => state.theme,
+    getCargando: state => state.loader.cargando,
+    getTextoCargando: state => state.loader.textoCargando,
+    getTextoPopUp: state => state.popup.textoPopup,
+    getTituloPopUp: state => state.popup.tituloPopup,
+    getPopUp: state => state.popup.cargando,
+    getRooms: state => state.rooms,
+    getDialog: state => state.dialog,
   },
 });

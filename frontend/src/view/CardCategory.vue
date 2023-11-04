@@ -23,11 +23,11 @@
 		},
 		props:{
 		},
-		data() {
-			return {
-				cards: [],
-			};
-		},
+    data(){
+      return {
+        cards:[]
+      }
+    },
 		computed: {
 			theme() {
 				return this.$store.getters.getTheme;
@@ -38,10 +38,10 @@
 		},
 		methods:{
 			async generarCards(){
+				util.cargarLoader("Buscando salas...")
 				const categoryLength = this.$router.currentRoute.value.path.length
 				const category = this.$router.currentRoute.value.path.slice(6,categoryLength)
 				console.log(category);
-				util.cargarLoader("Buscando salas...")
 				const rooms = await getMethod.getRooms()
 				this.cards = rooms.filter( item => item.typeroom.name == category )
 				util.cargarLoader("")

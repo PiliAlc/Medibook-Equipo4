@@ -28,13 +28,14 @@ export default {
       return this.$store.getters.getTheme
     },
   },
-  mounted() {
-    this.generarResultados()
+  async mounted() {
+    await this.generarResultados()
   },
   methods: {
     async generarResultados() {
       util.cargarLoader("cargando")
       const data = await getMethod.getRooms()
+      this.$store.dispatch('setRooms', data)
       const cantidad = data.length < 5 ? data.length : 5
       const indicesAleatorios = this.obtenerIndicesAleatorios(data.length,cantidad)
       this.resultados = indicesAleatorios.map((index) => data[index])

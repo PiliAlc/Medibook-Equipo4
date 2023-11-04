@@ -9,6 +9,8 @@
   <LoaderMain />
   <FooterComponent />
   <PopUp />
+  <DataDialog />
+
 </template>
 
 <script>
@@ -16,6 +18,7 @@ import HeaderPrincipal from './components/HeaderPrincipal.vue';
 import LoaderMain from './components/LoaderMain.vue';
 import FooterComponent from './components/FooterComponent.vue';
 import PopUp from './components/PopUp.vue';
+import DataDialog from './components/DataDialog.vue'
 
 export default {
   name: 'App',
@@ -23,7 +26,8 @@ export default {
     HeaderPrincipal,
     LoaderMain,
     FooterComponent,
-    PopUp
+    PopUp,
+    DataDialog
   },
   data() {
     return {

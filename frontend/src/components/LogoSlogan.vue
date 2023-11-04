@@ -10,7 +10,6 @@
 export default {
   name: 'LogoSlogan',
   props: {
-    theme:String,
   },
   computed: {
     themeClass() {
