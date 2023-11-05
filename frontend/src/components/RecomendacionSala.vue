@@ -33,13 +33,15 @@ export default {
   },
   methods: {
     async generarResultados() {
-      util.cargarLoader("cargando")
       const data = await getMethod.getRooms()
-      this.$store.dispatch('setRooms', data)
-      const cantidad = data.length < 5 ? data.length : 5
-      const indicesAleatorios = this.obtenerIndicesAleatorios(data.length,cantidad)
-      this.resultados = indicesAleatorios.map((index) => data[index])
-      util.cargarLoader("")
+      if (data) {
+        util.cargarLoader("cargando")
+        this.$store.dispatch('setRooms', data)
+        const cantidad = data.length < 5 ? data.length : 5
+        const indicesAleatorios = this.obtenerIndicesAleatorios(data.length,cantidad)
+        this.resultados = indicesAleatorios.map((index) => data[index])
+        util.cargarLoader("")
+      }
     },
     obtenerIndicesAleatorios(max, cantidad) {
       const indices = []

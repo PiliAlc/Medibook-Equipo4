@@ -73,9 +73,14 @@ const getRooms = async () =>{
 			'Content-Type': 'application/json'
 		}
 	}
-	const response = await fetch(url, settings)
-	const json = await response.json()
-	return json
+	try {
+		const response = await fetch(url, settings)
+		const json = await response.json()
+		return json
+		
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 // get room id or name
