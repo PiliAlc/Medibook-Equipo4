@@ -7,9 +7,11 @@ import com.medibook.util.ValidatorClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -22,6 +24,7 @@ public class RoomController {
     }
 
     @PostMapping()
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> addRoom(@RequestBody Room room) {
 
         roomService.addRoom(room);
@@ -29,6 +32,7 @@ public class RoomController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
     @PutMapping()
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> changeRoom(@RequestBody Room room) throws ResourceNotFoundException {
 
         roomService.editRoom(room);
@@ -36,7 +40,7 @@ public class RoomController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/listrooms")
     public ResponseEntity<List<Room>> listRooms() throws  ResourceNotFoundException{
 
         List<Room> rooms = roomService.listRooms();
@@ -67,44 +71,18 @@ public class RoomController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> delete(@PathVariable String id) throws ResourceNotFoundException {
 
         if(ValidatorClass.isNumeric(id)){
 
             roomService.deleteRoom(Long.parseLong(id));
 
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminado");
+            return ResponseEntity.status(HttpStatus.OK).body("Eliminado");
 
         } else {
 
             throw  new ResourceNotFoundException("El Id debe se numérico");
         }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+     }
 }
