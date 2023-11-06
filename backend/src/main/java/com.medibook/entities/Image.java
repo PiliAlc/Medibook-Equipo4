@@ -10,10 +10,10 @@ public class Image {
     private Long id;
     private String path; // Almacena la url a la S3
     @ManyToOne
-    @JoinColumn(name = "room_id")
+    @JoinColumn(name = "room_id", nullable = true)
     private Room room;
-    @ManyToOne
-    @JoinColumn(name = "typeroom_id")
+    @OneToOne
+    @JoinColumn(name = "typeroom_id", nullable = false)
     private Typeroom typeroom;
 
     public Image() {
