@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ public class ImageController {
     private ImageRepository imageRepository;
     // Maneja las solicitudes GET a la ruta "/images/{id}"
     @GetMapping("/images/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<byte[]> getImage(@PathVariable Long id) throws IOException {
         Optional<Image> imageOptional = imageRepository.findById(id);
         if (imageOptional.isPresent()) {

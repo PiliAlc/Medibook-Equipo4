@@ -7,6 +7,7 @@ import com.medibook.util.ValidatorClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -22,6 +23,7 @@ public class DoctorController {
         }
 
     @PostMapping()
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> addDoctor(@RequestBody Doctor doctor) {
 
         doctorService.addDoctor(doctor);
@@ -29,6 +31,7 @@ public class DoctorController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
     @PutMapping()
+    @PreAuthorize("hasRole('ADMIN')")
      public ResponseEntity<?> changeDoctor(@RequestBody Doctor doctor) throws ResourceNotFoundException {
 
             doctorService.editDoctor(doctor);
@@ -36,7 +39,8 @@ public class DoctorController {
             return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/listdoctors")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Doctor>> listDoctors() throws  ResourceNotFoundException{
 
         List<Doctor> doctors = doctorService.listDoctors();
@@ -45,6 +49,7 @@ public class DoctorController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Optional<Doctor>> searchById(@PathVariable String id) throws  ResourceNotFoundException{
         Optional<Doctor> doctor = doctorService.searchById(Long.parseLong(id));
         if(ValidatorClass.isNumeric(id)){
@@ -57,6 +62,7 @@ public class DoctorController {
         }
     }
     @GetMapping("/tuition/{tuition}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Optional<Doctor>> searchByTuition (@PathVariable String tuition) throws ResourceNotFoundException{
         Optional<Doctor> doctor = doctorService.searchByTuition(tuition);
         if(!doctor.get().getTuition().isEmpty()){
@@ -67,6 +73,7 @@ public class DoctorController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> delete(@PathVariable String id) throws ResourceNotFoundException {
 
         if(ValidatorClass.isNumeric(id)){

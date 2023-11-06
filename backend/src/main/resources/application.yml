@@ -16,3 +16,9 @@ s3.access-key: AKIAY3PLHSUJMQAM2NK3
 s3.secret-key: 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
 s3.bucket-name: 1023c07-grupo4
 s3.region: us-east-1
+
+# JWT
+#Firma del token (256 bits en Hex, lo elijo de allkeysgenerator.com)
+jwt.secret.key : 76397924423F4528482B4D6251655468576D5A7134743777217A25432A46294A
+#Tiempo de expiración del token a 1 día (en milisegundos)
+jwt.time.expiration : 86400000
