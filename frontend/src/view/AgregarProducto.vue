@@ -131,6 +131,7 @@ export default {
   border: 1px solid var(--border);
   border-radius: 8px;
   background-color: var(--oscuro);
+  margin-bottom: 130px;
 }
 
 form {
@@ -165,4 +166,17 @@ button:hover{
   background-color: #0f8389;
   transition: .5s ease-in-out;
 }
+
+@media only screen and (max-width:480px ){
+  .contenedor {
+    margin-top:-20%;
+  }
+  .login-container {
+    height: 75%;
+    width: 75%;
+  margin-bottom: -100px;
+}
+
+}
+
 </style>

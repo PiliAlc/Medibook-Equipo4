@@ -82,37 +82,34 @@ export default {
 
 @media only screen and (max-width:480px ){
   .footer {
-    height: 170px;
+    height: 60px;
     padding: 10px 0;
-  }
-  .footer-content {
-    flex-direction: column;
-    align-items: center;
-
   }
 
   .redesSociales {
-    margin-bottom: 20px;
-    width:350px;
+    margin-bottom: 0px;
+    width:200px;
+    margin-right: 5px;
+    padding-left: 50px;
   }
   .footerInfompresa {
-
-    width:350px;
+    width:200px;
+ 
   }
   .info p{
     font-size: 1.3vh;
 
   }
   .isologotipo img {
-  max-width: 60px;
+  width: 50px;
 }
 .isologotipo{
-  width: 80px;
-
+  width: 50px;
+  height: 100%;
 }
 .redesSociales img {
   max-width: 20px;
-  margin-right: 45px;
+  margin-right: 25px;
 }
 .footerInfompresa {
   justify-content: center;

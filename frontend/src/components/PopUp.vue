@@ -44,7 +44,7 @@ export default {
 .contenedor{
 position: absolute;
 width: 100%;
-height: 100%;
+height: 115vh;
 left: 50%;
 top: 50%;
 transform: translate(-50%, -50%);
@@ -53,15 +53,15 @@ background-color: rgba(0, 0, 0, 0.5);
 .textCont{
   position: relative;
   left: 50%;
-  top: 50%;
+  top: 67%;
   transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 25%;
-  height: 50%;
+  width: 60vh;
+  height: 55%;
   border: 1px solid aqua;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 h2, p{
   padding: 10px;
@@ -85,6 +85,20 @@ h2, p{
 .texto{
   width: 80%;
   text-align: right;
+}
+
+@media only screen and (max-width:480px ){
+
+  .textCont{
+  left: 50%;
+  top: 55%;
+  width: 45vh;
+  height: 45%;
+}
+.contenedor{
+height: 100vh;
+}
+
 }
 
 </style>
