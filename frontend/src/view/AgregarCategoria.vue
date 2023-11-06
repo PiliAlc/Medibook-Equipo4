@@ -37,12 +37,14 @@
 
         const categoryResult = await getMethod.getTypeRooms()
         let aux = false
-        categoryResult.forEach(category => {
-          if (category.name == this.$refs.nombre.value) {
-            aux = true
-            return
-          }
-        });
+        if (categoryResult) {
+          categoryResult.forEach(category => {
+            if (category.name == this.$refs.nombre.value) {
+              aux = true
+              return
+            }
+          });
+        }
         if (aux) {
           util.cargarPopUp("ya exite una categoría con ese nombre", "Faltan datos..")
           aux=false
@@ -65,11 +67,13 @@
           description: this.$refs.description.value
         }
 
-        await postMethods.addTypeRoom(category)
+        const res = await postMethods.addTypeRoom(category)
         
-        util.cargarLoader()
-        this.$refs.loginForm.reset()
-        util.cargarPopUp("Categoría agregada con éxito", "Gracias!")
+        if (res) {
+          util.cargarLoader()
+          this.$refs.loginForm.reset()
+          util.cargarPopUp("Categoría agregada con éxito", "Gracias!")
+        }
       },
     }
   }

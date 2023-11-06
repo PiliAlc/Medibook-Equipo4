@@ -41,8 +41,8 @@
 				util.cargarLoader("Buscando salas...")
 				const categoryLength = this.$router.currentRoute.value.path.length
 				const category = this.$router.currentRoute.value.path.slice(6,categoryLength)
-				console.log(category);
 				const rooms = await getMethod.getRooms()
+        console.log(rooms);
 				this.cards = rooms.filter( item => item.typeroom.name == category )
 				util.cargarLoader("")
 			}

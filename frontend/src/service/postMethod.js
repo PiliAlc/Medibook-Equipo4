@@ -19,9 +19,14 @@ const addUser = async data =>{
 		},
 		body: JSON.stringify(data),
 	}
-	const response = await fetch(url, settings)
-	const json = await response.json()
-	return json
+	try {
+		const response = await fetch(url, settings)
+		const json = await response.json()
+		return json
+	} catch (error) {
+		console.log(error);
+		return false
+	}
 }
 
 // Recibe un objeto data con los valores ingresado en el formulario de login,
@@ -39,9 +44,14 @@ const logIn = async data =>{
 		},
 		body: JSON.stringify(data),
 	}
-	const response = await fetch(url, settings)
-	const json = await response.json()
-	return json
+	try {
+		const response = await fetch(url, settings)
+		const json = await response.json()
+		return json
+	} catch (error) {
+		console.log(error);
+		return false
+	}
 }
 
 // METDODOS - DOCTORS -
@@ -64,9 +74,14 @@ const addDoctor = async data =>{
 		},
 		body: JSON.stringify(data)
 	}
-	const response = await fetch(url, settings)
-	const json = await response.json()
-	return json
+	try {
+		const response = await fetch(url, settings)
+		const json = await response.json()
+		return json
+	} catch (error) {
+		console.log(error);
+		return false
+	}
 }
 
 // METDODOS - ROOM -
@@ -83,10 +98,14 @@ const addRoom = async data => {
 		},
 		body: JSON.stringify(data)
 	}
-	const response = await fetch(url, settings)
-	const json = await response.json()
-	console.log(json);
-	return json
+	try {
+		const response = await fetch(url, settings)
+		const json = await response.json()
+		return json
+	} catch (error) {
+		console.log(error);
+		return false
+	}
 }
 const addTypeRoom = async data => {
 	const url = URL_BASE+"/typerooms"
@@ -98,9 +117,14 @@ const addTypeRoom = async data => {
 		},
 		body: JSON.stringify(data)
 	}
-	const response = await fetch(url, settings)
-	const json = await response.json()
-	return json
+	try {
+		const response = await fetch(url, settings)
+		const json = await response.json()
+		return json
+	} catch (error) {
+		console.log(error);
+		return false
+	}
 }
 
 const postMethods = {

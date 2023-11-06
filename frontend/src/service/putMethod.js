@@ -47,39 +47,46 @@ const updateDoctor = async data =>{
 	return json
 }
 
-const updateRoom = async data => {
-	const { id, name, description, favourite, url1, url2, url3, url4, url5, type, bookings } = data
-	const url = URL_BASE+"/rooms"+id
-
-	const datos = {
-		name: name,
-		description: description,
-		favourite: favourite,
-		url1: url1,
-		url2: url2,
-		url3: url3,
-		url4: url4,
-		url5: url5,
-		type: type,
-		bookings: bookings
-	}
+const updateRoom = async (data) => {
+	const url = URL_BASE+"/rooms"
 	const settings = {
 		method: "PUT",
 		headers: {
-			// authorization : jwt,
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(datos)
+		body: JSON.stringify(data)
 	}
-	const response = await fetch(url, settings)
-	const json = await response.json()
-	return json
+	try {
+		const response = await fetch(url, settings)
+		const json = await response.json()
+		return json
+	} catch (e) {
+		console.log(e);
+	}
+}
+const updateTypeRoom = async (data,id) => {
+	const url = URL_BASE+"/typerooms/"+id
+	const settings = {
+		method: "PUT",
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(data)
+	}
+	try {
+		const response = await fetch(url, settings)
+		const json = await response.json()
+		return json
+	} catch (e) {
+		console.log(e);
+	}
 }
 
 const putMethod = {
 	updateUser: updateUser,
 	updateDoctor: updateDoctor,
 	updateRoom: updateRoom,
+	updateTypeRoom: updateTypeRoom,
 }
 
 export default putMethod

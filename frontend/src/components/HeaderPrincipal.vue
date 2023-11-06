@@ -14,7 +14,7 @@
       <router-link to="/admin/product" v-if="this.$router.currentRoute.value.path == '/admin' || this.$router.currentRoute.value.path == '/admin/category'">
         <BotonPrincipal class="btnAgrSala" texto="AGREGAR SALA" size="19"/>
       </router-link>  
-      <router-link to="admin/category" v-if="this.$router.currentRoute.value.path == '/admin' || this.$router.currentRoute.value.path == '/admin/product'">
+      <router-link to="/admin/category" v-if="this.$router.currentRoute.value.path == '/admin' || this.$router.currentRoute.value.path == '/admin/product'">
         <BotonPrincipal class="btnAgrSala" texto="+ CATEGORÍA" size="19"/>
       </router-link>  
       <!-- <BotonPrincipal class="btnTheme" texto="🌓" @click="toggleTheme" style="border-radius: 50%; padding: .8vw;" /> -->

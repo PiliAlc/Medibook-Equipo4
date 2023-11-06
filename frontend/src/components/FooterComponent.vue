@@ -37,16 +37,21 @@ export default {
 
 <style scoped>
 .footer {
+  position: fixed;
+  bottom: 0;
   width: 100%;
   background-color: #0d7277;
   color: #fff;
   padding: 20px 0;
+  z-index: 999;
 }
 
 .footer-content {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .footerInfompresa {

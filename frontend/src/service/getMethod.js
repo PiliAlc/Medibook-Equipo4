@@ -46,9 +46,14 @@ const getDoctor = async data =>{
 			'Content-Type': 'application/json'
 		}
 	}
-	const response = await fetch(url, settings)
-	const json = await response.json()
-	return json
+	try {
+		const response = await fetch(url, settings)
+		const json = await response.json()
+		return json
+	} catch (error) {
+		console.log(error);
+		return false
+	}
 }
 const getDoctors = async () =>{
 	const url = URL_BASE+"/doctors"
@@ -58,9 +63,14 @@ const getDoctors = async () =>{
 			'Content-Type': 'application/json'
 		}
 	}
-	const response = await fetch(url, settings)
-	const json = await response.json()
-	return json
+	try {
+		const response = await fetch(url, settings)
+		const json = await response.json()
+		return json
+	} catch (error) {
+		console.log(error);
+		return false
+	}
 }
 
 // ROOMS -----------------------------------
@@ -100,9 +110,13 @@ const getRoom = async data =>{
 			'Content-Type': 'application/json'
 		}
 	}
-	const response = await fetch(url, settings)
-	const json = await response.json()
-	return json
+	try {
+		const response = await fetch(url, settings)
+		const json = await response.json()
+		return json
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 const getTypeRooms = async () =>{
@@ -113,9 +127,13 @@ const getTypeRooms = async () =>{
 			'Content-Type': 'application/json'
 		}
 	}
-	const response = await fetch(url, settings)
-	const json = await response.json()
-	return json
+	try {
+		const response = await fetch(url, settings)
+		const json = await response.json()
+		return json
+	} catch (error) {
+		console.log(error);
+	} 
 }
 const getTypeRoom = async id =>{
 	const url = URL_BASE+"/typerooms/"+id
@@ -125,9 +143,13 @@ const getTypeRoom = async id =>{
 			'Content-Type': 'application/json'
 		}
 	}
-	const response = await fetch(url, settings)
-	const json = await response.json()
-	return json
+	try {
+		const response = await fetch(url, settings)
+		const json = await response.json()
+		return json
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 const getMethod = {

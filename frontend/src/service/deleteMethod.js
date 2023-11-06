@@ -12,10 +12,13 @@ const deleteDoctor = async id =>{
 			'Content-Type': 'application/json'
 		}
 	}
-	const response = await fetch(url, settings)
-	const json = await response.json()
-	return json
-
+	try {
+		const response = await fetch(url, settings)
+		return response
+	} catch (error) {
+		console.log(error);
+		return false
+	}
 }
 
 // METDODOS - ROOM -
@@ -29,26 +32,33 @@ const deleteRoom = async id => {
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		
 	}
-	const response = await fetch(url, settings)
-	return response
+	try {
+		const response = await fetch(url, settings)
+		return response
+	} catch (error) {
+		console.log(error);
+		return false
+	}
 }
 
 // METODO - TYPEROOM -
 
 const deleteTypeRoom = async id =>{
 	const url = URL_BASE+"/typerooms/"+id
-
 	const settings = {
 		method: "DELETE",
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		
 	}
-	const response = await fetch(url, settings)
-	return response
+	try {
+		const response = await fetch(url, settings)
+		return response
+	} catch (error) {
+		console.log(error);
+		return false
+	}
 }
 
 const deleteMethods = {

@@ -8,6 +8,7 @@ import CardCategory from './view/CardCategory'
 import AdministrarProducto from './view/AdministrarProducto'
 import AgregarProducto from './view/AgregarProducto'
 import AgregarCategoria from './view/AgregarCategoria'
+import CardModify from './view/CardModify'
 
 const routes = [
   { path: '/', component: BodyMain },
@@ -16,8 +17,9 @@ const routes = [
   { path: '/admin', component: AdministrarProducto },
   { path: '/admin/product', component: AgregarProducto },
   { path: '/admin/category', component: AgregarCategoria },
-  { path: '/card/:id', name: 'card-detail', component: CardDetail },
-  { path: '/card/:id', name: 'card-category', component: CardCategory },
+  { path: '/card-detail/:id', name: 'card-detail', component: CardDetail },
+  { path: '/card-category/:id', name: 'card-category', component: CardCategory },
+  { path: '/modify/:id', name: 'card-modify', component: CardModify, props: ':card' },
 ];
 
 const router = createRouter({

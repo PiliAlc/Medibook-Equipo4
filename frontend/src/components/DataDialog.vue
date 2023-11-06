@@ -10,6 +10,20 @@
       </div>
     </div>
   </div>
+  <div v-if="dialog.type == 'recategorize'" class="contenedor">
+    <div class="textCont">
+      <div class="texto">
+        <p>{{ dialog.texto }}</p> 
+      </div>
+      <select name="type" id="type" v-model="selected">
+        <option v-for="category in dialog.categorys" :key="category.id" :value="category.id">{{ category.name }}</option>
+      </select>
+      <div class="btnCont">
+        <div class="Btn" @click="recategorizeCard">ACEPTAR</div>
+        <div class="Btn" @click="dialog.cancel">CANCELAR</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -17,13 +31,22 @@ export default {
   name:"DataDialog",
   props: {
   },
+  emits: ["update-type"],
   computed: {
     dialog() {
       return this.$store.getters.getDialog
     },
   },
+  data() {
+    return {
+      selected: null,
+    };
+  },
   methods:{
-  }
+    recategorizeCard() {
+      this.$emit('update-type', this.selected);
+    },
+  },
 };
 </script>
 
