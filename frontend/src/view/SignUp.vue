@@ -72,7 +72,7 @@ export default {
           this.resetForm();
           util.cargarPopUp("Usuario agregado con éxito", "GRACIAS")
           this.$store.commit('setUser', data)
-          this.$router.push({ name: 'login' })
+          this.$router.push({ path: '/login' })
         }
       } else {
         util.cargarPopUp("los datos ingresados no son correctos", "ERROR")

@@ -68,6 +68,6 @@ export default createStore({
     getPopUp: state => state.popup.cargando,
     getRooms: state => state.rooms,
     getDialog: state => state.dialog,
-    getUser: state => state.dialog,
+    getUser: state => state.user,
   },
 });

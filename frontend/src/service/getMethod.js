@@ -14,18 +14,23 @@ const getUsers = async () =>{
 	const json = await response.json()
 	return json
 }
-const getUser = async id =>{
-	const url = URL_BASE+"/users/"+id
+const getUser = async (jwt) =>{
+	const url = URL_BASE+"/user"
 	const settings = {
 		method: 'GET',
 		headers: {
-		//   authorization : jwt,
+			'Authorization' : "Bearer " + jwt,
 			'Content-Type': 'application/json'
 		}
 	}
-	const response = await fetch(url, settings)
-	const json = await response.json()
-	return json
+	try {
+		const response = await fetch(url, settings)
+		const json = await response.json()
+		return json
+	} catch (e) {
+		console.log(e);
+		return false
+	}
 }
 
 // DOCTORS ------------------------------
@@ -74,12 +79,12 @@ const getDoctors = async () =>{
 }
 
 // ROOMS -----------------------------------
-const getRooms = async () =>{
-	const url = URL_BASE+"/rooms"
+const getRooms = async jwt =>{
+	const url = URL_BASE+"/rooms/listrooms"
 	const settings = {
 		method: 'GET',
 		headers: {
-		//   authorization : jwt,
+			'Authorization' : "Bearer " + jwt,
 			'Content-Type': 'application/json'
 		}
 	}

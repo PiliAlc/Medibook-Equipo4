@@ -17,7 +17,9 @@
 
 <script>
 
+// import getMethod from '@/service/getMethod';
 import postMethods from '@/service/postMethod';
+import util from '@/utils/utils';
 
 
 export default {
@@ -39,12 +41,23 @@ export default {
         username: this.$refs.username.value,
         password: this.$refs.password.value,
       }
-
+      util.cargarLoader("Iniciando..")
       const result = await postMethods.logIn(data)
+      if (result) {
+        const userForStore = {
+          username: this.$refs.username.value,
+          password: this.$refs.password.value,
+          roles: ["ADMIN"],
+          jwt: result.token
+        }
+        this.resetForm()
+        this.$store.dispatch('setUser',userForStore)
+        util.cargarLoader("")
+        this.$router.push({ path: '/' })
+      } else {
+        util.cargarPopUp("los datos ingresados no son correctos", "ERROR")
+      }
 
-      console.log(result);
-
-      this.resetForm()
     },
     resetForm(){
       this.username = ""
