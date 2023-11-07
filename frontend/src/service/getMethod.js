@@ -1,12 +1,14 @@
 const URL_BASE = "http://localhost:3306"
-
+import createStore from '@/store'
+let jwt = ""
 // USER --------------
 const getUsers = async () =>{
+	jwt = createStore.getters.getUser.jwt
 	const url = URL_BASE+"/users"
 	const settings = {
 		method: 'GET',
 		headers: {
-		//   authorization : jwt,
+			'Authorization' : "Bearer " + jwt,
 			'Content-Type': 'application/json'
 		}
 	}
@@ -14,7 +16,8 @@ const getUsers = async () =>{
 	const json = await response.json()
 	return json
 }
-const getUser = async (jwt) =>{
+const getUser = async () =>{
+	jwt = createStore.getters.getUser.jwt
 	const url = URL_BASE+"/user"
 	const settings = {
 		method: 'GET',
@@ -47,7 +50,7 @@ const getDoctor = async data =>{
 	const settings = {
 		method: 'GET',
 		headers: {
-		//   authorization : jwt,
+			// 'Authorization' : "Bearer " + jwt,
 			'Content-Type': 'application/json'
 		}
 	}
@@ -65,6 +68,7 @@ const getDoctors = async () =>{
 	const settings = {
 		method: 'GET',
 		headers: {
+			// 'Authorization' : "Bearer " + jwt,
 			'Content-Type': 'application/json'
 		}
 	}
@@ -79,18 +83,20 @@ const getDoctors = async () =>{
 }
 
 // ROOMS -----------------------------------
-const getRooms = async jwt =>{
+const getRooms = async () =>{
+	console.log(jwt);
 	const url = URL_BASE+"/rooms/listrooms"
 	const settings = {
 		method: 'GET',
 		headers: {
-			'Authorization' : "Bearer " + jwt,
+			// 'Authorization' : "Bearer " + jwt,
 			'Content-Type': 'application/json'
 		}
 	}
 	try {
 		const response = await fetch(url, settings)
 		const json = await response.json()
+		console.log(json);
 		return json
 		
 	} catch (error) {
@@ -107,11 +113,11 @@ data = {
 */
 const getRoom = async data =>{
 	const {id, isId} = data
-	const url = isId ? URL_BASE+"/rooms/"+id : URL_BASE+"/rooms/name/"+id
+	const url = isId ? URL_BASE+"/rooms/"+id : URL_BASE+"/rooms/listrooms/name/"+id
 	const settings = {
 		method: 'GET',
 		headers: {
-			//   authorization : jwt,
+			// 'Authorization' : "Bearer " + jwt,
 			'Content-Type': 'application/json'
 		}
 	}
@@ -125,10 +131,11 @@ const getRoom = async data =>{
 }
 
 const getTypeRooms = async () =>{
-	const url = URL_BASE+"/typerooms"
+	const url = URL_BASE+"/typerooms/listtyperooms"
 	const settings = {
 		method: 'GET',
 		headers: {
+			// 'Authorization' : "Bearer " + jwt,
 			'Content-Type': 'application/json'
 		}
 	}
@@ -145,6 +152,7 @@ const getTypeRoom = async id =>{
 	const settings = {
 		method: 'GET',
 		headers: {
+			// 'Authorization' : "Bearer " + jwt,
 			'Content-Type': 'application/json'
 		}
 	}

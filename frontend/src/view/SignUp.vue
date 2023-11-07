@@ -55,7 +55,7 @@ export default {
         lastname: this.lastName,
         username: this.username,
         password: this.password,
-        roles:["USER"]
+        jwt:""
       }
       util.cargarLoader("Agregando usuario")
       let validation = {

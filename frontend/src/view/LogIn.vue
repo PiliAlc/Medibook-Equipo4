@@ -17,7 +17,6 @@
 
 <script>
 
-// import getMethod from '@/service/getMethod';
 import postMethods from '@/service/postMethod';
 import util from '@/utils/utils';
 
@@ -45,11 +44,13 @@ export default {
       const result = await postMethods.logIn(data)
       if (result) {
         const userForStore = {
+          name: this.$store.getters?.getUser?.name || "",
+          lastname: this.$store.getters?.getUser?.lastname || "",
           username: this.$refs.username.value,
           password: this.$refs.password.value,
-          roles: ["ADMIN"],
           jwt: result.token
         }
+        
         this.resetForm()
         this.$store.dispatch('setUser',userForStore)
         util.cargarLoader("")
