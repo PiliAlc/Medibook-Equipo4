@@ -16,8 +16,10 @@
 </template>
 
 <script>
-import getMethod from '../service/getMethod'
+
 import postMethods from '@/service/postMethod';
+
+
 export default {
   name: 'LogIn',
   computed: {
@@ -27,28 +29,21 @@ export default {
   },
   data() {
     return {
-      username: '',
-      password: ''
-    };
+      username: (this.$store.getters.getUser && this.$store.getters.getUser.username) || "",
+      password: (this.$store.getters.getUser && this.$store.getters.getUser.password) || "",
+    }
   },
   methods: {
     async submitForm() {
-      // this.$refs.loginForm.preverntDefault()
       const data= {
-        description: "aca estamos testeando el post",
-        favourite: false,
-        name:"sala post",
-        typeroom:{id:1}
+        username: this.$refs.username.value,
+        password: this.$refs.password.value,
       }
-      const posteando = await postMethods.addRoom(data)
-      console.log(posteando);
-      const {getRooms} = getMethod
-      const json = await getRooms()
-      console.log(json);
-      /* this.username = this.$refs.username.value
-      this.password = this.$refs.password.value
-      console.log('Usuario:', this.username);
-      console.log('Contraseña:', this.password); */
+
+      const result = await postMethods.logIn(data)
+
+      console.log(result);
+
       this.resetForm()
     },
     resetForm(){
