@@ -1,4 +1,4 @@
-package com.medibook.service;
+/*package com.medibook.service;
 
 import com.cloudinary.Cloudinary;
 import lombok.RequiredArgsConstructor;
@@ -25,3 +25,5 @@ public class FileUploadImpl implements FileUpload{
                 .toString();
     }
 }
+
+ */

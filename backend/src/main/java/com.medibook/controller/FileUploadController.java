@@ -1,4 +1,4 @@
-package com.medibook.controller;
+/*package com.medibook.controller;
 
 import com.medibook.service.FileUpload;
 import lombok.RequiredArgsConstructor;
@@ -31,3 +31,5 @@ public class FileUploadController {
         return ResponseEntity.ok(imageURL);
     }
 }
+
+ */

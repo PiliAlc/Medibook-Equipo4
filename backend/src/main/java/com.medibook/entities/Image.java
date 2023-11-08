@@ -8,7 +8,7 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String path; // Almacena la url a la S3
+    private String path; // url que devuelve Cloudinary
     @ManyToOne
     @JoinColumn(name = "room_id", nullable = true)
     private Room room;

@@ -2,6 +2,7 @@ package com.medibook.service;
 import com.medibook.entities.Room;
 import com.medibook.exceptions.ResourceNotFoundException;
 import com.medibook.repository.RoomRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
@@ -95,9 +96,7 @@ public class RoomService {
 
     public Optional<Room> searchById(Long id) throws  ResourceNotFoundException{
 
-        Optional<Room> room =  roomRepository.findById(id);
-
-
+        Optional<Room> room =  roomRepository.findId(id);
 
         if(room.isPresent()){
 
@@ -107,6 +106,12 @@ public class RoomService {
             throw  new ResourceNotFoundException("No existe la sala con ese id: " + id);
         }
         return room;
+    }
+
+    @Transactional
+    public void saveImageRoom(Room room){
+        roomRepository.save(room);
+
     }
 
 }
