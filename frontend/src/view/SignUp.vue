@@ -10,7 +10,7 @@
         <input ref="lastName" type="text" id="lastName" :value="lastName" />
 
         <label for="username">Correo Electrónico:</label>
-        <input ref="username" type="email" id="username" :value="username" />
+        <input ref="username" type="text" id="username" :value="username" />
 
         <label for="password">Contraseña:</label>
         <input ref="password" type="password" id="password" :value="password" />
@@ -39,7 +39,7 @@ export default {
       lastName: '',
       username: '',
       password: '',
-      roles:["USER"]
+      roles:["USER"],
     };
   },
   methods: {
@@ -55,17 +55,33 @@ export default {
         lastname: this.lastName,
         username: this.username,
         password: this.password,
-        jwt:""
+        roles:this.roles
       }
       util.cargarLoader("Agregando usuario")
-      let validation = {
-        name: util.validarDatos(data.name,"texto"),
-        lastname: util.validarDatos(data.lastname,"texto"),
-        username: util.validarDatos(data.username,"email"),
-        password: util.validarDatos(data.password,"password"),
+      let validation = [
+        {
+          name: util.validarDatos(data.name,"nombre")
+        },
+        {
+          lastname: util.validarDatos(data.lastname,"apellido")
+        },
+        { username: util.validarDatos(data.username,"email"),
+        },
+        {
+          password: util.validarDatos(data.password,"password")
+        }
+      ]
+      for(let item of validation){
+        const fieldName = Object.keys(item)[0]
+        if (!item[fieldName].isValid) {
+          console.log("entro: ", fieldName);
+          util.cargarLoader("")
+          util.cargarPopUp(item[fieldName].texto, "ERROR")
+          return
+        }
       }
-      let {name, lastname, username, password} = validation
-      if (name && lastname && username && password) {
+
+      if (validation[0].name.isValid && validation[1].lastname.isValid && validation[2].username.isValid && validation[3].password.isValid) {
         const result = await postMethods.addUser(data)
         util.cargarLoader("")
         if (result) {
@@ -73,10 +89,9 @@ export default {
           util.cargarPopUp("Usuario agregado con éxito", "GRACIAS")
           this.$store.commit('setUser', data)
           this.$router.push({ path: '/login' })
+        } else {
+          util.cargarPopUp("Problema en el servidor", "ERROR")
         }
-      } else {
-        util.cargarLoader("")
-        util.cargarPopUp("los datos ingresados no son correctos", "ERROR")
       }
     },
     resetForm() {

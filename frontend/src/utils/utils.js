@@ -26,16 +26,34 @@ const cargarPopUp = (texto, titulo) =>{
   }
 
   const validarDatos = (dato,tipo) => {
-    let result = false
+    let result = {
+      isValid:false,
+      texto: ""
+    }
     switch (tipo) {
-      case "texto":
-        result = regTexto.test(dato);
+      case "nombre":
+        result = {
+          isValid:regTexto.test(dato),
+          texto:"El nombre no cumple el formato"
+        }
+        break;
+      case "apellido":
+        result = {
+          isValid:regTexto.test(dato),
+          texto:"El apellido no cumple el formato"
+        }
         break;
       case "email":
-        result = regEmail.test(dato);
+        result = {
+          isValid:regEmail.test(dato),
+          texto:"El email no cumple el formato"
+        }
         break;
       case "password":
-        result = regContrasenia.test(dato);
+        result = {
+          isValid:regContrasenia.test(dato),
+          texto:"El password no cumple el formato"
+        }
         break;
     }
     return result

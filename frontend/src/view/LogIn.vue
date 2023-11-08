@@ -42,6 +42,7 @@ export default {
       }
       util.cargarLoader("Iniciando..")
       const result = await postMethods.logIn(data)
+      console.log(result);
       if (result) {
         const userForStore = {
           name: this.$store.getters?.getUser?.name || "",
