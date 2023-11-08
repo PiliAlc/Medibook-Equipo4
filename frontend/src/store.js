@@ -14,6 +14,7 @@ export default createStore({
     },
     rooms: [],
     dialog:{},
+    user:{},
   },
   mutations: {
     setTheme(state, theme) {
@@ -34,6 +35,9 @@ export default createStore({
     setDialog(state, dialog){
       state.dialog = dialog
     },
+    setUser(state, user){
+      state.user = user
+    },
   },
   actions: {
     setTheme({ commit }, theme) {
@@ -51,6 +55,9 @@ export default createStore({
     setDialog({ commit }, dialog) {
       commit("setDialog", dialog);
     },
+    setUser({ commit }, user) {
+      commit("setUser", user);
+    },
   },
   getters: {
     getTheme: state => state.theme,
@@ -61,5 +68,6 @@ export default createStore({
     getPopUp: state => state.popup.cargando,
     getRooms: state => state.rooms,
     getDialog: state => state.dialog,
+    getUser: state => state.user,
   },
 });

@@ -6,12 +6,13 @@ const URL_BASE = "http://localhost:3306"
 /* 
 	name: string,
 	lastName: string,
-	email: string,
-	password: string
+	username: string,
+	password: string,
+	roles:[""]
 */
 // Devuelve la respuesta de la API
 const addUser = async data =>{
-	const url = URL_BASE+"/users"
+	const url = URL_BASE+"/signup"
 	const settings = {
 		method: "POST",
 		headers: {
@@ -21,8 +22,8 @@ const addUser = async data =>{
 	}
 	try {
 		const response = await fetch(url, settings)
-		const json = await response.json()
-		return json
+		// const json = await response.json()
+		return response
 	} catch (error) {
 		console.log(error);
 		return false
@@ -31,12 +32,12 @@ const addUser = async data =>{
 
 // Recibe un objeto data con los valores ingresado en el formulario de login,
 /* 
-    email: string,
+    username: string,
     password: string
 */
 // Devuelve la respuesta de la API
 const logIn = async data =>{
-	const url = URL_BASE+"/users"
+	const url = URL_BASE+"/login"
 	const settings = {
 		method: "POST",
 		headers: {

@@ -1,4 +1,4 @@
-package com.medibook.controller;
+package com.medibook.controller;/*package com.medibook.controller;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -59,4 +59,4 @@ public class S3Controller {
 
         return s3Client.generatePresignedUrl(generatePresignedUrlRequest);
     }
-}
+}*/

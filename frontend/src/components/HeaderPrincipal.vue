@@ -2,21 +2,22 @@
   <header :class="theme">
     <LogoSlogan />
     <div class="btnes">
-      <router-link to="/signup" v-if="this.$router.currentRoute.value.path == '/'">
+      <router-link to="/signup" v-if="(path == '/' || path == '/login') && jwt == ''">
         <BotonPrincipal class="btnCrearCuenta" texto="CREAR CUENTA" size="19" />
       </router-link>
-      <router-link to="/login" v-if="this.$router.currentRoute.value.path == '/'">
+      <router-link to="/login" v-if="(path == '/' || path == '/signup') && jwt == ''">
         <BotonPrincipal class="btnInicio" texto="INICIAR SESIÓN" size="19"/>
       </router-link>  
-      <router-link to="/admin" v-if="this.$router.currentRoute.value.path != '/admin'">
+      <router-link to="/admin" v-if="path != '/admin' && jwt != ''">
         <BotonPrincipal class="btnAgrSala" texto="ADMINISTRAR" size="19"/>
       </router-link>  
-      <router-link to="/admin/product" v-if="this.$router.currentRoute.value.path == '/admin' || this.$router.currentRoute.value.path == '/admin/category'">
+      <router-link to="/admin/product" v-if="(path == '/admin' || path == '/admin/category') && jwt != ''">
         <BotonPrincipal class="btnAgrSala" texto="AGREGAR SALA" size="19"/>
       </router-link>  
-      <router-link to="/admin/category" v-if="this.$router.currentRoute.value.path == '/admin' || this.$router.currentRoute.value.path == '/admin/product'">
+      <router-link to="/admin/category" v-if="(path == '/admin' || path == '/admin/product') && jwt != ''">
         <BotonPrincipal class="btnAgrSala" texto="+ CATEGORÍA" size="19"/>
-      </router-link>  
+      </router-link>
+      <UserProfile v-if="(path != '/login' || path == '/signup') && jwt != ''"/>
       <!-- <BotonPrincipal class="btnTheme" texto="🌓" @click="toggleTheme" style="border-radius: 50%; padding: .8vw;" /> -->
     </div>
   </header>
@@ -25,18 +26,26 @@
 <script>
 import LogoSlogan from '../components/LogoSlogan.vue';
 import BotonPrincipal from '../components/BotonPrincipal';
+import UserProfile from '../components/UserProfile.vue'
 
 export default {
   name: 'HeaderPrincipal',
   components:{
     LogoSlogan,
     BotonPrincipal,
+    UserProfile,
   },
   props:{
   },
   computed: {
     theme() {
       return this.$store.getters.getTheme;
+    },
+    jwt() {
+      return this.$store.getters?.getUser?.jwt || ""
+    },
+    path() {
+      return this.$router.currentRoute.value.path
     }
   },
   methods: {

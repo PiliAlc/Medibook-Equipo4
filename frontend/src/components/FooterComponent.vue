@@ -7,7 +7,7 @@
         </div>
         <div class="info">
           <p>2023 Digital House ©</p>
-          <p>Todos los Derechos Reservados</p>
+          <p>Todos los Derechos Reservados.</p>
         </div>
       </div>
 

@@ -3,11 +3,14 @@
     <div class="signup-container">
       <h2>Registrarse</h2>
       <form @submit.prevent="submitForm">
-        <label for="username">Usuario:</label>
-        <input ref="username" type="text" id="username" :value="username" />
+        <label for="name">Nombre:</label>
+        <input ref="name" type="text" id="name" :value="name" />
 
-        <label for="email">Correo Electrónico:</label>
-        <input ref="email" type="email" id="email" :value="email" />
+        <label for="lastName">Apellido:</label>
+        <input ref="lastName" type="text" id="lastName" :value="lastName" />
+
+        <label for="username">Correo Electrónico:</label>
+        <input ref="username" type="email" id="username" :value="username" />
 
         <label for="password">Contraseña:</label>
         <input ref="password" type="password" id="password" :value="password" />
@@ -19,6 +22,10 @@
 </template>
 
 <script>
+
+import postMethods from '@/service/postMethod';
+import util from '@/utils/utils';
+
 export default {
   name: 'SignUp',
   computed: {
@@ -28,29 +35,53 @@ export default {
   },
   data() {
     return {
+      name: '',
+      lastName: '',
       username: '',
-      email: '',
-      password: ''
+      password: '',
+      roles:["USER"]
     };
   },
   methods: {
-    submitForm() {
+    async submitForm() {
 
+      this.name = this.$refs.name.value
+      this.lastName = this.$refs.lastName.value
       this.username = this.$refs.username.value
-      this.email = this.$refs.email.value
       this.password = this.$refs.password.value
 
-      console.log('Usuario:', this.username);
-      console.log('Correo Electrónico:', this.email);
-      console.log('Contraseña:', this.password);
-
-      // Enviar los datos del formulario al servidor
-
-      this.resetForm();
+      const data = {
+        name: this.name,
+        lastname: this.lastName,
+        username: this.username,
+        password: this.password,
+        jwt:""
+      }
+      util.cargarLoader("Agregando usuario")
+      let validation = {
+        name: util.validarDatos(data.name,"texto"),
+        lastname: util.validarDatos(data.lastname,"texto"),
+        username: util.validarDatos(data.username,"email"),
+        password: util.validarDatos(data.password,"password"),
+      }
+      let {name, lastname, username, password} = validation
+      if (name && lastname && username && password) {
+        const result = await postMethods.addUser(data)
+        util.cargarLoader("")
+        if (result) {
+          this.resetForm();
+          util.cargarPopUp("Usuario agregado con éxito", "GRACIAS")
+          this.$store.commit('setUser', data)
+          this.$router.push({ path: '/login' })
+        }
+      } else {
+        util.cargarPopUp("los datos ingresados no son correctos", "ERROR")
+      }
     },
     resetForm() {
+      this.name = '';
+      this.lastName = '';
       this.username = '';
-      this.email = '';
       this.password = '';
     }
   }

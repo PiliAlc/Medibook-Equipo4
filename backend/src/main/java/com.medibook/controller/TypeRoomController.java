@@ -7,6 +7,7 @@ import com.medibook.util.ValidatorClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class TypeRoomController {
     }
 
     @PostMapping()
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> addType(@RequestBody Typeroom typeRoom) {
 
         typeRoomService.addType(typeRoom);
@@ -31,6 +33,7 @@ public class TypeRoomController {
     }
 
     @PutMapping()
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> editTypeRoom(@RequestBody Typeroom typeRoom) throws ResourceNotFoundException {
 
         typeRoomService.editTypeRoom(typeRoom);
@@ -38,7 +41,7 @@ public class TypeRoomController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/listtyperooms")
     public ResponseEntity<List<Typeroom>> listTypeRooms() throws ResourceNotFoundException {
 
         List<Typeroom> typeRooms = typeRoomService.listTypeRooms();
@@ -60,13 +63,14 @@ public class TypeRoomController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> deleteTypeRoom(@PathVariable String id) throws ResourceNotFoundException {
 
         if (ValidatorClass.isNumeric(id)) {
 
             typeRoomService.deleteTypeRoom(Long.parseLong(id));
 
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminado");
+            return ResponseEntity.status(HttpStatus.OK).body("Eliminado");
 
         } else {
 
