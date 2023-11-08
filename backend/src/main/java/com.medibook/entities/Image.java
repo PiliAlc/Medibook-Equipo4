@@ -12,21 +12,20 @@ public class Image {
     @ManyToOne
     @JoinColumn(name = "room_id", nullable = true)
     private Room room;
-    @OneToOne
-    @JoinColumn(name = "typeroom_id", nullable = false)
+    @OneToOne(mappedBy = "image")
     private Typeroom typeroom;
 
     public Image() {
     }
 
-    public Image(String path, Room room, Typeroom typeroom) {
+    public Image(Long id, String path, Room room, Typeroom typeroom) {
+        this.id = id;
         this.path = path;
         this.room = room;
         this.typeroom = typeroom;
     }
 
-    public Image(Long id, String path, Room room, Typeroom typeroom) {
-        this.id = id;
+    public Image(String path, Room room, Typeroom typeroom) {
         this.path = path;
         this.room = room;
         this.typeroom = typeroom;
