@@ -59,7 +59,7 @@ export default {
 
 <style scoped>
 header{
-  z-index: 999;
+  z-index: 9;
   display: flex;
   position: sticky;
   top: 0;
@@ -69,7 +69,7 @@ header{
   padding: 10px;
   background-color: var(--text);
   width:100%;
-  height: 9vw;
+  height: 8vw;
 }
 .btnes {
   display: flex;

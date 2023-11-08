@@ -50,12 +50,13 @@ export default {
           password: this.$refs.password.value,
           jwt: result.token
         }
-        
+
         this.resetForm()
         this.$store.dispatch('setUser',userForStore)
         util.cargarLoader("")
         this.$router.push({ path: '/' })
       } else {
+        util.cargarLoader("")
         util.cargarPopUp("los datos ingresados no son correctos", "ERROR")
       }
 
@@ -72,7 +73,8 @@ export default {
 .contenedor {
   background-color: #15b4bc;
   color: var(--text);
-  height: 100vh;
+  height: auto;
+  min-height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;

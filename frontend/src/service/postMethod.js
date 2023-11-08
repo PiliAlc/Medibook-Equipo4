@@ -1,4 +1,5 @@
 const URL_BASE = "http://localhost:3306"
+// import createStore from '@/store'
 
 // METODOS - USUARIO -
 
@@ -12,6 +13,7 @@ const URL_BASE = "http://localhost:3306"
 */
 // Devuelve la respuesta de la API
 const addUser = async data =>{
+	// createStore.dispatch('setUser', data)
 	const url = URL_BASE+"/signup"
 	const settings = {
 		method: "POST",

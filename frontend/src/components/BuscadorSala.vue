@@ -17,7 +17,6 @@
 
 <script>
 import BotonPrincipal from './BotonPrincipal.vue';
-// import data from '@/data';
 import CardSala from './CardSala.vue';
 import getMethod from '@/service/getMethod';
 import util from '../utils/utils'
@@ -54,7 +53,7 @@ export default {
           description.trim().toLowerCase().includes(busqueda) 
           }) 
         )
-        util.cargarLoader("")
+      util.cargarLoader("")
     }
   },
 }

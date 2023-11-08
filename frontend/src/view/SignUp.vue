@@ -75,6 +75,7 @@ export default {
           this.$router.push({ path: '/login' })
         }
       } else {
+        util.cargarLoader("")
         util.cargarPopUp("los datos ingresados no son correctos", "ERROR")
       }
     },
@@ -92,14 +93,16 @@ export default {
 .contenedor {
   background-color: #15b4bc;
   color: var(--text);
-  height: 100vh;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px 0;
 }
 .signup-container {
   width: 300px;
   padding: 20px;
+  margin: 20px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background-color: var(--oscuro);

@@ -84,7 +84,6 @@ const getDoctors = async () =>{
 
 // ROOMS -----------------------------------
 const getRooms = async () =>{
-	console.log(jwt);
 	const url = URL_BASE+"/rooms/listrooms"
 	const settings = {
 		method: 'GET',
@@ -96,7 +95,6 @@ const getRooms = async () =>{
 	try {
 		const response = await fetch(url, settings)
 		const json = await response.json()
-		console.log(json);
 		return json
 		
 	} catch (error) {

@@ -18,10 +18,10 @@ const cargarPopUp = (texto, titulo) =>{
 
 
   const cargarLoader = texto =>{
-    const cargando = {
-      isCargando: !createStore.state.loader.cargando,
-      texto: createStore.state.loader.textoCargando == '' ? texto : ''
-    };
+    let cargando = {}
+      texto == "" ?
+      cargando={ isCargando: false, texto: createStore.state.loader.textoCargando == '' } :
+      cargando={ isCargando: !createStore.state.loader.cargando, texto: createStore.state.loader.textoCargando == '' ? texto : '' }
     createStore.dispatch('setCargando', cargando)
   }
 

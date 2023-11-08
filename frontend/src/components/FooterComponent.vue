@@ -37,23 +37,22 @@ export default {
 
 <style scoped>
 .footer {
-  position: fixed;
   bottom: 0;
   width: 100%;
   background-color: #0d7277;
   color: #fff;
   padding: 20px 0;
-  z-index: 999;
+  z-index: 9;
+  height: auto;
 }
-
 .footer-content {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
+  padding: 10px 0;
 }
-
 .footerInfompresa {
   display: flex;
   justify-content: space-around;
@@ -62,16 +61,12 @@ export default {
   margin-right: 20vw;
   width: 360px;
 }
-
 .isologotipo img {
   max-width: 100px;
-  
 }
-
 .info p {
   margin: 0;
 }
-
 .redesSociales img {
   max-width: 40px;
   margin-right: 45px;
@@ -85,7 +80,6 @@ export default {
     height: 60px;
     padding: 10px 0;
   }
-
   .redesSociales {
     margin-bottom: 0px;
     width:200px;
@@ -94,26 +88,24 @@ export default {
   }
   .footerInfompresa {
     width:200px;
- 
   }
   .info p{
     font-size: 1.3vh;
-
   }
   .isologotipo img {
-  width: 50px;
-}
-.isologotipo{
-  width: 50px;
-  height: 100%;
-}
-.redesSociales img {
-  max-width: 20px;
-  margin-right: 25px;
-}
-.footerInfompresa {
-  justify-content: center;
-  margin-right: 0vw;
-}
+    width: 50px;
+  }
+  .isologotipo{
+    width: 50px;
+    height: 100%;
+  }
+  .redesSociales img {
+    max-width: 20px;
+    margin-right: 25px;
+  }
+  .footerInfompresa {
+    justify-content: center;
+    margin-right: 0vw;
+  }
 }
 </style>

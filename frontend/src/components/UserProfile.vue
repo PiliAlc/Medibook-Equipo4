@@ -1,11 +1,11 @@
 <template>
     <div class="user-profile">
-      <div class="profile-picture" :style="{ backgroundImage: `url(${picture})` }"></div>
+      <div class="profile-picture"></div>
       <div class="container" @click="toggleMenu"><span></span><span></span><span></span></div>
       <div class="menu" :class="{ 'is-open': isOpen }">
         <ul>
           <li v-for="(option, index) in options" :key="index">
-            <a href="#">{{ option }}</a>
+            <p @click="actionMenu(option)">{{ option }}</p>
           </li>
         </ul>
       </div>
@@ -16,10 +16,6 @@
 export default {
   name: 'UserProfile',
   props: {
-    picture: {
-      type: String,
-      required: false,
-    },
     options: {
       type: Array,
       default: () => ['Administrar', 'Cerrar Sesión'],
@@ -34,6 +30,17 @@ export default {
     toggleMenu() {
       this.isOpen = !this.isOpen;
     },
+    actionMenu(option){
+      switch (option) {
+        case "Cerrar Sesión":
+          this.$store.dispatch('setUser',{})
+          this.$router.push({ path: '/' })
+          break;
+        case "Administrar":
+          this.$router.push({ path: '/admin/user' })
+          break;
+      }
+    }
   },
 };
 </script>
@@ -112,8 +119,14 @@ span{
   margin-bottom: 5px;
 }
 
-.menu a {
-  text-decoration: none;
+.menu p {
   color: #000;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.menu p:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 </style>
