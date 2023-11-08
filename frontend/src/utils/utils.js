@@ -3,7 +3,7 @@ import createStore from '@/store'
 const regExp = {
   regTexto : /^[a-zA-ZÀ-ÿ\s]{3,20}$/,
   regEmail : /^[a-zA-Z0-9_.+-]+@[a-zA-Z]+\.[a-zA-Z]{2,13}$/,
-  regContrasenia : /^[a-zA-Z\d!@#$%^&*()_+]{8,12}$/
+  regContrasenia: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[a-zA-Z\d!@#$%^&*()_+]{8,12}$/
 };
 const { regTexto, regEmail, regContrasenia } = regExp;
 

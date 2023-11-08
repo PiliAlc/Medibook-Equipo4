@@ -4,16 +4,19 @@
       <h2>Registrarse</h2>
       <form @submit.prevent="submitForm">
         <label for="name">Nombre:</label>
-        <input ref="name" type="text" id="name" :value="name" />
+        <input
+          ref="name" type="text" id="name" :value="name" placeholder="Entre 3 y 20 Letras"/>
+
 
         <label for="lastName">Apellido:</label>
-        <input ref="lastName" type="text" id="lastName" :value="lastName" />
+        <input ref="lastName" type="text" id="lastName" :value="lastName" placeholder="Entre 3 y 20 Letras"/>
 
         <label for="username">Correo Electrónico:</label>
-        <input ref="username" type="text" id="username" :value="username" />
+        <input ref="username" type="text" id="username" :value="username" placeholder="En formato xxxx@xxx.xxx"/>
 
         <label for="password">Contraseña:</label>
-        <input ref="password" type="password" id="password" :value="password" />
+        <input ref="password" type="password" id="password" :value="password" placeholder="8-20: May, Min, !@#$%^&*()_+."/>
+
 
         <button type="submit">Registrarse</button>
       </form>
@@ -99,7 +102,7 @@ export default {
       this.lastName = '';
       this.username = '';
       this.password = '';
-    }
+    },
   }
 };
 </script>
