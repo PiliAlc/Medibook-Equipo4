@@ -3,7 +3,7 @@
     <div class="login-container">
       <h2>Iniciar Sesión</h2>
       <form ref="loginForm" @submit.prevent="submitForm">
-        <label for="username">Usuario:</label>
+        <label for="username">Email:</label>
         <input ref="username" type="text" id="username" :value="username" />
 
         <label for="password">Contraseña:</label>
@@ -41,6 +41,20 @@ export default {
         password: this.$refs.password.value,
       }
       util.cargarLoader("Iniciando..")
+      util.cargarLoader("Agregando usuario")
+      let validation = [
+        { username: util.validarDatos(data.username,"email"),},
+        { password: util.validarDatos(data.password,"password") }
+      ]
+      for(let item of validation){
+        const fieldName = Object.keys(item)[0]
+        if (!item[fieldName].isValid) {
+          console.log("entro: ", fieldName);
+          util.cargarLoader("")
+          util.cargarPopUp(item[fieldName].texto, "ERROR")
+          return
+        }
+      }
       const result = await postMethods.logIn(data)
       console.log(result);
       if (result) {
