@@ -1,4 +1,6 @@
 const URL_BASE = "http://localhost:3306"
+// import createStore from '@/store'
+// let jwt = ""
 
 // METDODOS - USER -
 

@@ -1,19 +1,10 @@
 const URL_BASE = "http://localhost:3306"
 // import createStore from '@/store'
+// let jwt = ""
 
 // METODOS - USUARIO -
 
-// Recibe un objeto data con los valores ingresado en el formulario de registro,
-/* 
-	name: string,
-	lastName: string,
-	username: string,
-	password: string,
-	roles:[""]
-*/
-// Devuelve la respuesta de la API
 const addUser = async data =>{
-	// createStore.dispatch('setUser', data)
 	const url = URL_BASE+"/signup"
 	const settings = {
 		method: "POST",
@@ -24,20 +15,13 @@ const addUser = async data =>{
 	}
 	try {
 		const response = await fetch(url, settings)
-		// const json = await response.json()
 		return response
-	} catch (error) {
-		console.log(error);
+	} catch (e) {
+		console.log(e);
 		return false
 	}
 }
 
-// Recibe un objeto data con los valores ingresado en el formulario de login,
-/* 
-    username: string,
-    password: string
-*/
-// Devuelve la respuesta de la API
 const logIn = async data =>{
 	const url = URL_BASE+"/login"
 	const settings = {
@@ -51,23 +35,14 @@ const logIn = async data =>{
 		const response = await fetch(url, settings)
 		const json = await response.json()
 		return json
-	} catch (error) {
-		console.log(error);
+	} catch (e) {
+		console.log(e);
 		return false
 	}
 }
 
 // METDODOS - DOCTORS -
 
-// Recibe un objeto data con los valores ingresado en el formulario de login,
-/* 
-	name: string,
-	lastname: string,
-	tuition: string,
-	bookings: array,
-	specialties: array
-*/
-// Devuelve la respuesta de la API
 const addDoctor = async data =>{
 	const url = URL_BASE+"/doctors"
 	const settings = {
@@ -81,16 +56,14 @@ const addDoctor = async data =>{
 		const response = await fetch(url, settings)
 		const json = await response.json()
 		return json
-	} catch (error) {
-		console.log(error);
+	} catch (e) {
+		console.log(e);
 		return false
 	}
 }
 
 // METDODOS - ROOM -
 
-// Recibe un objeto data con los valores ingresado en el formulario de agregar producto,
-// Devuelve la respuesta de la API
 const addRoom = async data => {
 	const url = URL_BASE+"/rooms"
 
@@ -105,8 +78,8 @@ const addRoom = async data => {
 		const response = await fetch(url, settings)
 		const json = await response.json()
 		return json
-	} catch (error) {
-		console.log(error);
+	} catch (e) {
+		console.log(e);
 		return false
 	}
 }
@@ -124,8 +97,8 @@ const addTypeRoom = async data => {
 		const response = await fetch(url, settings)
 		const json = await response.json()
 		return json
-	} catch (error) {
-		console.log(error);
+	} catch (e) {
+		console.log(e);
 		return false
 	}
 }
