@@ -1,7 +1,9 @@
 const URL_BASE = "http://localhost:3306"
 import createStore from '@/store'
 let jwt = ""
+
 // USER --------------
+
 const getUsers = async () =>{
 	jwt = createStore.getters.getUser.jwt
 	const url = URL_BASE+"/users"
