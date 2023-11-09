@@ -31,7 +31,6 @@
       }
     },
     mounted(){
-      console.log("estoy entrando");
     }
   }
   </script>

@@ -1,6 +1,6 @@
 <template>
     <div class="user-profile">
-      <div class="profile-picture"></div>
+      <div class="profile-picture">{{userName}}</div>
       <div class="container" @click="toggleMenu"><span></span><span></span><span></span></div>
       <div class="menu" :class="{ 'is-open': isOpen }">
         <ul>
@@ -24,7 +24,11 @@ export default {
   data() {
     return {
       isOpen: false,
+      userName: ""
     };
+  },
+  created() {
+    this.obtenerNombre();
   },
   methods: {
     toggleMenu() {
@@ -41,6 +45,13 @@ export default {
           this.$router.push({ path: '/admin/user' })
           break;
       }
+    },
+    obtenerNombre(){
+      const user = this.$store.getters.getUser
+      const inicialNombre = user.name.slice(0, 1)
+      const inicialApellido = user.lastname.slice(0, 1)
+      this.userName = inicialNombre+inicialApellido
+      console.log(this.userName)
     }
   },
 };
@@ -60,6 +71,10 @@ export default {
   border: 2px solid #000;
   background-size: cover;
   background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
 }
 
 .container{
