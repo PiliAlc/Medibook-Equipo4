@@ -1,6 +1,7 @@
 package com.medibook.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -24,15 +25,15 @@ public class UserEntity {
 
 
     @NotBlank
-    @Size(max = 80)
+    @Size(max = 30)
     private String name;
 
     @NotBlank
-    @Size(max = 80)
+    @Size(max = 30)
     private String lastname;
 
     @NotBlank
-    @Size(max = 30)
+    @Email
     private String username;
 
     @NotBlank

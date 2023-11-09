@@ -4,7 +4,9 @@ package com.medibook.controller;
 import com.medibook.controller.request.CreateUserDTO;
 import com.medibook.entities.ERole;
 import com.medibook.entities.RoleEntity;
+import com.medibook.entities.Room;
 import com.medibook.entities.UserEntity;
+import com.medibook.exceptions.ResourceNotFoundException;
 import com.medibook.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -43,16 +46,18 @@ public class PrincipalController {
                 .lastname(createUserDTO.getLastname())
                 .roles(roles)
                 .build();
-    //Persisto el usuario y lo retorono
+
+    //Persisto el usuario y lo retorno
         userRepository.save(userEntity);
 
         return ResponseEntity.ok(userEntity);
     }
 
-    @DeleteMapping("/deleteUser")
+    /*@DeleteMapping("/deleteUser")
     @PreAuthorize("hasRole('ADMIN')")
     public String deleteUser(@RequestParam String id){
         userRepository.deleteById(Long.parseLong(id));
         return "Se ha borrado el user con id ".concat(id);
-    }
+
+    }*/
 }
