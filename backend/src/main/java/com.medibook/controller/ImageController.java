@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -26,8 +27,8 @@ public class ImageController {
         private ImageService imageService;
 
         @PostMapping("/upload")
-        public ResponseEntity<?> uploadImage(@RequestParam("path") MultipartFile file, @RequestParam(value = "room_id", required = false) Long idRoom) throws IOException {
-            imageService.uploadImage(file, idRoom);
+        public ResponseEntity<?> uploadImage(@RequestParam("path") List<MultipartFile> files, @RequestParam(value = "room_id", required = false) Long idRoom) throws IOException {
+            imageService.uploadImages(files, idRoom);
 
             return ResponseEntity.ok().build();
         }

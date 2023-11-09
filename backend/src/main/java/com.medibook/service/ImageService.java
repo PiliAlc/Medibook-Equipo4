@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -32,23 +33,23 @@ public class ImageService {
 
     //El método uploadImage maneja la subida de imágenes a Cloudinary
     //y la creación de una nueva entrada en la tabla “images”.
-    public void uploadImage(MultipartFile file, Long idRoom) throws IOException {
-        //sube el archivo de imagen a Cloudinary y obtiene la URL de la imagen subida.
-        Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
-        //almacena la URL de la imagen subida en una variable.
-        String url = (String) uploadResult.get("url");
-
-        Image image = new Image(); //se crea una nueva isntancia de clase image
-        image.setPath(url); //establece la URL de la imagen en la instancia de la clase Image
-
+    public void uploadImages(List<MultipartFile> files, Long roomId) throws IOException {
         Room room;
 
         try {
-            //busca una habitación en la base de datos utilizando el ID de habitación proporcionado.
-            Optional<Room> roomOptional = roomService.searchById(idRoom);
-            room = roomOptional.get(); //obtiene la habitación de la base de datos.
-            room.getImages().add(image); //agrega la instancia de la clase Image a la lista de imágenes de la habitación.
-            roomService.saveImageRoom(room); //guarda la habitación actualizada en la base de datos.
+            Optional<Room> roomOptional = roomService.searchById(roomId);
+            room = roomOptional.orElseThrow(() -> new ResourceNotFoundException("Room not found")); // Manejar si la habitación no se encuentra
+
+            for (MultipartFile file : files) {
+                Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+                String url = (String) uploadResult.get("url");
+
+                Image image = new Image();
+                image.setPath(url);
+                room.getImages().add(image);
+            }
+
+            roomService.saveImageRoom(room);
         } catch (Exception | ResourceNotFoundException e){
             System.out.println(e.getMessage());
         }
