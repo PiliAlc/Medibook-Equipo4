@@ -41,7 +41,7 @@ public class ImageService {
         Image image = new Image(); //se crea una nueva isntancia de clase image
         image.setPath(url); //establece la URL de la imagen en la instancia de la clase Image
 
-        Room room = null;
+        Room room;
 
         try {
             //busca una habitación en la base de datos utilizando el ID de habitación proporcionado.
@@ -53,7 +53,7 @@ public class ImageService {
             System.out.println(e.getMessage());
         }
 
-        imageRepository.save(image); //guarda la instancia de la clase Image en la BD
+        // imageRepository.save(image); //guarda la instancia de la clase Image en la BD
     }
 
 }

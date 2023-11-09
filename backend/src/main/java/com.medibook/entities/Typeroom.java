@@ -21,7 +21,7 @@ public class Typeroom {
     private Set<Room> rooms;
 
     @OneToOne
-    @JoinColumn(name = "image_id", nullable = false)
+    @JoinColumn(name = "image_id", nullable = true)
     private Image image;
 
     public Typeroom() {

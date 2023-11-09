@@ -19,7 +19,8 @@ public class Room {
     @JsonIgnore
     private Set<Booking> bookings;
 
-    @OneToMany(mappedBy = "room")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "room_id")
     @JsonIgnore
     private Set<Image> images;
 

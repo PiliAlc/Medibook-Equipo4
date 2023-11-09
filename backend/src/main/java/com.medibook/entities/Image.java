@@ -9,25 +9,21 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String path; // url que devuelve Cloudinary
-    @ManyToOne
-    @JoinColumn(name = "room_id", nullable = true)
-    private Room room;
+
     @OneToOne(mappedBy = "image")
     private Typeroom typeroom;
 
     public Image() {
     }
 
-    public Image(Long id, String path, Room room, Typeroom typeroom) {
+    public Image(Long id, String path, Typeroom typeroom) {
         this.id = id;
         this.path = path;
-        this.room = room;
         this.typeroom = typeroom;
     }
 
-    public Image(String path, Room room, Typeroom typeroom) {
+    public Image(String path, Typeroom typeroom) {
         this.path = path;
-        this.room = room;
         this.typeroom = typeroom;
     }
 
@@ -45,14 +41,6 @@ public class Image {
 
     public void setPath(String path) {
         this.path = path;
-    }
-
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
     }
 
     public Typeroom getTyperoom() {
