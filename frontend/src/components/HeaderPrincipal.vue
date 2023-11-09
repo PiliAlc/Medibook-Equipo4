@@ -41,6 +41,9 @@ export default {
     theme() {
       return this.$store.getters.getTheme;
     },
+    rol() {
+      return this.$store.getters?.getUser?.roles || ""
+    },
     jwt() {
       return this.$store.getters?.getUser?.jwt || ""
     },

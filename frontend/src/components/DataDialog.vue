@@ -24,6 +24,21 @@
       </div>
     </div>
   </div>
+  <div v-if="dialog.type == 'rol'" class="contenedor">
+    <div class="textCont">
+      <div class="texto">
+        <p>{{ dialog.texto }}</p> 
+      </div>
+      <select name="type" id="type" v-model="selected">
+        <option value="ADMIN">ADMIN</option>
+        <option value="USER">USER</option>
+      </select>
+      <div class="btnCont">
+        <div class="Btn" @click="recategorizeRol">ACEPTAR</div>
+        <div class="Btn" @click="dialog.cancel">CANCELAR</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -31,7 +46,7 @@ export default {
   name:"DataDialog",
   props: {
   },
-  emits: ["update-type"],
+  emits: ["update-type", "update-rol"],
   computed: {
     dialog() {
       return this.$store.getters.getDialog
@@ -45,6 +60,9 @@ export default {
   methods:{
     recategorizeCard() {
       this.$emit('update-type', this.selected);
+    },
+    recategorizeRol() {
+      this.$emit('update-rol', this.selected);
     },
   },
 };

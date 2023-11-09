@@ -1,28 +1,28 @@
-const URL_BASE = "http://localhost:3306"
-// import createStore from '@/store'
-// let jwt = ""
+const URL_BASE = "http://localhost:8090"
+import createStore from '@/store'
+let jwt = createStore.getters.getUser.jwt
 
 // METDODOS - USER -
 
 const updateUser = async data => {
-	const { id, nombre, apellido, email, password } = data
-	const url = URL_BASE+"/users/"+id
-	const datos = {
-		name: nombre,
-		lastName: apellido,
-		email: email,
-		password: password
-	}
+	jwt = createStore.getters.getUser.jwt
+	const url = URL_BASE+"/users/editUsers"
 	const config = {
 		method : "PUT",
-		body : JSON.stringify(datos),
+		body : JSON.stringify(data),
 		headers : {
+			'Authorization' : "Bearer " + jwt,
 			'Content-Type': 'application/json'
 		}
 	}
-	const response = await fetch(url, config)
-	const json = await response.json()
-	return json
+	try {
+		const response = await fetch(url, config)
+		const json = await response.json()
+		return json
+	} catch (e) {
+		console.log(e)
+		return false
+	}
 }
 
 const updateDoctor = async data =>{

@@ -1,124 +1,101 @@
 <template>
   <div class="user-profile">
-    <h1>usuario</h1>
+    <div class="contenedor">
+      <h2>ADMINISTRACIÓN DE USUARIOS</h2>
+      <div class="mainTable">
+        <div class="info">
+          <p class="id">id</p>
+          <p class="name">Nombre</p>
+        </div>
+        <div class="action">
+          <p>Acciones</p>
+        </div>
+      </div>
+      <div class="salaInfo">
+        <AdminUser :users="users" @update-user="updateUsers" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+
+import getMethod from "@/service/getMethod";
+import util from "@/utils/utils";
+import AdminUser from "@/components/AdminUser";
+
 export default {
-name: 'UserInfo',
-/* props: {
-  options: {
-    type: Array,
-    default: () => ['Administrar', 'Cerrar Sesión'],
+  name: 'UserInfo',
+  emits: ['update-users'],
+  components: {
+    AdminUser,
   },
-},
-data() {
-  return {
-    isOpen: false,
-  };
-},
-methods: {
-  toggleMenu() {
-    this.isOpen = !this.isOpen;
+  computed: {
+    theme() {
+      return this.$store.getters.getTheme;
+    },
   },
-  actionMenu(option){
-    switch (option) {
-      case "Cerrar Sesión":
-        this.$store.dispatch('setUser',{})
-        this.$router.push({ path: '/' })
-        break;
-      case "Administrar":
-        this.$router.push({ path: '/admin/user' })
-        break;
-    }
-  }
-}, */
+  data() {
+    return {
+      users: []
+    };
+  },
+  async created() {
+    await this.generarUsers()
+  },
+  methods: {
+    async generarUsers() {
+      util.cargarLoader("Cargando usuarios...")
+      this.users = await getMethod.getUsers()
+      util.cargarLoader("")
+    },
+    async updateUsers(updateUsers) {
+      this.users = updateUsers
+    },
+  }, 
+
 };
 </script>
 
 <style scoped>
-.user-profile {
-display: flex;
-align-items: center;
+.contenedor {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 50px;
 }
-
-.profile-picture {
-width: 80px;
-height: 80px;
-border-radius: 50%;
-background-color: #ccc;
-border: 2px solid #000;
-background-size: cover;
-background-position: center;
+.mainTable {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 2px solid black;
+  border-radius: 25px;
+  margin-top: 5px;
 }
-
-.container{
-width: 50px;
-height: 50px;
-border-radius: 50%;
-background-size: cover;
-background-position: center;
-display: flex;
-align-items: center;
-justify-content: center;
-font-weight: bold;
-cursor: pointer;
+.info {
+  width: 35%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
-span{
-width: 5px;
-height: 5px;
-border-radius: 50%;
-background-color: white;
-border: 2px solid #000;
-background-size: cover;
-background-position: center;
-display: flex;
-align-items: center;
-justify-content: center;
-font-weight: bold;
-margin-right: 1px;
+.id {
+  width: 30%;
 }
-
-.menu.is-open {
-display: block;
-width: 250px;
-height: 250px;
-position: absolute;
-left: 100%;
-top: 0%;
-transform: translate( -100%, 50%);
+.name {
+  width: 70%;
 }
-
-.menu {
-display: none;
-position: absolute;
-top: calc(100% + 10px);
-left: 0;
-z-index: 1;
-background-color: #fff;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-padding: 10px;
+.action {
+  width: 65%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-.menu ul {
-list-style: none;
-margin: 0;
-padding: 0;
-}
-
-.menu li {
-margin-bottom: 5px;
-}
-
-.menu p {
-color: #000;
-padding: 0;
-margin: 0;
-cursor: pointer;
-}
-.menu p:hover {
-text-decoration: underline;
-cursor: pointer;
+.salaInfo {
+  width: 100%;
 }
 </style>

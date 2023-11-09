@@ -1,4 +1,4 @@
-const URL_BASE = "http://localhost:3306"
+const URL_BASE = "http://localhost:8090"
 // import createStore from '@/store'
 // let jwt = ""
 

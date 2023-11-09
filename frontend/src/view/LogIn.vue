@@ -17,8 +17,9 @@
 
 <script>
 
-import postMethods from '@/service/postMethod';
-import util from '@/utils/utils';
+import postMethods from '@/service/postMethod'
+import getMethod from '@/service/getMethod'
+import util from '@/utils/utils'
 
 
 export default {
@@ -30,8 +31,8 @@ export default {
   },
   data() {
     return {
-      username: (this.$store.getters.getUser && this.$store.getters.getUser.username) || "",
-      password: (this.$store.getters.getUser && this.$store.getters.getUser.password) || "",
+      username: (this.$store.getters?.getUser?.username) || "",
+      password: (this.$store.getters?.getUser?.password) || "",
     }
   },
   methods: {
@@ -40,32 +41,37 @@ export default {
         username: this.$refs.username.value,
         password: this.$refs.password.value,
       }
-      util.cargarLoader("Iniciando..")
-      util.cargarLoader("Agregando usuario")
-      let validation = [
+      /* let validation = [
         { username: util.validarDatos(data.username,"email"),},
         { password: util.validarDatos(data.password,"password") }
       ]
       for(let item of validation){
         const fieldName = Object.keys(item)[0]
         if (!item[fieldName].isValid) {
-          console.log("entro: ", fieldName);
           util.cargarLoader("")
           util.cargarPopUp(item[fieldName].texto, "ERROR")
           return
         }
-      }
+      } */
+      util.cargarLoader("Iniciando..")
       const result = await postMethods.logIn(data)
-      console.log(result);
       if (result) {
-        const userForStore = {
-          name: this.$store.getters?.getUser?.name || "",
-          lastname: this.$store.getters?.getUser?.lastname || "",
+        let preUser = {
           username: this.$refs.username.value,
           password: this.$refs.password.value,
-          jwt: result.token
+          jwt: result.token,
         }
-
+        this.$store.dispatch('setUser',preUser)
+        let user = await getMethod.getUser(data.username,false)
+        const userForStore = {
+          id: user?.id || "",
+          name: user?.name || "",
+          lastname: user?.lastname || "",
+          username: this.$refs.username.value,
+          password: this.$refs.password.value,
+          jwt: result.token,
+          roles: user?.roles
+        }
         this.resetForm()
         this.$store.dispatch('setUser',userForStore)
         util.cargarLoader("")

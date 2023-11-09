@@ -1,4 +1,4 @@
-const URL_BASE = "http://localhost:3306"
+const URL_BASE = "http://localhost:8090"
 import createStore from '@/store'
 let jwt = ""
 
@@ -6,21 +6,7 @@ let jwt = ""
 
 const getUsers = async () =>{
 	jwt = createStore.getters.getUser.jwt
-	const url = URL_BASE+"/users"
-	const settings = {
-		method: 'GET',
-		headers: {
-			'Authorization' : "Bearer " + jwt,
-			'Content-Type': 'application/json'
-		}
-	}
-	const response = await fetch(url, settings)
-	const json = await response.json()
-	return json
-}
-const getUser = async () =>{
-	jwt = createStore.getters.getUser.jwt
-	const url = URL_BASE+"/user"
+	const url = URL_BASE+"/users/listUsers"
 	const settings = {
 		method: 'GET',
 		headers: {
@@ -33,7 +19,26 @@ const getUser = async () =>{
 		const json = await response.json()
 		return json
 	} catch (e) {
-		console.log(e);
+		console.log(e)
+		return false
+	}
+}
+const getUser = async (id, isId) =>{
+	jwt = createStore.getters.getUser.jwt
+	const url = isId ? URL_BASE+"/users/"+id : URL_BASE+"/users/username/"+id
+	const settings = {
+		method: 'GET',
+		headers: {
+			'Authorization' : "Bearer " + jwt,
+			'Content-Type': 'application/json'
+		}
+	}
+	try {
+		const response = await fetch(url, settings)
+		const json = await response.json()
+		return json
+	} catch (e) {
+		console.log(e)
 		return false
 	}
 }
@@ -61,7 +66,7 @@ const getDoctor = async data =>{
 		const json = await response.json()
 		return json
 	} catch (error) {
-		console.log(error);
+		console.log(error)
 		return false
 	}
 }
@@ -79,7 +84,7 @@ const getDoctors = async () =>{
 		const json = await response.json()
 		return json
 	} catch (error) {
-		console.log(error);
+		console.log(error)
 		return false
 	}
 }
@@ -100,7 +105,8 @@ const getRooms = async () =>{
 		return json
 		
 	} catch (error) {
-		console.log(error);
+		console.log(error)
+		return false
 	}
 }
 
@@ -126,7 +132,8 @@ const getRoom = async data =>{
 		const json = await response.json()
 		return json
 	} catch (error) {
-		console.log(error);
+		console.log(error)
+		return false
 	}
 }
 
@@ -144,7 +151,8 @@ const getTypeRooms = async () =>{
 		const json = await response.json()
 		return json
 	} catch (error) {
-		console.log(error);
+		console.log(error)
+		return false
 	} 
 }
 const getTypeRoom = async id =>{
@@ -161,7 +169,8 @@ const getTypeRoom = async id =>{
 		const json = await response.json()
 		return json
 	} catch (error) {
-		console.log(error);
+		console.log(error)
+		return false
 	}
 }
 

@@ -31,6 +31,7 @@ export default {
       this.isOpen = !this.isOpen;
     },
     actionMenu(option){
+      this.toggleMenu()
       switch (option) {
         case "Cerrar Sesión":
           this.$store.dispatch('setUser',{})
