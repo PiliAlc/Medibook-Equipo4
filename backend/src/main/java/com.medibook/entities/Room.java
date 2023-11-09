@@ -28,7 +28,36 @@ public class Room {
     @JoinColumn(name = "typeroom_id",nullable = false)
     private Typeroom typeroom;
 
+    @ManyToMany
+    @JoinTable(
+            name = "room_characteristic",
+            joinColumns = @JoinColumn(name = "room_id"),
+            inverseJoinColumns = @JoinColumn(name = "characteristic_id")
+    )
+    private Set<Characteristic> characteristics;
+
     public Room() {
+    }
+
+    public Room(Long id, String name, String description, Boolean favourite, Set<Booking> bookings, Set<Image> images, Typeroom typeroom, Set<Characteristic> characteristics) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.favourite = favourite;
+        this.bookings = bookings;
+        this.images = images;
+        this.typeroom = typeroom;
+        this.characteristics = characteristics;
+    }
+
+    public Room(String name, String description, Boolean favourite, Set<Booking> bookings, Set<Image> images, Typeroom typeroom, Set<Characteristic> characteristics) {
+        this.name = name;
+        this.description = description;
+        this.favourite = favourite;
+        this.bookings = bookings;
+        this.images = images;
+        this.typeroom = typeroom;
+        this.characteristics = characteristics;
     }
 
     public Long getId() {
@@ -87,22 +116,11 @@ public class Room {
         this.typeroom = typeroom;
     }
 
-    public Room(String name, String description, Boolean favourite, Set<Booking> bookings, Set<Image> images, Typeroom typeroom) {
-        this.name = name;
-        this.description = description;
-        this.favourite = favourite;
-        this.bookings = bookings;
-        this.images = images;
-        this.typeroom = typeroom;
+    public Set<Characteristic> getCharacteristics() {
+        return characteristics;
     }
 
-    public Room(Long id, String name, String description, Boolean favourite, Set<Booking> bookings, Set<Image> images, Typeroom typeroom) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.favourite = favourite;
-        this.bookings = bookings;
-        this.images = images;
-        this.typeroom = typeroom;
+    public void setCharacteristics(Set<Characteristic> characteristics) {
+        this.characteristics = characteristics;
     }
 }
