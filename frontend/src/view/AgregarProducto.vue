@@ -90,13 +90,13 @@ export default {
       if (id) {
         await postMethods.addRoom(datos)
         const rooms = await getMethod.getRooms()
-        const idx = rooms.length
-        const room = await getMethod.getRoom(idx, true)
+        const idx = rooms.length -1
+        const id = rooms[idx].id
         
         const formData = new FormData()
         this.imageFiles.forEach( async (img)=>{
           formData.set("path", img)
-          formData.set("room_id",room.id)
+          formData.set("room_id", id)
           await postMethods.addImg(formData)
         })
 
@@ -108,7 +108,7 @@ export default {
         this.$refs.loginForm.reset()
         util.cargarPopUp("Ha ocurrido un error en el servido", "Lo sentimos!")
       }
-
+      
     },
     async init(){
       this.options = await getMethod.getTypeRooms()

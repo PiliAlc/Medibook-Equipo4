@@ -2,8 +2,12 @@
   <div class="contenedor">
     <h2>PANEL DE ADMINISTRACIÓN</h2>
     <div class="mainTable">
-      <p @click="displayHandler(true)">salas</p>
-      <p @click="displayHandler(false)">categorías</p>
+      <div class="salaCont">
+        <p :class="{ back : display }" @click="displayHandler(true)">salas</p>
+      </div>
+      <div class="categoryCont">
+        <p :class="{ back : !display }" @click="displayHandler(false)">categorías</p>
+      </div>
     </div>
     <div class="mainTable">
       <div class="info">
@@ -93,6 +97,25 @@ export default {
   border-radius: 25px;
   margin-top: 5px;
 }
+
+.categoryCont, .salaCont{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainTable .back{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 25px;
+}
+
 .info {
   width: 35%;
   height: 100%;

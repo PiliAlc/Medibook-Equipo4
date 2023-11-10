@@ -9,6 +9,7 @@
       <p @click="deleteCard(card)">Eliminar</p>
     </div>
   </div>
+  <DataDialog @update-type="handleUpdateType"/>
 </template>
 
 <script>
@@ -16,10 +17,14 @@
 import deleteMethods from '@/service/deleteMethod'
 import getMethod from '@/service/getMethod'
 import util from '@/utils/utils'
+import DataDialog from './DataDialog'
 
 export default {
   name:'AdminType',
   emits: ['update-cards'],
+  components: {
+    DataDialog,
+  },
   props:{
     cards:{
       type:Array,
@@ -33,7 +38,7 @@ export default {
     async deleteCard(card) {
       let dialog = {
         type: 'delete',
-        texto: 'Está seguro que desea eliminar esta sala?',
+        texto: 'Está seguro que desea eliminar esta categoría?',
         acept: async () =>{
           dialog = {}
           this.$store.dispatch('setDialog',dialog)

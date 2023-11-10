@@ -3,10 +3,9 @@
     <div class="signup-container">
       <h2>Registrarse</h2>
       <form @submit.prevent="submitForm">
-        <label for="name">Nombre:</label>
-        <input
-          ref="name" type="text" id="name" :value="name" placeholder="Entre 3 y 20 Letras"/>
 
+        <label for="name">Nombre:</label>
+        <input ref="name" type="text" id="name" :value="name" placeholder="Entre 3 y 20 Letras"/>
 
         <label for="lastName">Apellido:</label>
         <input ref="lastName" type="text" id="lastName" :value="lastName" placeholder="Entre 3 y 20 Letras"/>
@@ -15,11 +14,12 @@
         <input ref="username" type="text" id="username" :value="username" placeholder="En formato xxxx@xxx.xxx"/>
 
         <label for="password">Contraseña:</label>
-        <input ref="password" type="password" id="password" :value="password" placeholder="8-20: May, Min, !@#$%^&*()_+."/>
+        <input ref="password" type="password" id="password" :value="password" placeholder="8-20: May, Min, !@#$%^&*()_+." @change="checkPass"/>
 
-
+        
         <button type="submit">Registrarse</button>
       </form>
+      <span v-if="!showMsg">{{ msg }}</span>
     </div>
   </div>
 </template>
@@ -43,6 +43,8 @@ export default {
       username: '',
       password: '',
       roles:["ADMIN"],
+      showMsg:true,
+      msg:"La contraseña debe cumplir con los requisitos: \n Al menos una letra minúscula y una maypuscula. \n Un caracter especial: !@#$%^&*()_+ \n Tener una longitud entre 8 y 12 caracteres."
     };
   },
   methods: {
@@ -61,18 +63,10 @@ export default {
         roles: this.roles
       }
       util.cargarLoader("Agregando usuario")
-      let validation = [
-        {
-          name: util.validarDatos(data.name,"nombre")
-        },
-        {
-          lastname: util.validarDatos(data.lastname,"apellido")
-        },
-        { username: util.validarDatos(data.username,"email"),
-        },
-        {
-          password: util.validarDatos(data.password,"password")
-        }
+      let validation = [ { name: util.validarDatos(data.name,"nombre") },
+        { lastname: util.validarDatos(data.lastname,"apellido") },
+        { username: util.validarDatos(data.username,"email"), },
+        { password: util.validarDatos(data.password,"password") }
       ]
       for(let item of validation){
         const fieldName = Object.keys(item)[0]
@@ -104,6 +98,9 @@ export default {
       this.username = '';
       this.password = '';
     },
+    checkPass(e){
+      this.showMsg = util.validarDatos(e.target.value,"password").isValid
+    }
   }
 };
 </script>

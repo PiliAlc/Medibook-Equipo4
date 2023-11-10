@@ -21,7 +21,7 @@
 
 <script>
 import util from '@/utils/utils';
-// import getMethod from '@/service/getMethod';
+import getMethod from '@/service/getMethod'
 
 export default {
   name: 'CardDetail',
@@ -29,28 +29,24 @@ export default {
     theme() {
       return this.$store.getters.getTheme;
     },
-    card() {
-      util.cargarLoader("Buscando sala...")
-      const result = this.$store.getters.getRooms
-      util.cargarLoader("")
-      return result.filter(room=>room.id == this.$route.params.id)
-    }
   },
-  /* watch: {
-    '$route.params.id': 'loadCard'
+  data(){
+    return {
+      card:[]
+    }
   },
   methods: {
     async loadCard() {
-      util.cargarLoader("Buscando sala...");
+      util.cargarLoader("Buscando sala...")
       const data = {
         id: this.$route.params.id,
         isId: true
       };
-      const resultado = await getMethod.getRoom(data);
-      console.log(resultado);
-      util.cargarLoader("");
+      const resultado = await getMethod.getRoom(data)
+      this.card = resultado
+      util.cargarLoader("")
     },
-  }, */
+  },
 };
 </script>
 

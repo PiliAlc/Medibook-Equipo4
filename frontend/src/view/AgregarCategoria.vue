@@ -10,6 +10,9 @@
           <label for="description">DESCRIPCIÓN*</label>
           <textarea ref="description" id="description" :value="description" maxlength="100" rows="4" cols="50"></textarea>
   
+          <label for="images">IMÁGENES*</label>
+          <input ref="images" type="file" accept="image/png, image/jpeg" id="images" multiple @change="handleImageChange" />
+
           <button type="submit">AGREGAR</button>
         </form>
       </div>
@@ -30,10 +33,30 @@
     },
     data() {
       return {
+        imageFiles: [],
+        urls: [],
+        options: []
       };
     },
     methods: {
+      handleImageChange(event) {
+        const selectedFiles = Array.from(event.target.files).slice(0, 1)
+        this.imageFiles = selectedFiles
+      },
       async submitForm() {
+
+        if (this.imageFiles.length != 1) {
+          util.cargarPopUp("Seleccione 1 sola imagen", "Faltan datos..")
+          return
+        }
+        if (this.$refs.nombre.length < 4) {
+          util.cargarPopUp("Ingrese el nombre", "Faltan datos..")
+          return
+        }
+        if (this.$refs.description.length < 10) {
+          util.cargarPopUp("Ingrese el descripción de la sala", "Faltan datos..")
+          return
+        }
 
         const categoryResult = await getMethod.getTypeRooms()
         let aux = false
@@ -46,17 +69,8 @@
           });
         }
         if (aux) {
-          util.cargarPopUp("ya exite una categoría con ese nombre", "Faltan datos..")
+          util.cargarPopUp("Ya exite una categoría con ese nombre", "Error..")
           aux=false
-          return
-        }
-
-        if (this.$refs.nombre.length < 1) {
-          util.cargarPopUp("Ingrese el nombre", "Faltan datos..")
-          return
-        }
-        if (this.$refs.description.length < 1) {
-          util.cargarPopUp("Ingrese el descripción de la sala", "Faltan datos..")
           return
         }
   
@@ -64,12 +78,26 @@
 
         const category = {
           name: this.$refs.nombre.value,
-          description: this.$refs.description.value
+          description: this.$refs.description.value,
+          images:{
+            id: 25
+          }
         }
 
         const res = await postMethods.addTypeRoom(category)
         
         if (res) {
+
+          const categorys = await getMethod.getTypeRooms()
+          const idx = categorys.length -1
+          const id = categorys[idx].id
+          console.log(id);
+          const formData = new FormData()
+          formData.set("path", this.imageFiles[0])
+          formData.set("typeroom_id",id)
+          await postMethods.addImg(formData)
+          const respu = await getMethod.getTypeRooms()
+          console.log(respu)
           util.cargarLoader()
           this.$refs.loginForm.reset()
           util.cargarPopUp("Categoría agregada con éxito", "Gracias!")

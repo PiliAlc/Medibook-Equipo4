@@ -8,13 +8,13 @@
       <router-link to="/login" v-if="(path == '/' || path == '/signup') && jwt == ''">
         <BotonPrincipal class="btnInicio" texto="INICIAR SESIÓN" size="19"/>
       </router-link>  
-      <router-link to="/admin" v-if="path != '/admin' && jwt != ''">
+      <router-link to="/admin" v-if="path != '/admin' && jwt != '' && rol == 'ADMIN'">
         <BotonPrincipal class="btnAgrSala" texto="ADMINISTRAR" size="19"/>
       </router-link>  
-      <router-link to="/admin/product" v-if="(path == '/admin' || path == '/admin/category') && jwt != ''">
+      <router-link to="/admin/product" v-if="(path == '/admin' || path == '/admin/category') && jwt != '' && rol == 'ADMIN'">
         <BotonPrincipal class="btnAgrSala" texto="AGREGAR SALA" size="19"/>
       </router-link>  
-      <router-link to="/admin/category" v-if="(path == '/admin' || path == '/admin/product') && jwt != ''">
+      <router-link to="/admin/category" v-if="(path == '/admin' || path == '/admin/product') && jwt != '' && rol == 'ADMIN'">
         <BotonPrincipal class="btnAgrSala" texto="+ CATEGORÍA" size="19"/>
       </router-link>
       <UserProfile v-if="(path != '/login' || path == '/signup') && jwt != ''"/>
@@ -42,7 +42,11 @@ export default {
       return this.$store.getters.getTheme;
     },
     rol() {
-      return this.$store.getters?.getUser?.roles || ""
+      let rol = ""
+      if (this.$store.getters.getUser && this.$store.getters.getUser.roles) {
+        rol = this.$store.getters.getUser.roles[0].name
+      }
+      return rol 
     },
     jwt() {
       return this.$store.getters?.getUser?.jwt || ""

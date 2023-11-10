@@ -1,9 +1,8 @@
 <template>
 	<div class="container">
 		<div v-for="card in cards" :key="card.id" :class="[theme, 'card']" >
-			<!-- <img v-for="url in card.images" :key="url.id" :src="url.path" :alt="url.name"> -->
 			<router-link :to="{ name: 'card-detail', params: { id: card.id } }">
-				<div class="imgSimulation"></div>
+			<img :key="card.id" :src="card.images[0].path" :alt="card.name">
 				<div :class="[theme, 'info']">
 					<h2> {{ card.name }} </h2>
 					<p> {{ card.description }} </p>

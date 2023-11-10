@@ -1,15 +1,12 @@
 <template>
-  <div v-for="sala in resultados" :key="sala.id" :class="[theme, 'card']">
-    <!-- <router-link :to="{ name: 'card-category', params: { id: sala.description } }">
-      <img :src="sala.url[0]" :alt="sala.name">
-    </router-link> -->
-    <div class="imgSimulation"></div>
+  <div v-for="sala in resultados" :key="sala?.id" :class="[theme, 'card']">
+    <router-link :to="{ name: 'card-category', params: { id: sala?.name } }">
+      <img :key="sala?.id" :src="sala?.image" :alt="sala?.image">
       <div :class="[theme, 'info']">
-        <h2>{{ sala.typeroom.name }}</h2>
-        <router-link :to="{ name: 'card-category', params: { id: sala.typeroom.name } }">
+        <h2>{{ sala.name }}</h2>
           <p class="infoDet">Detalles</p>
-        </router-link>
-      </div>
+        </div>
+      </router-link>
   </div>
 </template>
   

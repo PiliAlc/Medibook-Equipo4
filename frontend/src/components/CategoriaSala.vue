@@ -33,7 +33,8 @@ export default {
   },
   methods: {
     async generarCategorias() {
-      this.resultados = await getMethod.getRooms()
+      this.resultados = await getMethod.getTypeRooms()
+      console.log(this.resultados);
     },
   },
 

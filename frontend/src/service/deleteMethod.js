@@ -47,12 +47,12 @@ const deleteDoctor = async id =>{
 // METDODOS - ROOM -
 
 const deleteRoom = async id => {
-
+	jwt = createStore.getters.getUser.jwt
 	const url = URL_BASE+"/rooms/"+id
-
 	const settings = {
 		method: "DELETE",
 		headers: {
+			'Authorization' : "Bearer " + jwt,
 			'Content-Type': 'application/json'
 		},
 	}
@@ -69,9 +69,11 @@ const deleteRoom = async id => {
 
 const deleteTypeRoom = async id =>{
 	const url = URL_BASE+"/typerooms/"+id
+	jwt = createStore.getters.getUser.jwt
 	const settings = {
 		method: "DELETE",
 		headers: {
+			'Authorization' : "Bearer " + jwt,
 			'Content-Type': 'application/json'
 		},
 	}
