@@ -7,18 +7,7 @@
           <div class="cerrar">&lt;</div>
         </router-link>
       </div>
-      <!-- <img v-for="url in card.url" :key="url" :src=url :alt="card.name" > -->
-      <div class="imgSimulationCont">
-        <div class="imgMainCont">
-          <div class="imgMain"></div>
-        </div>
-        <div class="imgBox">
-          <div class="imgSimulation"></div>
-          <div class="imgSimulation"></div>
-          <div class="imgSimulation"></div>
-          <div class="imgSimulation"></div>
-        </div>
-      </div>
+      <img v-for="images in card.images" :key="images.id" :src=images.path >
       <div class="footerCont">
         <p><strong>TIPO DE SALA: </strong>{{ card[0].typeroom.name }}</p>
         <div class="descripcion">

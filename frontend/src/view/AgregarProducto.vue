@@ -45,8 +45,8 @@ export default {
   },
   methods: {
     handleImageChange(event) {
-      const selectedFiles = Array.from(event.target.files).slice(0, 5);
-      this.imageFiles = selectedFiles;
+      const selectedFiles = Array.from(event.target.files).slice(0, 5)
+      this.imageFiles = selectedFiles
     },
     async submitForm() {
 
@@ -54,11 +54,11 @@ export default {
         util.cargarPopUp("Seleccione 5 imagenes", "Faltan datos..")
         return
       }
-      if (this.$refs.nombre.length < 1) {
+      if (this.$refs.nombre.length < 4) {
         util.cargarPopUp("Ingrese el nombre", "Faltan datos..")
         return
       }
-      if (this.$refs.description.length < 1) {
+      if (this.$refs.description.length < 10) {
         util.cargarPopUp("Ingrese el descripción de la sala", "Faltan datos..")
         return
       }
@@ -66,11 +66,6 @@ export default {
         util.cargarPopUp("Ingrese la categoría de la sala", "Faltan datos..")
         return
       }
-      /* this.imageFiles.forEach(img=>{
-        const {name} = img
-        const urlBase = `https://github.com/VICT0R89/ProyectoImgs/blob/main/${this.$refs.tipo.value}/${name}?raw=true`
-        this.urls.push(urlBase)
-      }) */
 
       // INICIO DE AGREGAR SALA -------------------------
 
@@ -91,8 +86,20 @@ export default {
           id: id
         }
       }
+
       if (id) {
         await postMethods.addRoom(datos)
+        const rooms = await getMethod.getRooms()
+        const idx = rooms.length
+        const room = await getMethod.getRoom(idx, true)
+        
+        const formData = new FormData()
+        this.imageFiles.forEach( async (img)=>{
+          formData.set("path", img)
+          formData.set("room_id",room.id)
+          await postMethods.addImg(formData)
+        })
+
         util.cargarLoader("")
         this.$refs.loginForm.reset()
         util.cargarPopUp("Sala agregada con éxito", "Gracias!")

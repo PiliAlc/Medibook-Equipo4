@@ -51,7 +51,6 @@ export default {
       const inicialNombre = user.name.slice(0, 1)
       const inicialApellido = user.lastname.slice(0, 1)
       this.userName = inicialNombre+inicialApellido
-      console.log(this.userName)
     }
   },
 };

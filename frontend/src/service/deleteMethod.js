@@ -1,6 +1,27 @@
 const URL_BASE = "http://localhost:8090"
-// import createStore from '@/store'
-// let jwt = ""
+import createStore from '@/store'
+let jwt = ""
+
+// METDODOS - USERS -
+
+const deleteUser = async id =>{
+	const url = URL_BASE+"/users/"+id
+	jwt = createStore.getters.getUser.jwt
+	const settings = {
+		method: "DELETE",
+		headers: {
+			'Authorization' : "Bearer " + jwt,
+			'Content-Type': 'application/json'
+		}
+	}
+	try {
+		const response = await fetch(url, settings)
+		return response
+	} catch (error) {
+		console.log(error);
+		return false
+	}
+}
 
 // METDODOS - DOCTORS -
 
@@ -66,7 +87,8 @@ const deleteTypeRoom = async id =>{
 const deleteMethods = {
 	deleteDoctor: deleteDoctor,
 	deleteRoom: deleteRoom,
-	deleteTypeRoom: deleteTypeRoom
+	deleteTypeRoom: deleteTypeRoom,
+	deleteUser: deleteUser,
 }
 
 export default deleteMethods

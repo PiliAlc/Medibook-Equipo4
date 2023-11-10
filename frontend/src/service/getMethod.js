@@ -90,18 +90,19 @@ const getDoctors = async () =>{
 }
 
 // ROOMS -----------------------------------
+
 const getRooms = async () =>{
 	const url = URL_BASE+"/rooms/listrooms"
 	const settings = {
 		method: 'GET',
 		headers: {
-			// 'Authorization' : "Bearer " + jwt,
 			'Content-Type': 'application/json'
 		}
 	}
 	try {
 		const response = await fetch(url, settings)
 		const json = await response.json()
+		console.log(json)
 		return json
 		
 	} catch (error) {
@@ -110,20 +111,11 @@ const getRooms = async () =>{
 	}
 }
 
-// get room id or name
-/* 
-data = {
-	id: integer or string (name)
-	isId: boolean (true = id, false = name)
-}
-*/
-const getRoom = async data =>{
-	const {id, isId} = data
+const getRoom = async (id, isId) =>{
 	const url = isId ? URL_BASE+"/rooms/"+id : URL_BASE+"/rooms/listrooms/name/"+id
 	const settings = {
 		method: 'GET',
 		headers: {
-			// 'Authorization' : "Bearer " + jwt,
 			'Content-Type': 'application/json'
 		}
 	}

@@ -21,7 +21,6 @@ public class Room {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "room_id")
-    @JsonIgnore
     private Set<Image> images;
 
     @ManyToOne

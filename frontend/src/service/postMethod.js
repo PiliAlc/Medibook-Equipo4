@@ -1,6 +1,6 @@
 const URL_BASE = "http://localhost:8090"
-// import createStore from '@/store'
-// let jwt = ""
+import createStore from '@/store'
+let jwt = ""
 
 // METODOS - USUARIO -
 
@@ -45,9 +45,11 @@ const logIn = async data =>{
 
 const addDoctor = async data =>{
 	const url = URL_BASE+"/doctors"
+	jwt = createStore.getters.getUser.jwt
 	const settings = {
 		method: "POST",
 		headers: {
+			'Authorization' : "Bearer " + jwt,
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(data)
@@ -66,10 +68,11 @@ const addDoctor = async data =>{
 
 const addRoom = async data => {
 	const url = URL_BASE+"/rooms"
-
+	jwt = createStore.getters.getUser.jwt
 	const settings = {
 		method: "POST",
 		headers: {
+			'Authorization' : "Bearer " + jwt,
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(data)
@@ -85,10 +88,11 @@ const addRoom = async data => {
 }
 const addTypeRoom = async data => {
 	const url = URL_BASE+"/typerooms"
-
+	jwt = createStore.getters.getUser.jwt
 	const settings = {
 		method: "POST",
 		headers: {
+			'Authorization' : "Bearer " + jwt,
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(data)
@@ -103,12 +107,33 @@ const addTypeRoom = async data => {
 	}
 }
 
+const addImg = async (data) =>{
+	jwt = createStore.getters.getUser.jwt
+	const url = URL_BASE+"/images/upload"
+	const settings = {
+		method: "POST",
+		headers: {
+			'Authorization' : "Bearer " + jwt,
+		},
+		body: data
+	}
+	try {
+		const response = await fetch(url, settings)
+		console.log(response)
+		return response
+	} catch (e) {
+		console.log(e)
+		return false
+	}
+}
+
 const postMethods = {
 	addUser: addUser,
 	logIn: logIn,
 	addDoctor: addDoctor,
 	addRoom: addRoom,
-	addTypeRoom: addTypeRoom
+	addTypeRoom: addTypeRoom,
+	addImg: addImg,
 }
 
 export default postMethods
