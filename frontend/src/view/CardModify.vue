@@ -83,6 +83,7 @@ export default {
         }
       })
       const datos= {
+        id: this.card.id,
         description: this.localCard.description,
         favourite: false,
         name:this.localCard.name,
@@ -91,17 +92,16 @@ export default {
         },
         images: this.card.images
       }
-        const res = await putMethod.updateRoom(datos)
-        if (res) {
-          util.cargarLoader("")
-          this.$refs.modifyForm.reset()
-          util.cargarPopUp("Sala modificada con éxito", "Gracias!")
-        }else {
-          util.cargarLoader("")
-          this.$refs.modifyForm.reset()
-          util.cargarPopUp("Ha ocurrido un error en el servido", "Lo sentimos!")
-        }
-      
+      const res = await putMethod.updateRoom(datos)
+      if (res) {
+        util.cargarLoader("")
+        this.$refs.modifyForm.reset()
+        util.cargarPopUp("Sala modificada con éxito", "Gracias!")
+      }else {
+        util.cargarLoader("")
+        this.$refs.modifyForm.reset()
+        util.cargarPopUp("Ha ocurrido un error en el servido", "Lo sentimos!")
+      }
     },
     async init(){
       this.options = await getMethod.getTypeRooms()
