@@ -102,7 +102,6 @@ const getRooms = async () =>{
 	try {
 		const response = await fetch(url, settings)
 		const json = await response.json()
-		console.log(json)
 		return json
 		
 	} catch (error) {
@@ -111,7 +110,7 @@ const getRooms = async () =>{
 	}
 }
 
-const getRoom = async (id, isId) =>{
+const getRoom = async ({id, isId}) =>{
 	const url = isId ? URL_BASE+"/rooms/"+id : URL_BASE+"/rooms/listrooms/name/"+id
 	const settings = {
 		method: 'GET',

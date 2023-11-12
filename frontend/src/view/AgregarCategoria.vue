@@ -78,10 +78,7 @@
 
         const category = {
           name: this.$refs.nombre.value,
-          description: this.$refs.description.value,
-          images:{
-            id: 25
-          }
+          description: this.$refs.description.value
         }
 
         const res = await postMethods.addTypeRoom(category)
@@ -91,13 +88,10 @@
           const categorys = await getMethod.getTypeRooms()
           const idx = categorys.length -1
           const id = categorys[idx].id
-          console.log(id);
           const formData = new FormData()
           formData.set("path", this.imageFiles[0])
           formData.set("typeroom_id",id)
-          await postMethods.addImg(formData)
-          const respu = await getMethod.getTypeRooms()
-          console.log(respu)
+          await postMethods.addImgTyperoom(formData)
           util.cargarLoader()
           this.$refs.loginForm.reset()
           util.cargarPopUp("Categoría agregada con éxito", "Gracias!")

@@ -67,6 +67,22 @@ export default {
         return
       }
 
+      const roomsResult = await getMethod.getRooms()
+        let aux = false
+        if (roomsResult) {
+          roomsResult.forEach(room => {
+            if (room.name == this.$refs.nombre.value) {
+              aux = true
+              return
+            }
+          });
+        }
+        if (aux) {
+          util.cargarPopUp("Ya exite una sala con ese nombre", "Error..")
+          aux=false
+          return
+        }
+
       // INICIO DE AGREGAR SALA -------------------------
 
       util.cargarLoader("Agregando sala...")

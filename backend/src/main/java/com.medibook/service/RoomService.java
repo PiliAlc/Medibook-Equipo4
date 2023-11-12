@@ -111,7 +111,6 @@ public class RoomService {
     @Transactional
     public void saveImageRoom(Room room){
         roomRepository.save(room);
-
     }
 
 }

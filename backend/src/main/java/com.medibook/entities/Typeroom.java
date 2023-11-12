@@ -20,8 +20,8 @@ public class Typeroom {
     @JsonIgnore // Cuando alguien mapee con un dto, que no llame a la propiedad turnos, porque entra en loop infinito.
     private Set<Room> rooms;
 
-    @OneToOne
-    @JoinColumn(name = "image_id", nullable = true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "typeroom_id")
     private Image image;
 
     public Typeroom() {
@@ -82,8 +82,3 @@ public class Typeroom {
         this.image = image;
     }
 }
-
-
-
-
-

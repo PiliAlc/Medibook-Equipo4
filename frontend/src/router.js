@@ -21,7 +21,7 @@ const routes = [
   { path: '/admin/user', component: UserInfo },
   { path: '/card-detail/:id', name: 'card-detail', component: CardDetail },
   { path: '/card-category/:id', name: 'card-category', component: CardCategory },
-  { path: '/modify/:id', name: 'card-modify', component: CardModify, props: ':card' },
+  { path: '/modify/:id', name: 'card-modify', component: CardModify },
 ];
 
 const router = createRouter({

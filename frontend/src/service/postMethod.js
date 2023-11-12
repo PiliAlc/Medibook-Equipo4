@@ -119,7 +119,24 @@ const addImg = async (data) =>{
 	}
 	try {
 		const response = await fetch(url, settings)
-		console.log(response)
+		return response
+	} catch (e) {
+		console.log(e)
+		return false
+	}
+}
+const addImgTyperoom = async (data) =>{
+	jwt = createStore.getters.getUser.jwt
+	const url = URL_BASE+"/images/upload/typeroom"
+	const settings = {
+		method: "POST",
+		headers: {
+			'Authorization' : "Bearer " + jwt,
+		},
+		body: data
+	}
+	try {
+		const response = await fetch(url, settings)
 		return response
 	} catch (e) {
 		console.log(e)
@@ -134,6 +151,7 @@ const postMethods = {
 	addRoom: addRoom,
 	addTypeRoom: addTypeRoom,
 	addImg: addImg,
+	addImgTyperoom: addImgTyperoom,
 }
 
 export default postMethods

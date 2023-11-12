@@ -71,7 +71,6 @@ export default {
       for(let item of validation){
         const fieldName = Object.keys(item)[0]
         if (!item[fieldName].isValid) {
-          console.log("entro: ", fieldName);
           util.cargarLoader("")
           util.cargarPopUp(item[fieldName].texto, "ERROR")
           return
@@ -80,7 +79,6 @@ export default {
 
       if (validation[0].name.isValid && validation[1].lastname.isValid && validation[2].username.isValid && validation[3].password.isValid) {
         const result = await postMethods.addUser(data)
-        console.log(result);
         util.cargarLoader("")
         if (result) {
           this.resetForm();

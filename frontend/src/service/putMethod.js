@@ -40,7 +40,7 @@ const updateDoctor = async data =>{
 		method : "PUT",
 		body : JSON.stringify(datos),
 		headers : {
-			// authorization : jwt,
+			// 'Authorization' : "Bearer " + jwt,
 			'Content-Type': 'application/json'
 		}
 	}
@@ -51,9 +51,11 @@ const updateDoctor = async data =>{
 
 const updateRoom = async (data) => {
 	const url = URL_BASE+"/rooms"
+	jwt = createStore.getters.getUser.jwt
 	const settings = {
 		method: "PUT",
 		headers: {
+			'Authorization' : "Bearer " + jwt,
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(data)

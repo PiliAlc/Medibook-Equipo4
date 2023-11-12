@@ -10,9 +10,12 @@
       </div>
     </div>
   </nav>
-  <div :class="theme"  id="resultados">
-    <CardSala :resultados="resultados" />
-  </div>
+  <section :class="theme"  id="resultados">
+    <h2 v-if="resultados.length > 0" >RESULTADOS DE BÚSQUEDA</h2>
+    <div class="contenedor">
+      <CardSala :resultados="resultados" />
+    </div>
+  </section>
 </template>
 
 <script>
@@ -39,9 +42,9 @@ export default {
   },
   methods: {
     async buscar(){
+      this.resultados = []
       util.cargarLoader("Buscando salas...")
       const datos = await getMethod.getRooms()
-      console.log(datos);
       const busqueda = this.$refs.search.value.trim().toLowerCase();
       busqueda.length == 0 ? (
         util.cargarLoader(""),
@@ -69,11 +72,34 @@ nav{
   background-color: var(--background2);
   width:100%;
   height: 100%;
-  
+}
+section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid var(--border);
+  padding: 10px;
+  background-color: white;
+  width:100%;
+}
+.contenedor{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width:100%;
 }
 h1{
+  text-align: left;
   margin-bottom: 25px;
   margin-top: -10px;
+  color: var(--text2);
+}
+h2{
+  align-self: flex-start;
+  margin-left: 50px;
+  font-size: 2vw;
   color: var(--text2);
 }
 .buscadorContainer{

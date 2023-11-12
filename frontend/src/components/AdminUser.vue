@@ -60,7 +60,6 @@
 
         let user = await getMethod.getUser(this.userId,true)
         user.roles[0].name = rol
-        console.log(user)
         const res = await putMethod.updateUser(user)
         util.cargarLoader("")
         if (res == "OK") {

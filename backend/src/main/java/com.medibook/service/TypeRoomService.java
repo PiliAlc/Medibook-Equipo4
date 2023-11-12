@@ -1,9 +1,11 @@
 package com.medibook.service;
 
 
+import com.medibook.entities.Room;
 import com.medibook.entities.Typeroom;
 import com.medibook.exceptions.ResourceNotFoundException;
 import com.medibook.repository.TypeRoomRepository;
+import jakarta.transaction.Transactional;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -94,8 +96,21 @@ public class TypeRoomService {
     }
 
 
+    public Optional<Typeroom> searchById(Long id)  throws  ResourceNotFoundException {
+        Optional<Typeroom> typeroom =  typeRoomRepository.findId(id);
+
+        if(typeroom.isPresent()){
+
+            logger.info("Se consulta sala por Id: " + typeroom.get().getId());}
+        else{
+
+            throw  new ResourceNotFoundException("No existe la sala con ese id: " + id);
+        }
+        return typeroom;
+    }
+
+    @Transactional
+    public void saveImageTyperRoom(Typeroom typeroom) {
+        typeRoomRepository.save(typeroom);
+    }
 }
-
-
-
-

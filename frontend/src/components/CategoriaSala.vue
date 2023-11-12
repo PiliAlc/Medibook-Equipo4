@@ -10,6 +10,7 @@
 <script>
 import CardCategoria from './CardCategoria.vue';
 import getMethod from '@/service/getMethod';
+import util from '@/utils/utils';
 
 export default {
   name: 'CategoriaSala',
@@ -33,8 +34,9 @@ export default {
   },
   methods: {
     async generarCategorias() {
+      util.cargarLoader("Buscando salas...")
       this.resultados = await getMethod.getTypeRooms()
-      console.log(this.resultados);
+      util.cargarLoader("")
     },
   },
 
@@ -51,7 +53,6 @@ section{
   padding: 10px;
   background-color: white;
   width:100%;
-
 }
 .contenedor{
   display: flex;

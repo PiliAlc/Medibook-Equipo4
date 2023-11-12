@@ -2,17 +2,15 @@
   <div :class="[theme, 'card']">
     <div class="card-container">
       <div class="headerContainer">
-        <h2>DETALLE DE SALA - {{ card[0].name }}</h2>
-        <router-link to="/">
-          <div class="cerrar">&lt;</div>
-        </router-link>
+        <h2>DETALLE DE SALA - {{ card?.name }}</h2>
+        <div class="cerrar" @click="goBack">&lt;</div>
       </div>
-      <img v-for="images in card.images" :key="images.id" :src=images.path >
+      <img v-for="images in card?.images" :key="images?.id" :src=images?.path >
       <div class="footerCont">
-        <p><strong>TIPO DE SALA: </strong>{{ card[0].typeroom.name }}</p>
+        <p><strong>TIPO DE SALA: </strong>{{ card?.typeroom?.name }}</p>
         <div class="descripcion">
           <strong>DESCRIPCIÓN:</strong>
-          <p>{{ card[0].description }}</p>
+          <p>{{ card?.description }}</p>
         </div>
       </div>
     </div>
@@ -35,7 +33,10 @@ export default {
       card:[]
     }
   },
-  methods: {
+  created() {
+			this.loadCard();
+		},
+  methods:{
     async loadCard() {
       util.cargarLoader("Buscando sala...")
       const data = {
@@ -45,6 +46,9 @@ export default {
       const resultado = await getMethod.getRoom(data)
       this.card = resultado
       util.cargarLoader("")
+    },
+    goBack() {
+      this.$router.go(-1);
     },
   },
 };

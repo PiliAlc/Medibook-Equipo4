@@ -9,7 +9,7 @@
 
         <label for="category">CATEGORÍA*</label>
         <select ref="category" name="category" id="category" v-model="localCard.category">
-          <option v-for="category in options" :key="category.id" :value=category.name>{{category.name}}</option>
+          <option v-for="category in options" :key="category.id" :value="category.name">{{category.name}}</option>
         </select>
 
         <label for="description">DESCRIPCIÓN SALA*</label>
@@ -37,16 +37,13 @@ export default {
     }
   },
   props: {
-    card: {
-      type: Object,
-      default: () => ({})
-    }
   },
   data() {
     return {
       imageFiles: [],
       urls: [],
       options: [],
+      card: [],
       localCard: {
         name: '',
         category: '',
@@ -60,32 +57,23 @@ export default {
       this.imageFiles = selectedFiles;
     },
     async submitForm() {
-      console.log(this.card);
-      if (this.imageFiles.length != 5) {
-        util.cargarPopUp("Seleccione 5 imagenes", "Faltan datos..")
-        return
-      }
-      if (this.localCard.name.length < 1) {
+
+      if (this.localCard.name.length < 3) {
         util.cargarPopUp("Ingrese el nombre", "Faltan datos..")
         return
       }
       if (this.localCard.description.length < 1) {
-        util.cargarPopUp("Ingrese el descripción de la sala", "Faltan datos..")
+        util.cargarPopUp("Ingrese la descripción de la sala", "Faltan datos..")
         return
       }
       if (!this.localCard.category) {
         util.cargarPopUp("Ingrese la categoría de la sala", "Faltan datos..")
         return
       }
-      /* this.imageFiles.forEach(img=>{
-        const {name} = img
-        const urlBase = `https://github.com/VICT0R89/ProyectoImgs/blob/main/${this.$refs.tipo.value}/${name}?raw=true`
-        this.urls.push(urlBase)
-      }) */
 
       // INICIO DE AGREGAR SALA -------------------------
 
-      util.cargarLoader("Agregando sala...")
+      util.cargarLoader("Modificando sala...")
       
       let id;
       this.options.forEach(opt=>{
@@ -100,27 +88,37 @@ export default {
         name:this.localCard.name,
         typeroom:{
           id: id
+        },
+        images: this.card.images
+      }
+        const res = await putMethod.updateRoom(datos)
+        if (res) {
+          util.cargarLoader("")
+          this.$refs.modifyForm.reset()
+          util.cargarPopUp("Sala modificada con éxito", "Gracias!")
+        }else {
+          util.cargarLoader("")
+          this.$refs.modifyForm.reset()
+          util.cargarPopUp("Ha ocurrido un error en el servido", "Lo sentimos!")
         }
-      }
-      if (id) {
-        await putMethod.updateRoom(datos)
-        util.cargarLoader("")
-        this.$refs.modifyForm.reset()
-        util.cargarPopUp("Sala agregada con éxito", "Gracias!")
-      } else {
-        util.cargarLoader("")
-        this.$refs.modifyForm.reset()
-        util.cargarPopUp("Ha ocurrido un error en el servido", "Lo sentimos!")
-      }
-
+      
     },
     async init(){
       this.options = await getMethod.getTypeRooms()
-      this.localCard = { ...this.card };
+      const data = {
+        id:parseInt(this.$router.currentRoute.value.params.id, 10),
+        isId: true
+      }
+      this.card = await getMethod.getRoom(data)
+      this.localCard = {
+        name:this.card.name,
+        category:this.card.typeroom.name,
+        description:this.card.description
+      }
     }
   },
-  mounted(){
-    this.init()
+  async mounted(){
+    await this.init()
   }
 }
 </script>
@@ -172,6 +170,7 @@ button {
   border-radius: 4px;
   cursor: pointer;
   transition: .5s ease-in-out;
+  margin-top: 15px;
 }
 button:hover{
   background-color: #0f8389;

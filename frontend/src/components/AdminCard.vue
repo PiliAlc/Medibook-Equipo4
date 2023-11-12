@@ -5,7 +5,7 @@
       <p class="name">{{ card.name }}</p>
     </div>
     <div class="action">
-      <router-link :to="{ name: 'card-modify', params: { id: card.id }, props: {card: card} }">
+      <router-link :to="{ name: 'card-modify', params: { id: card.id } }">
         <p>Modificar</p>
       </router-link>
       <p @click="recategorizeCard(card)">Recategorizar</p>
