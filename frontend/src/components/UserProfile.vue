@@ -18,7 +18,7 @@ export default {
   props: {
     options: {
       type: Array,
-      default: () => ['Administrar', 'Cerrar Sesión'],
+      default: () => ['Administrar', 'Mi Perfil', 'Cerrar Sesión'],
     },
   },
   data() {
@@ -42,6 +42,9 @@ export default {
           this.$router.push({ path: '/' })
           break;
         case "Administrar":
+          this.$router.push({ path: '/admin/users' })
+          break;
+        case "Mi Perfil":
           this.$router.push({ path: '/admin/user' })
           break;
       }

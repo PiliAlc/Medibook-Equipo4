@@ -2,56 +2,35 @@
   <div class="user-profile">
     <div class="contenedor">
       <h2>ADMINISTRACIÓN DE USUARIOS</h2>
-      <div class="mainTable">
-        <div class="info">
-          <p class="id">id</p>
-          <p class="name">Nombre</p>
-        </div>
-        <div class="action">
-          <p>Acciones</p>
-        </div>
-      </div>
-      <div class="salaInfo">
-        <AdminUser :users="users" @update-user="updateUsers" />
-      </div>
+      <p>{{user.id}}</p>
+      <p>{{user.name}}</p>
+      <p>{{user.lastname}}</p>
+      <p>{{user.username}}</p>
+      <p>{{user.roles[0].name}}</p>
     </div>
   </div>
 </template>
 
 <script>
-
-import getMethod from "@/service/getMethod";
-import util from "@/utils/utils";
-import AdminUser from "@/components/AdminUser";
-
 export default {
-  name: 'UserInfo',
+  name: 'UsersInfo',
   emits: ['update-users'],
-  components: {
-    AdminUser,
-  },
   computed: {
     theme() {
       return this.$store.getters.getTheme;
     },
+    user(){
+      return this.$store.getters?.getUser
+    }
   },
   data() {
     return {
       users: []
     };
   },
-  async created() {
-    await this.generarUsers()
+  created() {
   },
   methods: {
-    async generarUsers() {
-      util.cargarLoader("Cargando usuarios...")
-      this.users = await getMethod.getUsers()
-      util.cargarLoader("")
-    },
-    async updateUsers(updateUsers) {
-      this.users = updateUsers
-    },
   }, 
 
 };

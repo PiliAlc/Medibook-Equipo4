@@ -5,7 +5,14 @@
         <h2>DETALLE DE SALA - {{ card?.name }}</h2>
         <div class="cerrar" @click="goBack">&lt;</div>
       </div>
-      <img v-for="images in card?.images" :key="images?.id" :src=images?.path >
+      <div class="mainContainer">
+        <div class="mainImage" v-if="card?.images && card.images.length > 0">
+          <img :src="card?.images[0]?.path" :alt="card?.images[0]?.alt">
+        </div>
+        <div class="secondaryImages">
+          <img v-for="(image, index) in card?.images?.slice(1, 5)" :key="index" :src="image.path" :alt="image.alt">
+        </div>
+      </div>
       <div class="footerCont">
         <p><strong>TIPO DE SALA: </strong>{{ card?.typeroom?.name }}</p>
         <div class="descripcion">
@@ -90,46 +97,45 @@ export default {
     cursor: pointer;
     margin-right: 40px;
   }
-  .imgSimulationCont{
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 80%;
-    height: 300px;
-  }
-  .imgMainCont{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40%;
-    height: 90%;
-  }
-  .imgMain{
-    width: 100%;
-    height: 100%;
-    border: 2px solid black;
-    border-radius: 5px;
-  }
-  .imgBox{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 50%;
-    height: 90%;
-  }
-  .imgSimulation{
-    width: 48%;
-    height: 45%;
-    border: 2px solid black;
-    border-radius: 5px;
-  }
-
   p{
     color: black;
   }
-
+  .mainContainer {
+    width: 80%;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  .mainImage{
+    position: relative;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .secondaryImages{
+    position: relative;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .mainImage img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+  }
+  .secondaryImages img {
+    width: 45%;
+    height: 45%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
   .footerCont{
     display: flex;
     flex-direction: column;

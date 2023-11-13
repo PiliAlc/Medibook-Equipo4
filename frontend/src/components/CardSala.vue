@@ -48,7 +48,7 @@
   .info {
     position: relative;
     display: flex;
-    flex-direction: row;
+    align-items: center;
     justify-content: space-between;
     padding: 10px;
     background-color: var(--background2);
@@ -58,9 +58,9 @@
     z-index: 2;
   }
   .info h2{
-    margin-left: 35px;
     text-transform: capitalize;
     color: var(--text2);
+    font-size: 16px;
   }
   .infoDesc {
     color: var(--text2);
@@ -69,8 +69,6 @@
   }
   .infoDet {
     color: var(--text2);
-    margin-top: 13px;
-    margin-right: 50px;
     text-decoration: underline;
   }
   @media only screen and (max-width:480px ){ 

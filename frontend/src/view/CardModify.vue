@@ -104,6 +104,7 @@ export default {
       }
     },
     async init(){
+      util.cargarLoader("Cargando datos...")
       this.options = await getMethod.getTypeRooms()
       const data = {
         id:parseInt(this.$router.currentRoute.value.params.id, 10),
@@ -115,6 +116,7 @@ export default {
         category:this.card.typeroom.name,
         description:this.card.description
       }
+      util.cargarLoader("")
     }
   },
   async mounted(){

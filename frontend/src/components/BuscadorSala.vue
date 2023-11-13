@@ -10,8 +10,8 @@
       </div>
     </div>
   </nav>
-  <section :class="theme"  id="resultados">
-    <h2 v-if="resultados.length > 0" >RESULTADOS DE BÚSQUEDA</h2>
+  <section :class="theme"  id="resultados" v-if="resultados.length > 0">
+    <h2>RESULTADOS DE BÚSQUEDA</h2>
     <div class="contenedor">
       <CardSala :resultados="resultados" />
     </div>
@@ -50,12 +50,15 @@ export default {
         util.cargarLoader(""),
         util.cargarPopUp("no se encontran coincidencias", "RESULTADO")
         ) :
-      (this.resultados = datos.filter((sala) => {  
-        let {name, description} = sala
+        (this.resultados = datos.filter((sala) => {  
+          let {name, description} = sala
         return name.trim().toLowerCase().includes(busqueda) ||
         description.trim().toLowerCase().includes(busqueda) 
-        }) 
+      }) 
       )
+      if (this.resultados.length < 1) {
+        util.cargarPopUp("no se encontran coincidencias", "RESULTADO")
+      }
       util.cargarLoader("")
     }
   },
